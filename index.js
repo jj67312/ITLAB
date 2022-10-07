@@ -16,10 +16,15 @@ async function main() {
 const postModel = require('./models/Post');
 
 // get all posts
-app.get('/', async (req, res) => {
+app.get('/post', async (req, res) => {
   const allPosts = await postModel.find({});
   res.send(allPosts);
 });
+
+app.get('/post/:id', async (req, res)=>{
+  const post = await postModel.findById(req.params.id)
+  
+})
 
 // create new post
 app.post('/', async (req, res) => {
@@ -54,6 +59,14 @@ app.put('/:id', async (req, res) => {
   await post.save();
   res.send(post);
 });
+
+// Comments -------------------
+
+const commentModel = require('./models/Comment')
+app.post('/comment' , (req,res)=>{
+
+})
+
 
 app.listen(3000, (req, res) => {
   console.log('ITLAB');
