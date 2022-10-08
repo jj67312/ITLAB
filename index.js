@@ -21,10 +21,11 @@ app.get('/post', async (req, res) => {
   res.send(allPosts);
 });
 
-app.get('/post/:id', async (req, res)=>{
-  const post = await postModel.findById(req.params.id)
-  
-})
+// get specified post
+app.get('/post/:id', async (req, res) => {
+  const post = await postModel.findById(req.params.id).populate('comments');
+  res.send(post);
+});
 
 // create new post
 app.post('/', async (req, res) => {
@@ -62,11 +63,34 @@ app.put('/:id', async (req, res) => {
 
 // Comments -------------------
 
-const commentModel = require('./models/Comment')
-app.post('/comment' , (req,res)=>{
+const commentModel = require('./models/Comment');
 
-})
+// make a new comment
+app.post('/:id/comment', async (req, res) => {
+  // find the post under which the comments are made
+  const postID = req.params.id;
+  // get the comment from the form
+  const comment = req.body;
+  // find the post from the db
+  const currPost = await postModel.findById(postID);
+  // make new comment and enter into the db
+  const newComment = await commentModel.create(comment);
+  // push the comment into the selected post
+  currPost.comments.push(newComment._id);
+  await currPost.save();
+  res.send(currPost);
+});
 
+// delete a comment:
+app.delete('/:id/comment/:commentID', async (req, res) => {
+  const { id, commentID } = req.params;
+  const currPost = await postModel.findByIdAndUpdate(id, {
+    $pull: { comments: commentID },
+  });
+  const currComment = await commentModel.findByIdAndDelete(commentID);
+
+  res.send({ currPost, currComment });
+});
 
 app.listen(3000, (req, res) => {
   console.log('ITLAB');
