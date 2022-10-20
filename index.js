@@ -1,19 +1,105 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
+
+const passport = require('passport');
+
+const genPassword = require('./utils').genPassword
+
+const isAuth = require('./authMiddleware').isAuth
 
 app.use(express.urlencoded({ extended: true }));
 
-main()
-  .catch((err) => console.log(err))
-  .then(() => {
-    console.log('Connection to DB successful');
-  });
-async function main() {
-  await mongoose.connect('mongodb://localhost:27017/itlab');
-}
+// Database connection
+require('./config/database')
 
+// Session store
+const session = require('express-session')
+
+const MongoStore = require('connect-mongo')
+const sessionStore = new MongoStore({collectionName:"sessions", mongoUrl:'mongodb://localhost:27017/itlab'})
+
+app.use(session({
+  secret:"jvdbvjdiv",
+  resave:false,
+  saveUninitialized:true,
+  store: sessionStore,
+  cookie : {
+    maxAge: 1000*60 // 1min
+  }
+}))
+
+// Passport 
+app.use(passport.initialize())
+app.use(passport.session())
+require('./config/passport')
+
+app.use((req,res,next)=>{
+  console.log(req.session)
+  console.log(req.user);
+  next()
+})
+
+//ejs
+app.set('view-engine', 'ejs')
+
+//models
 const postModel = require('./models/Post');
+const User = require('./models/User')
+
+// login and register routes --------------------
+
+app.get('/login', (req,res)=>{
+  res.render('login.ejs')
+})
+
+app.get('/register', (req,res)=>{
+  res.render('register.ejs')
+})
+
+app.post('/login', passport.authenticate('local', { failureRedirect: '/login-failure', successRedirect: 'login-success' }))
+
+app.post('/register', (req, res, next) => {
+  const saltHash = genPassword(req.body.password);
+  
+  const salt = saltHash.salt;
+  const hash = saltHash.hash;
+
+  const newUser = new User({
+    username:req.body.username,
+    salt: salt,
+    hashedPassword:hash
+  })
+
+  newUser.save()
+      .then((user) => {
+          console.log(user);
+      });
+
+  res.redirect('/login');
+});
+
+app.get('/login-success', isAuth, (req, res, next) => {
+  res.send('<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>');
+});
+
+app.get('/login-failure', (req, res, next) => {
+  res.send('Wrong user credentials');
+});
+
+app.get('/protected-route', isAuth, (req, res, next) => {
+  res.send('You made it to the route.');
+});
+
+app.get('/logout', (req, res, next) => {
+  req.logout((err)=>{
+    if(err) return next(err)
+    else res.redirect('/login');
+  });
+});
+
+
+// post and comment routes ------------------------------------------------------------
+
 
 // get all posts
 app.get('/post', async (req, res) => {
