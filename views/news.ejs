@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <script src="news.js" defer></script>
+</head>
+<body>
+    <div class="news ">
+
+        <!-- Refer https://dev.to/atultyagi612/build-a-news-app-with-nodejs-express-ejs-and-newsapi-140f -->
+
+        <% articles.forEach(function(article,index){ %>
+
+            <% if ((typeof article.url=='object') || (typeof article.title=='object') || (typeof article.urlToImage=='object') || (typeof article.content=='object')){ %>
+                <% } else{ %>
+                    
+                        <h3>
+                            <%- article.title %>
+                        </h3>
+
+                    <% } %>
+                    <% }) %>
+    </div>
+</body>
+</html>

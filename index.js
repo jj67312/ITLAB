@@ -42,6 +42,10 @@ app.use((req,res,next)=>{
 //ejs
 app.set('view-engine', 'ejs')
 
+//static
+const path = require('path')
+app.use(express.static(path.join(__dirname, 'static')))
+
 //models
 const postModel = require('./models/Post');
 const User = require('./models/User')
@@ -71,9 +75,9 @@ app.post('/register', (req, res, next) => {
   })
 
   newUser.save()
-      .then((user) => {
-          console.log(user);
-      });
+  .then((user) => {
+    console.log(user);
+  });
 
   res.redirect('/login');
 });
@@ -178,6 +182,24 @@ app.delete('/:id/comment/:commentID', async (req, res) => {
   res.send({ currPost, currComment });
 });
 
+// news
+const NewsAPI = require('newsapi');
+const api_key = "eadeccef94e442f69bb28a13ed8b6975"
+const newsapi = new NewsAPI(api_key)
+
+app.get('/news', (req,res)=>{
+  newsapi.v2.topHeadlines({
+    category: 'technology',
+    language: 'en'
+  })
+  .then(data=>{
+    res.render('news.ejs' , {articles: data.articles})
+  })
+  .catch(err => {console.log(err);})
+})
+
+
 app.listen(3000, (req, res) => {
   console.log('ITLAB');
 });
+
