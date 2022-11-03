@@ -183,19 +183,20 @@ app.delete('/:id/comment/:commentID', async (req, res) => {
 });
 
 // news
-const NewsAPI = require('newsapi');
-const api_key = "eadeccef94e442f69bb28a13ed8b6975"
-const newsapi = new NewsAPI(api_key)
+// const NewsAPI = require('newsapi');
+// const api_key = "eadeccef94e442f69bb28a13ed8b6975"
+// const newsapi = new NewsAPI(api_key)
 
-app.get('/news', (req,res)=>{
-  newsapi.v2.topHeadlines({
-    category: 'technology',
-    language: 'en'
-  })
-  .then(data=>{
-    res.render('news.ejs' , {articles: data.articles})
-  })
-  .catch(err => {console.log(err);})
+app.get('/news', async(req,res)=>{
+  res.render('news.ejs')
+  // newsapi.v2.topHeadlines({
+  //   category: 'technology',
+  //   language: 'en'
+  // })
+  // .then(data=>{
+  //   res.render('news.ejs' , {articles: data.articles})
+  // })
+  // .catch(err => {console.log(err);})
 })
 
 
@@ -203,3 +204,19 @@ app.listen(3000, (req, res) => {
   console.log('ITLAB');
 });
 
+
+// If using ejs 
+
+// Refer https://dev.to/atultyagi612/build-a-news-app-with-nodejs-express-ejs-and-newsapi-140f 
+
+// <% articles.forEach(function(article,index){ %>
+
+//   <% if ((typeof article.url=='object') || (typeof article.title=='object') || (typeof article.urlToImage=='object') || (typeof article.content=='object')){ %>
+//       <% } else{ %>
+          
+//               <h3>
+//                   <%- article.title %>
+//               </h3>
+
+//           <% } %>
+//           <% }) %>
