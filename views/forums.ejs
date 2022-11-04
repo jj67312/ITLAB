@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
+    <script
+      src="https://kit.fontawesome.com/c8ead70426.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="stylesheets/forums.css" />
+    <title>Navbar</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">bit<font style="color: #4285f4">bot.</font></div>
+      <nav>
+        <ul class="links">
+          <li><a href="#">Home</a></li>
+          <li><a href="/post">Forums</a></li>
+          <li><a href="#">Products</a></li>
+        </ul>
+      </nav>
+      <i class="fa-solid fa-bell bell-icon"></i>
+    </header>
+
+    <div class="showcase-area">
+      <div class="column1">
+        <div class="profile">
+          <div class="profile-logo"><p class="profile-logo-text">P</p></div>
+          <p class="profile-text1">Prabhat Mattoo</p>
+          <p class="profile-text2">4 Threads • 11k Followers</p>
+          <button class="profile-edit-btn">Edit your Profile</button>
+        </div>
+        <div class="topics">
+          <p class="topic-heading">
+            Topics you follow<i class="fa-solid fa-plus add-icon"></i>
+          </p>
+          <ul class="topic-list">
+            <li>#iPhone14</li>
+            <li>#SamsungNote10</li>
+            <li>#NothingPhone</li>
+            <li>#elon</li>
+            <li>#bruhmoment</li>
+            <li>#convo2022</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="column2">
+        <p class="heading1">Hello Prabhat!</p>
+        <p class="heading2">Good Morning - How are you feeling today?</p>
+        <form action="#">
+          <input
+            type="search"
+            class="input-news-search-bar"
+            placeholder="What's on your mind?"
+          />
+          <input type="button" class="news-search-btn" value="Search" />
+        </form>
+        <p class="heading3">Today's News</p>
+        <div class="news-box">
+          <ul>
+            <% for(let post of allPosts) {%> 
+            <li>
+              <div class="news-info">
+                <img class="intel" src="./skins/intel.png" alt="" />
+                <div class="intel-text">
+                  <p class="intel-heading">
+                    <%= post.title %> 
+                  </p>
+                  <p class="intel-news">
+                    <%= post.description %> 
+                  </p>
+                </div>
+              </div>
+            </li>
+            <% } %> 
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

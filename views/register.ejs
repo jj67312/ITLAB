@@ -1,23 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheets/signup.css">
+  <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
+  <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+  <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+  <title>Sign Up</title>
 </head>
+
 <body>
-    <h1>Register</h1>
-<form action="register" method="post">
-    <section>
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text" autocomplete="username" required autofocus>
-    </section>
-    <section>
-        <label for="current-password">Password</label>
-        <input id="current-password" name="password" type="password" autocomplete="current-password" required>
-    </section>
-    <button type="submit">Sign in</button>
-</form>
+  <div class="container">
+    <div class="left">
+      <div class="row1">
+        <p class="text1">Sign up</p>
+      </div>
+
+      <div class="row2">
+        <p class="text2">
+          By continuing, you are setting up a BitBot account and agree to our
+          <a href="#" style="color: #4285f4">User Agreement</a> and
+          <a href="#" style="color: #4285f4">Privacy Policy.</a>
+        </p>
+      </div>
+
+      <!-- <div class="row3">
+          <div class="google-btn">
+            <div class="google-icon-wrapper">
+              <img class="google-icon" src="./skins/google-logo.png" />
+            </div>
+            <p class="btn-text"><b>Continue with google</b></p>
+          </div>
+        </div> -->
+
+      <div class="row4">
+        <h5 class="partition">OR</h5>
+      </div>
+      <div class="row5">
+        <form action="/register" method="POST">
+          <div class="group1">
+            <input name="username" type="text" id="username" placeholder="Name" class="name" required />
+            <label for="username" class="form-label">Username</label>
+          </div>
+
+          <!-- <div class="field group2">
+            <div class="input-field">
+              <input type="email" id="email" placeholder="Email" class="email" />
+              <label for="email" class="form-label">Email</label>
+            </div>
+            <div class="error email-error">
+              <i class="bx bx-error-circle error-icon"></i>
+              <p class="error-text2">Please enter a valid email</p>
+            </div>
+          </div> -->
+
+          <div class="field group3">
+            <div class="input-field">
+              <input required name="password" type="password" id="current-password" placeholder="Password" class="password" />
+              <label for="current-password" class="form-label">Password</label>
+              <i class="far fa-eye" id="show-password"></i>
+            </div>
+            <div class="error password-error">
+              <i class="bx bx-error-circle error-icon"></i>
+              <p class="error-text3">
+                Please enter atleast 8 charatcters with numbers, symbols,
+                small and capital letters.
+              </p>
+            </div>
+          </div>
+
+          <input type="submit" value="Continue" />
+        </form>
+      </div>
+
+      <div class="row6">
+        <p class="signin">
+          Already have an account?
+          <a href="/login" style="text-decoration: none">
+            <font style="color: #4285f4"> Sign In</font>
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="right">
+    </div>
+  </div>
+  <script src="javascripts/signup.js"></script>
 </body>
+
 </html>

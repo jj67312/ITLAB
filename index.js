@@ -3,87 +3,105 @@ const app = express();
 
 const passport = require('passport');
 
-const genPassword = require('./utils').genPassword
+const genPassword = require('./utils').genPassword;
 
-const isAuth = require('./authMiddleware').isAuth
+const isAuth = require('./authMiddleware').isAuth;
 
 app.use(express.urlencoded({ extended: true }));
 
 // Database connection
-require('./config/database')
+require('./config/database');
 
 // Session store
-const session = require('express-session')
+const session = require('express-session');
 
-const MongoStore = require('connect-mongo')
-const sessionStore = new MongoStore({collectionName:"sessions", mongoUrl:'mongodb://localhost:27017/itlab'})
+const MongoStore = require('connect-mongo');
+const sessionStore = new MongoStore({
+  collectionName: 'sessions',
+  mongoUrl: 'mongodb://localhost:27017/itlab',
+});
 
-app.use(session({
-  secret:"jvdbvjdiv",
-  resave:false,
-  saveUninitialized:true,
-  store: sessionStore,
-  cookie : {
-    maxAge: 1000*60 // 1min
-  }
-}))
+app.use(
+  session({
+    secret: 'jvdbvjdiv',
+    resave: false,
+    saveUninitialized: true,
+    store: sessionStore,
+    cookie: {
+      maxAge: 1000 * 60, // 1min
+    },
+  })
+);
 
-// Passport 
-app.use(passport.initialize())
-app.use(passport.session())
-require('./config/passport')
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport');
 
-app.use((req,res,next)=>{
-  console.log(req.session)
+app.use((req, res, next) => {
+  console.log(req.session);
   console.log(req.user);
-  next()
-})
+  next();
+});
 
 //ejs
-app.set('view-engine', 'ejs')
+app.set('view-engine', 'ejs');
 
 //static
-const path = require('path')
-app.use(express.static(path.join(__dirname, 'static')))
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'static')));
 
 //models
 const postModel = require('./models/Post');
-const User = require('./models/User')
+const User = require('./models/User');
 
 // login and register routes --------------------
 
-app.get('/login', (req,res)=>{
-  res.render('login.ejs')
-})
+app.get('/login', (req, res) => {
+  res.render('login.ejs');
+});
 
-app.get('/register', (req,res)=>{
-  res.render('register.ejs')
-})
+app.get('/register', (req, res) => {
+  res.render('register.ejs');
+});
 
-app.post('/login', passport.authenticate('local', { failureRedirect: '/login-failure', successRedirect: 'login-success' }))
+app.post(
+  '/login',
+  passport.authenticate('local', {
+    failureRedirect: '/login-failure',
+    successRedirect: 'login-success',
+  })
+);
 
 app.post('/register', (req, res, next) => {
   const saltHash = genPassword(req.body.password);
-  
+
   const salt = saltHash.salt;
   const hash = saltHash.hash;
 
   const newUser = new User({
-    username:req.body.username,
+    username: req.body.username,
     salt: salt,
-    hashedPassword:hash
-  })
+    hashedPassword: hash,
+  });
 
-  newUser.save()
-  .then((user) => {
+  newUser.save().then((user) => {
     console.log(user);
   });
 
-  res.redirect('/login');
+  res.redirect('/home');
+});
+
+app.get('/home', (req, res) => {
+  res.render('landing.ejs');
 });
 
 app.get('/login-success', isAuth, (req, res, next) => {
-  res.send('<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>');
+  res.send(
+    '<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>'
+  );
 });
 
 app.get('/login-failure', (req, res, next) => {
@@ -95,20 +113,19 @@ app.get('/protected-route', isAuth, (req, res, next) => {
 });
 
 app.get('/logout', (req, res, next) => {
-  req.logout((err)=>{
-    if(err) return next(err)
+  req.logout((err) => {
+    if (err) return next(err);
     else res.redirect('/login');
   });
 });
 
-
 // post and comment routes ------------------------------------------------------------
-
 
 // get all posts
 app.get('/post', async (req, res) => {
   const allPosts = await postModel.find({});
-  res.send(allPosts);
+  console.log(allPosts);
+  res.render('forums.ejs', { allPosts });
 });
 
 // get specified post
@@ -187,8 +204,8 @@ app.delete('/:id/comment/:commentID', async (req, res) => {
 // const api_key = "eadeccef94e442f69bb28a13ed8b6975"
 // const newsapi = new NewsAPI(api_key)
 
-app.get('/news', async(req,res)=>{
-  res.render('news.ejs')
+app.get('/news', async (req, res) => {
+  res.render('news.ejs');
   // newsapi.v2.topHeadlines({
   //   category: 'technology',
   //   language: 'en'
@@ -197,23 +214,21 @@ app.get('/news', async(req,res)=>{
   //   res.render('news.ejs' , {articles: data.articles})
   // })
   // .catch(err => {console.log(err);})
-})
-
+});
 
 app.listen(3000, (req, res) => {
   console.log('ITLAB');
 });
 
+// If using ejs
 
-// If using ejs 
-
-// Refer https://dev.to/atultyagi612/build-a-news-app-with-nodejs-express-ejs-and-newsapi-140f 
+// Refer https://dev.to/atultyagi612/build-a-news-app-with-nodejs-express-ejs-and-newsapi-140f
 
 // <% articles.forEach(function(article,index){ %>
 
 //   <% if ((typeof article.url=='object') || (typeof article.title=='object') || (typeof article.urlToImage=='object') || (typeof article.content=='object')){ %>
 //       <% } else{ %>
-          
+
 //               <h3>
 //                   <%- article.title %>
 //               </h3>
