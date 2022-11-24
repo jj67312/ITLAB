@@ -4,7 +4,7 @@ const form = document.querySelector("form");
 const emailField = form.querySelector(".group2");
 const passField = form.querySelector(".group3");
 const pass = passField.querySelector(".password");
-const mail = emailField.querySelector(".email");
+//const mail = emailField.querySelector(".email");
 
 showPassword.addEventListener("click", function () {
   // toggle the type attribute to hide password
