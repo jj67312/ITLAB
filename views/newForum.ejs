@@ -8,7 +8,9 @@
   <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/c8ead70426.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="stylesheets/home.css" />
+  <link rel="stylesheet" href="/stylesheets/home.css" />
+  <link rel="stylesheet" href="/stylesheets/signup.css" />
+  <link rel="stylesheet" href="/stylesheets/newForum.css" />
   <title>Home</title>
 </head>
 
@@ -31,34 +33,20 @@
         </ul>
       </div>
       <div class="main-column">
-        <p class="heading1">Hello Prabhat!</p>
-        <p class="heading2">How are you feeling today?</p>
-        <form class="forum" action="#">
-          <input type="search" class="forum-search-bar" placeholder="What's on your mind?" />
-          <input type="button" class="forum-search-btn" value="Search" />
-        </form>
-        <div class="thread">
-          <p class="heading3">
-            <i class="bx bx-down-arrow down"></i>Hot Topics
-          </p>
-          <button class="start-thread-btn" onclick=" window.location.href = 'http://localhost:3000/forums/new' ">
-            <i class="bx bx-plus add-icon"></i>Start a New Thread
-          </button>
-        </div>
-
         <div class="forums-showcase">
-          <ul>
-            <% for(let post of allPosts) {%>
-            <li>
-              <h3><%= post.title %> </h3>
-              <p><%= post.description %> </p>
-              <p class="line"></p>
-              <p class="posted-by">
-                Posted By <font style="color: #4285f4"><%= post.author %> </font>
-              </p>
-            </li>
-            <% } %>
-          </ul>
+          <form action="/" method="POST">
+            <div class="input-field">
+              <label for="title">Enter post:</label>
+              <input name="title" id="title" type="text">
+            </div>
+
+            <div class="input-field">
+              <label for="description">Enter description:</label>
+              <input name="description" id="description" type="text">
+            </div>
+
+            <button>Post</button>
+          </form>
         </div>
       </div>
       <div class="news-profile-column">

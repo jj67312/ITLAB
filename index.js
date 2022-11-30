@@ -98,20 +98,6 @@ app.get('/home', (req, res) => {
   res.render('landing.ejs');
 });
 
-app.get('/login-success', isAuth, (req, res, next) => {
-  res.send(
-    '<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>'
-  );
-});
-
-app.get('/login-failure', (req, res, next) => {
-  res.send('Wrong user credentials');
-});
-
-app.get('/protected-route', isAuth, (req, res, next) => {
-  res.send('You made it to the route.');
-});
-
 app.get('/logout', (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
@@ -122,14 +108,18 @@ app.get('/logout', (req, res, next) => {
 // post and comment routes ------------------------------------------------------------
 
 // get all posts
-app.get('/post', async (req, res) => {
+app.get('/forums', async (req, res) => {
   const allPosts = await postModel.find({});
   console.log(allPosts);
   res.render('forums.ejs', { allPosts });
 });
 
-// get specified post
-app.get('/post/:id', async (req, res) => {
+app.get('/forums/new', async (req, res) => {
+  res.render('newForum.ejs');
+});
+
+// get specified forums
+app.get('/forums/:id', async (req, res) => {
   const post = await postModel.findById(req.params.id).populate('comments');
   res.send(post);
 });
@@ -139,6 +129,7 @@ app.post('/', async (req, res) => {
   const newPost = req.body;
   const post = await postModel.create(newPost);
   await post.save();
+  res.redirect('/forums')
   res.send(newPost);
 });
 
@@ -200,49 +191,49 @@ app.delete('/:id/comment/:commentID', async (req, res) => {
 });
 
 // web scraping
-const axios = require('axios')
-const cheerio = require('cheerio')
+const axios = require('axios');
+const cheerio = require('cheerio');
 
 // "samsung" "oneplus" "vivo" "oppo"
-const brand = "xiaomi"
+const brand = 'xiaomi';
 
-const url = "https://www.91mobiles.com/"+ brand +"-mobile-price-list-in-india"
+const url =
+  'https://www.91mobiles.com/' + brand + '-mobile-price-list-in-india';
 
-const products = []
-const titles = []
-const prices = []
+const products = [];
+const titles = [];
+const prices = [];
 
-app.get('/products', (req,res)=>{
-    res.send("hello")
-    axios(url)
-    .then(resp =>{
-        const html = resp.data
-        //console.log(html);
-        //res.send(html)
-        const $ = cheerio.load(html)
-        $('.finder_pro_image', html).each(function (){
-            //console.log($(this));
-            const link = $(this).attr('src')
-            //const title = $(this).text()
-            products.push(link)
-        })
-        $('.hover_blue_link', html).each(function(){
-            const title = $(this).text().replace('\n', '')
-            titles.push(title)
-        })
-        $('.price', html).each(function(){
-            const price = $(this).text()
-            prices.push(price)
-        })
-        console.log(products);
-        console.log(titles);
-        console.log(prices);
+app.get('/products', (req, res) => {
+  res.send('hello');
+  axios(url)
+    .then((resp) => {
+      const html = resp.data;
+      //console.log(html);
+      //res.send(html)
+      const $ = cheerio.load(html);
+      $('.finder_pro_image', html).each(function () {
+        //console.log($(this));
+        const link = $(this).attr('src');
+        //const title = $(this).text()
+        products.push(link);
+      });
+      $('.hover_blue_link', html).each(function () {
+        const title = $(this).text().replace('\n', '');
+        titles.push(title);
+      });
+      $('.price', html).each(function () {
+        const price = $(this).text();
+        prices.push(price);
+      });
+      console.log(products);
+      console.log(titles);
+      console.log(prices);
     })
-    .catch(err =>{
-        console.log(err);
-    })
-    
-})
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 // news
 // const NewsAPI = require('newsapi');
@@ -268,15 +259,3 @@ app.listen(3000, (req, res) => {
 // If using ejs
 
 // Refer https://dev.to/atultyagi612/build-a-news-app-with-nodejs-express-ejs-and-newsapi-140f
-
-// <% articles.forEach(function(article,index){ %>
-
-//   <% if ((typeof article.url=='object') || (typeof article.title=='object') || (typeof article.urlToImage=='object') || (typeof article.content=='object')){ %>
-//       <% } else{ %>
-
-//               <h3>
-//                   <%- article.title %>
-//               </h3>
-
-//           <% } %>
-//           <% }) %>
