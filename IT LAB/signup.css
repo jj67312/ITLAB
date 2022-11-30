@@ -37,7 +37,7 @@ a {
 .right {
     height: 100%;
     width: 50%;
-    background-image: url('signup_side_image.png');
+    background: url('./skins/signup_side_image.png');
     background-size: cover;
 }
 
