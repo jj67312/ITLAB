@@ -38,6 +38,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport');
 
+// Google auth
+require('./config/passportGoogle')
+
 app.use((req, res, next) => {
   // console.log(req.session);
   // console.log(req.user);
@@ -71,7 +74,7 @@ app.post(
   '/login',
   passport.authenticate('local', {
     failureRedirect: '/login-failure',
-    successRedirect: 'login-success',
+    successRedirect: '/login-success',
   })
 );
 
@@ -98,6 +101,29 @@ app.get('/home', (req, res) => {
   res.render('landing.ejs');
 });
 
+<<<<<<< HEAD
+app.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}))
+
+app.get('/google/callback', passport.authenticate('google', {failureRedirect:'/login-failure', successRedirect:'/login-success'}), (req,res)=>{
+  //res.redirect('/login-success')
+})
+
+app.get('/login-success', isAuth, (req, res, next) => {
+  res.send(
+    '<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>'
+  );
+});
+
+app.get('/login-failure', isAuth, (req, res, next) => {
+  res.send('Wrong user credentials');
+});
+
+app.get('/protected-route', isAuth, (req, res, next) => {
+  res.send('You made it to the route.');
+});
+
+=======
+>>>>>>> cac9009d020353d8aeae2168c475d096787f1bc2
 app.get('/logout', (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
@@ -198,19 +224,62 @@ app.delete('/:id/comment/:commentID', async (req, res) => {
 });
 
 // web scraping
+<<<<<<< HEAD
+const axios = require('axios')
+const cheerio = require('cheerio');
+const { Strategy } = require('passport-local');
+=======
 const axios = require('axios');
 const cheerio = require('cheerio');
+>>>>>>> cac9009d020353d8aeae2168c475d096787f1bc2
 
 // "samsung" "oneplus" "vivo" "oppo"
 const brand = 'xiaomi';
 
+<<<<<<< HEAD
+// mobile urls
+const url = "https://www.91mobiles.com/"+ brand +"-mobile-price-list-in-india"
+const url2 ="https://www.amazon.in/Apple-iPhone-14-256GB-Midnight/dp/B0BDJ6N5D6/?_encoding=UTF8&pd_rd_w=DsMoj&content-id=amzn1.sym.1f592895-6b7a-4b03-9d72-1a40ea8fbeca&pf_rd_p=1f592895-6b7a-4b03-9d72-1a40ea8fbeca&pf_rd_r=YWHCYMEK8FBTP8HDXE0D&pd_rd_wg=2bLli&pd_rd_r=c80153b8-a457-45cd-a521-7066673fdd7a&ref_=pd_gw_ci_mcx_mr_hp_atf_m"
+const laptopBrand =""
+// laptop urls
+const laptopUrl = "https://www.91mobiles.com/hp-laptops-price-list-in-india"
+=======
 const url =
   'https://www.91mobiles.com/' + brand + '-mobile-price-list-in-india';
+>>>>>>> cac9009d020353d8aeae2168c475d096787f1bc2
 
 const products = [];
 const titles = [];
 const prices = [];
 
+<<<<<<< HEAD
+app.get('/products', (req,res)=>{
+    //res.send("hello")
+    axios(url)
+    .then(resp =>{
+        const html = resp.data
+        //console.log(html);
+        //res.send(html)
+        const $ = cheerio.load(html)
+        $('.finder_pro_image', html).each(function (){
+            //console.log($(this));
+            const link = $(this).attr('src')
+            //const title = $(this).text()
+            products.push(link)
+        })
+        $('.hover_blue_link', html).each(function(){
+            const title = $(this).text().replace('\n                                 ', '').replace('                             ','')
+            titles.push(title)
+        })
+        $('.price', html).each(function(){
+            const price = $(this).text().replace('\n\t\t\t\t\t\n\t\t\t\t\t','')
+            prices.push(price)
+        })
+        res.json({products:products, titles:titles, prices:prices})
+        // console.log(products);
+        // console.log(titles);
+        // console.log(prices);
+=======
 app.get('/products', (req, res) => {
   res.send('hello');
   axios(url)
@@ -236,6 +305,7 @@ app.get('/products', (req, res) => {
       console.log(products);
       console.log(titles);
       console.log(prices);
+>>>>>>> cac9009d020353d8aeae2168c475d096787f1bc2
     })
     .catch((err) => {
       console.log(err);

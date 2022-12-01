@@ -82,18 +82,57 @@ header .container {
   list-style: none;
 }
 
-.links a {
+.links li {
+  padding: 0 40px;
+}
+
+.links li a {
   font-family: HelveticaNeue, sans-serif;
-  color: var(--darkOne);
   display: inline-block;
-  margin-left: 4.5rem;
+
+  color: var(--darkOne);
   font-size: 1.4rem;
+
   transition: color 300ms, transform 300ms;
 }
 
-.links a:hover {
+.links li a:hover {
   color: var(--color2);
   transform: scale(1.05);
+}
+
+.get-started-btn {
+  color: var(--backgroundColor);
+  background-color: var(--color2);
+  width: 9.5rem;
+  height: 3rem;
+
+  margin: 1.5rem 0 1rem;
+  text-decoration: none;
+  text-align: center;
+
+  border: none;
+  border-radius: 3px;
+
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 1.1rem;
+
+  transition: all 300ms ease-out;
+}
+
+.dark .get-started-btn:hover {
+  color: var(--btnColor);
+  background-color: var(--backgroundColor);
+  border: 2px solid var(--btnColor);
+  cursor: pointer;
+}
+
+.light .get-started-btn:hover {
+  color: var(--color2);
+  background-color: var(--backgroundColor);
+  border: 2px solid var(--color2);
+  cursor: pointer;
 }
 
 .showcase-area .container {
@@ -115,7 +154,7 @@ header .container {
   font-family: Inter;
   font-weight: 700;
   font-size: 1.7rem;
-  color: var(--darkOne);;
+  color: var(--darkOne);
   margin: 0.8rem 0 1rem;
 }
 
@@ -126,40 +165,6 @@ header .container {
   font-size: 1.25rem;
   color: var(--darkOne);
   max-width: 600px;
-}
-
-.get-started-btn {
-  color: var(--backgroundColor);
-  background-color: var(--color2);
-  width: 9.5rem;
-  height: 3rem;
-
-  margin: 1.8rem 0 2rem;
-  text-decoration: none;
-  text-align: center;
-
-  border: none;
-  border-radius: 3px;
-
-  font-family: Inter;
-  font-weight: 400;
-  font-size: 1.1rem;
-
-  transition: color 300ms, border 300ms, background-color 300ms ease-out;
-}
-
-.dark .get-started-btn:hover {
-  color: var(--btnColor);
-  background-color: var(--backgroundColor);
-  border: 2px solid var(--btnColor);
-  cursor: pointer;
-}
-
-.light .get-started-btn:hover {
-  color: var(--color2);
-  background-color: var(--backgroundColor);
-  border: 2px solid var(--color2);
-  cursor: pointer;
 }
 
 .signin {
