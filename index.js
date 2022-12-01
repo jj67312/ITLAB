@@ -101,6 +101,7 @@ app.get('/home', (req, res) => {
   res.render('landing.ejs');
 });
 
+<<<<<<< HEAD
 app.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}))
 
 app.get('/google/callback', passport.authenticate('google', {failureRedirect:'/login-failure', successRedirect:'/login-success'}), (req,res)=>{
@@ -121,6 +122,8 @@ app.get('/protected-route', isAuth, (req, res, next) => {
   res.send('You made it to the route.');
 });
 
+=======
+>>>>>>> cac9009d020353d8aeae2168c475d096787f1bc2
 app.get('/logout', (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
@@ -131,14 +134,18 @@ app.get('/logout', (req, res, next) => {
 // post and comment routes ------------------------------------------------------------
 
 // get all posts
-app.get('/post', async (req, res) => {
+app.get('/forums', async (req, res) => {
   const allPosts = await postModel.find({});
   console.log(allPosts);
   res.render('forums.ejs', { allPosts });
 });
 
-// get specified post
-app.get('/post/:id', async (req, res) => {
+app.get('/forums/new', async (req, res) => {
+  res.render('newForum.ejs');
+});
+
+// get specified forums
+app.get('/forums/:id', async (req, res) => {
   const post = await postModel.findById(req.params.id).populate('comments');
   res.send(post);
 });
@@ -148,6 +155,7 @@ app.post('/', async (req, res) => {
   const newPost = req.body;
   const post = await postModel.create(newPost);
   await post.save();
+  res.redirect('/forums')
   res.send(newPost);
 });
 
@@ -209,24 +217,35 @@ app.delete('/:id/comment/:commentID', async (req, res) => {
 });
 
 // web scraping
+<<<<<<< HEAD
 const axios = require('axios')
 const cheerio = require('cheerio');
 const { Strategy } = require('passport-local');
+=======
+const axios = require('axios');
+const cheerio = require('cheerio');
+>>>>>>> cac9009d020353d8aeae2168c475d096787f1bc2
 
 // "samsung" "oneplus" "vivo" "oppo"
-const brand = "xiaomi"
+const brand = 'xiaomi';
 
+<<<<<<< HEAD
 // mobile urls
 const url = "https://www.91mobiles.com/"+ brand +"-mobile-price-list-in-india"
 const url2 ="https://www.amazon.in/Apple-iPhone-14-256GB-Midnight/dp/B0BDJ6N5D6/?_encoding=UTF8&pd_rd_w=DsMoj&content-id=amzn1.sym.1f592895-6b7a-4b03-9d72-1a40ea8fbeca&pf_rd_p=1f592895-6b7a-4b03-9d72-1a40ea8fbeca&pf_rd_r=YWHCYMEK8FBTP8HDXE0D&pd_rd_wg=2bLli&pd_rd_r=c80153b8-a457-45cd-a521-7066673fdd7a&ref_=pd_gw_ci_mcx_mr_hp_atf_m"
 const laptopBrand =""
 // laptop urls
 const laptopUrl = "https://www.91mobiles.com/hp-laptops-price-list-in-india"
+=======
+const url =
+  'https://www.91mobiles.com/' + brand + '-mobile-price-list-in-india';
+>>>>>>> cac9009d020353d8aeae2168c475d096787f1bc2
 
-const products = []
-const titles = []
-const prices = []
+const products = [];
+const titles = [];
+const prices = [];
 
+<<<<<<< HEAD
 app.get('/products', (req,res)=>{
     //res.send("hello")
     axios(url)
@@ -253,12 +272,38 @@ app.get('/products', (req,res)=>{
         // console.log(products);
         // console.log(titles);
         // console.log(prices);
+=======
+app.get('/products', (req, res) => {
+  res.send('hello');
+  axios(url)
+    .then((resp) => {
+      const html = resp.data;
+      //console.log(html);
+      //res.send(html)
+      const $ = cheerio.load(html);
+      $('.finder_pro_image', html).each(function () {
+        //console.log($(this));
+        const link = $(this).attr('src');
+        //const title = $(this).text()
+        products.push(link);
+      });
+      $('.hover_blue_link', html).each(function () {
+        const title = $(this).text().replace('\n', '');
+        titles.push(title);
+      });
+      $('.price', html).each(function () {
+        const price = $(this).text();
+        prices.push(price);
+      });
+      console.log(products);
+      console.log(titles);
+      console.log(prices);
+>>>>>>> cac9009d020353d8aeae2168c475d096787f1bc2
     })
-    .catch(err =>{
-        console.log(err);
-    })
-    
-})
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 // news
 // const NewsAPI = require('newsapi');
@@ -284,15 +329,3 @@ app.listen(3000, (req, res) => {
 // If using ejs
 
 // Refer https://dev.to/atultyagi612/build-a-news-app-with-nodejs-express-ejs-and-newsapi-140f
-
-// <% articles.forEach(function(article,index){ %>
-
-//   <% if ((typeof article.url=='object') || (typeof article.title=='object') || (typeof article.urlToImage=='object') || (typeof article.content=='object')){ %>
-//       <% } else{ %>
-
-//               <h3>
-//                   <%- article.title %>
-//               </h3>
-
-//           <% } %>
-//           <% }) %>
