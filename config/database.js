@@ -10,7 +10,7 @@ mongoose.connect(url, {
 const con = mongoose.connection
 
 con.on('open', ()=>{
-    console.log("Database connected");
+    // console.log("Database connected");
 })
 
 
