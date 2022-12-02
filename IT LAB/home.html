@@ -1,12 +1,14 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="./home.css">
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./home.css" />
     <title>Home</title>
   </head>
   <body>
@@ -16,13 +18,13 @@
           <div class="logo">bit<font style="color: #4285f4">bot.</font></div>
           <ul class="links">
             <li>
-              <a href="#"
+              <a href="./home.html"
                 ><i class="bx bx-home icon"></i
                 ><span class="text">Home</span></a
               >
             </li>
             <li>
-              <a href="#"
+              <a href="./news.html"
                 ><i class="bx bx-news icon"></i
                 ><span class="text">News</span></a
               >
@@ -35,7 +37,7 @@
             </li>
             <li>
               <a href="#"
-                ><i class='bx bx-log-out icon'></i>
+                ><i class="bx bx-log-out icon"></i>
                 <span class="text">Log Out</span></a
               >
             </li>
@@ -79,7 +81,12 @@
                 placeholder="Title"
               />
               <p class="desc">Description*</p>
-              <textarea required class="desc_input" maxlength="500" placeholder="Description (max 500 words)"></textarea>
+              <textarea
+                required
+                class="desc_input"
+                maxlength="500"
+                placeholder="Description (max 500 words)"
+              ></textarea>
               <input
                 type="submit"
                 class="post_publish_btn"
@@ -102,9 +109,17 @@
                   sed.
                 </p>
                 <p class="line"></p>
-                <p class="posted-by">
-                  Posted By <a href="#"><font style="color: #4285f4">Aniket Kudtarkar</font></a>
-                </p>
+                <div class="post-footer">
+                  <p class="posted-by">
+                    Posted By
+                    <a href="#"
+                      ><font style="color: #4285f4">Aniket Kudtarkar</font></a
+                    >
+                  </p>
+                  <i class="bx bxs-like like-btn"></i>
+                  <p class="like-count">0</p>
+                  <i class="bx bxs-chat comment-btn"></i>
+                </div>
               </li>
               <li>
                 <h3>Can my Mobile keep overheating when I charge it?</h3>
@@ -117,9 +132,17 @@
                   sed.
                 </p>
                 <p class="line"></p>
-                <p class="posted-by">
-                  Posted By <a href="#"><font style="color: #4285f4">Jay Jani</font></a>
-                </p>
+                <div class="post-footer">
+                  <p class="posted-by">
+                    Posted By
+                    <a href="#"
+                      ><font style="color: #4285f4">Aniket Kudtarkar</font></a
+                    >
+                  </p>
+                  <i class="bx bxs-like like-btn"></i>
+                  <p class="like-count">0</p>
+                  <i class="bx bxs-chat comment-btn"></i>
+                </div>
               </li>
               <li>
                 <h3>Can my Mobile keep overheating when I charge it?</h3>
@@ -132,9 +155,17 @@
                   sed.
                 </p>
                 <p class="line"></p>
-                <p class="posted-by">
-                  Posted By <a href="#"><font style="color: #4285f4">Prabhat Mattoo</font></a>
-                </p>
+                <div class="post-footer">
+                  <p class="posted-by">
+                    Posted By
+                    <a href="#"
+                      ><font style="color: #4285f4">Aniket Kudtarkar</font></a
+                    >
+                  </p>
+                  <i class="bx bxs-like like-btn"></i>
+                  <p class="like-count">0</p>
+                  <i class="bx bxs-chat comment-btn"></i>
+                </div>
               </li>
               <li>
                 <h3>Can my Mobile keep overheating when I charge it?</h3>
@@ -147,9 +178,17 @@
                   sed.
                 </p>
                 <p class="line"></p>
-                <p class="posted-by">
-                  Posted By <a href="#"> <font style="color: #4285f4">Shubhan Kadam</font></a>
-                </p>
+                <div class="post-footer">
+                  <p class="posted-by">
+                    Posted By
+                    <a href="#"
+                      ><font style="color: #4285f4">Aniket Kudtarkar</font></a
+                    >
+                  </p>
+                  <i class="bx bxs-like like-btn"></i>
+                  <p class="like-count">0</p>
+                  <i class="bx bxs-chat comment-btn"></i>
+                </div>
               </li>
             </ul>
           </div>
@@ -160,19 +199,32 @@
             <div class="profile-logo"><p class="profile-logo-text">P</p></div>
             <p class="profile-text1">Prabhat Mattoo</p>
             <p class="profile-text2">4 Threads • 11k Followers</p>
-            <button class="profile-btn" 
-            onclick="window.location.href = 'profile.html'">View Profile</button>
+            <button
+              class="profile-btn"
+              onclick="window.location.href = 'profile.html'"
+            >
+              View Profile
+            </button>
           </div>
           <div class="news">
             <div class="header">
               <p>News</p>
-              <a href="#">View All</a>
+              <a href="./news.html">View All</a>
             </div>
-            <div class="news-from-api" id="newsAccordion"></div>
+            <div id="newsFeed" class="news-from-api">
+              <!-- <div class="news-card">
+                  <img src="./skins/intel.png" />
+                  <p class="news-headline">
+                    The Intel Innovation 2022 event saw the debut of the new 13th
+                    generation Intel Core processors, the introduction of the new
+                    Intel Geti computer vision platform
+                  </p>
+                </div> -->
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <script src="./home.js"></script>
+    <script src="./home.js" defer></script>
   </body>
 </html>

@@ -456,7 +456,7 @@ textarea {
   margin-bottom: 0.6rem;
 }
 
-.line {
+.main-column .forums-showcase .line {
   position: relative;
   width: 790px;
   margin-top: 1rem;
@@ -464,18 +464,48 @@ textarea {
   align-items: center;
 }
 
-.line:before,
-.line:after {
+.main-column .forums-showcase .line:before,
+.main-column .forums-showcase .line:after {
   content: "";
   flex: 1 1;
   border-bottom: 1px solid #dfdede;
   margin: auto;
 }
 
-.posted-by {
+.main-column .forums-showcase .post-footer .posted-by {
   margin-top: 0.5rem;
+  font-size: 15px;
 }
 
+.main-column .forums-showcase .post-footer {
+  width: 790px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.main-column .forums-showcase .post-footer .like-btn {
+  margin: 0.4rem 0 0 31rem;
+  font-size: 22px;
+  cursor: pointer;
+  color: #8a8a8a;
+}
+
+.main-column .forums-showcase .post-footer .like-btn.active {
+  color: #4285f4;
+}
+
+.main-column .forums-showcase .post-footer .like-count {
+  margin: 0.4rem 0 0 0.2rem;
+  font-size: 13px;
+}
+
+.main-column .forums-showcase .post-footer .comment-btn {
+  margin: 0.4rem 0 0 1rem;
+  font-size: 22px;
+  cursor: pointer;
+}
 .news-profile-column {
   position: relative;
   min-width: 22%;
@@ -484,7 +514,7 @@ textarea {
 
 .news-profile-column .profile {
   position: relative;
-  width: 300px;
+  width: 310px;
   height: 300px;
 
   margin: 2rem 0 0 0;
@@ -542,7 +572,7 @@ textarea {
   position: relative;
   top: 100px;
 
-  width: 235px;
+  width: 240px;
   height: 45px;
 
   font-size: 18px;
@@ -571,7 +601,7 @@ textarea {
 .news-profile-column .news {
   position: relative;
   margin-top: 1rem;
-  width: 300px;
+  width: 310px;
   height: 390px;
   background: #f2f2f2;
   box-shadow: 0px -4px 82px rgba(0, 0, 0, 0.1);
@@ -580,6 +610,7 @@ textarea {
 
 .news-profile-column .news .header {
   padding: 16px 10px 0 10px;
+  margin-bottom: 1rem;
   font-family: Inter, sans-serif;
   font-style: normal;
   font-size: 16px;
@@ -610,4 +641,34 @@ textarea {
 
 .news-profile-column .news .header a:hover:after {
   width: 100%;
+}
+
+.news-profile-column .news .news-from-api {
+  height: 320px;
+  width: 300px;
+  margin-left: 5px;
+  overflow-y: visible;
+  overflow-x: hidden;
+}
+
+#news-data {
+  width: 300px;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#news-image {
+  width: 70px;
+  height: 70px;
+}
+
+#news-headline {
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-size: 13px;
+  text-align: justify;
+  padding: 0 9px 0 9px;
 }
