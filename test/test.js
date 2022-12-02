@@ -66,7 +66,7 @@ describe('Deleting a post', () => {
       });
   });
 
-  it('It should delete an existing post', (done) => {
+  it('It should not delete a post which does not exist.', (done) => {
     chai
       .request(server)
       .delete('/' + 0)
