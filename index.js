@@ -38,9 +38,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport');
 
+// Google auth
+require('./config/passportGoogle');
+
 app.use((req, res, next) => {
-  console.log(req.session);
-  console.log(req.user);
+  // console.log(req.session);
+  // console.log(req.user);
   next();
 });
 
@@ -71,7 +74,7 @@ app.post(
   '/login',
   passport.authenticate('local', {
     failureRedirect: '/login-failure',
-    successRedirect: 'login-success',
+    successRedirect: '/login-success',
   })
 );
 
@@ -98,6 +101,32 @@ app.get('/home', (req, res) => {
   res.render('landing.ejs');
 });
 
+app.get(
+  '/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get(
+  '/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: '/login-failure',
+    successRedirect: '/login-success',
+  }),
+  (req, res) => {
+    //res.redirect('/login-success')
+  }
+);
+
+app.get('/login-success', isAuth, (req, res, next) => {
+  res.send(
+    '<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>'
+  );
+});
+
+app.get('/login-failure', isAuth, (req, res, next) => {
+  res.send('Wrong user credentials');
+});
+
 app.get('/logout', (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
@@ -110,8 +139,9 @@ app.get('/logout', (req, res, next) => {
 // get all posts
 app.get('/forums', async (req, res) => {
   const allPosts = await postModel.find({});
-  console.log(allPosts);
-  res.render('forums.ejs', { allPosts });
+  // console.log(allPosts);
+  res.json(allPosts);
+  // res.render('forums.ejs', { allPosts });
 });
 
 app.get('/forums/new', async (req, res) => {
@@ -129,19 +159,25 @@ app.post('/', async (req, res) => {
   const newPost = req.body;
   const post = await postModel.create(newPost);
   await post.save();
-  res.redirect('/forums')
-  res.send(newPost);
+  // res.redirect('/forums');
+  res.json(newPost);
 });
 
 // for deleting post:
 app.delete('/:id', async (req, res) => {
   const postId = req.params.id;
-  const post = await postModel.findById(postId);
-  await postModel.deleteOne(post);
-  res.send(post);
+  await postModel
+    .findById(postId)
+    .then((data) => {
+      postModel.deleteOne(data);
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(404).send('Failed to delete');
+    });
 });
 
-// update post:
+// update data:
 app.put('/:id', async (req, res) => {
   const postId = req.params.id;
   // old post
@@ -156,7 +192,7 @@ app.put('/:id', async (req, res) => {
   post.title = newPost.title;
   post.description = newPost.description;
   await post.save();
-  res.send(post);
+  res.json(post);
 });
 
 // Comments -------------------
@@ -255,6 +291,8 @@ app.get('/news', async (req, res) => {
 app.listen(3000, (req, res) => {
   console.log('ITLAB');
 });
+
+module.exports = app;
 
 // If using ejs
 
