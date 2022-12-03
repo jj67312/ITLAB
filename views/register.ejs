@@ -41,11 +41,20 @@
       </div>
       <div class="row5">
         <form action="/register" method="POST">
+          <% if(message.length>0){%>
+            <p class="error-text2"><%= message %></p>
+          <% } %>
+
+          <% if(typeof alert != 'undefined'){ %>
+            <% alert.forEach(function(error){ %>
+              <p class="error-text2"><%= error.msg %></p>
+            <% }) %>
+          <% } %>
           <div class="group1">
             <input name="username" type="text" id="username" placeholder="Name" class="name" required />
             <label for="username" class="form-label">Username</label>
           </div>
-
+          
           <div class="field group2">
             <div class="input-field">
               <input type="email" id="email" placeholder="Email" class="email" />
@@ -53,7 +62,6 @@
             </div>
             <div class="error email-error">
               <i class="bx bx-error-circle error-icon"></i>
-              <p class="error-text2">Please enter a valid email</p>
             </div>
           </div>
 
@@ -65,10 +73,9 @@
             </div>
             <div class="error password-error">
               <i class="bx bx-error-circle error-icon"></i>
-              <p class="error-text3">
-                Please enter atleast 8 charatcters with numbers, symbols,
-                small and capital letters.
-              </p>
+              <% if(message.length>0){%>
+                <p class="error-text2"><%= message %></p>
+              <% } %>
             </div>
           </div>
 
