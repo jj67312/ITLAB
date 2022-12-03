@@ -37,7 +37,7 @@ function getNews() {
     });
 }
 
-getNews();
+// getNews();
 
 const like_btn = Array.from(document.getElementsByClassName("like-btn"));
 const cmnt_btn = document.getElementById("commentButton");
