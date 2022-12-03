@@ -44,22 +44,15 @@
           </ul>
         </div>
         <div class="main-column">
-          <p class="heading1">Hello Prabhat!</p>
-          <p class="heading2">How are you feeling today?</p>
-
-          <form class="forum" action="#">
-            <input
-              type="search"
-              class="forum-search-bar"
-              placeholder="What's on your mind?"
-            />
-            <input type="button" class="forum-search-btn" value="Search" />
-          </form>
-
-          <div class="thread">
-            <p class="heading3">
-              <i class="bx bx-down-arrow down"></i>Hot Topics
-            </p>
+          <div class="top-bar">
+            <form class="forum" action="#">
+              <input
+                type="search"
+                class="forum-search-bar"
+                placeholder="What's on your mind?"
+              />
+              <input type="button" class="forum-search-btn" value="Search" />
+            </form>
             <button class="start-thread-btn">
               <i class="bx bx-plus add-icon"></i>Start a New Thread
             </button>
@@ -97,8 +90,8 @@
           </dialog>
 
           <div class="forums-showcase">
-            <ul>
-              <li>
+            <div class="forum-card">
+              <div class="post-header">
                 <h3>Can my Mobile keep overheating when I charge it?</h3>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
@@ -109,88 +102,55 @@
                   sed.
                 </p>
                 <p class="line"></p>
-                <div class="post-footer">
-                  <p class="posted-by">
-                    Posted By
-                    <a href="#"
-                      ><font style="color: #4285f4">Aniket Kudtarkar</font></a
-                    >
-                  </p>
-                  <i class="bx bxs-like like-btn"></i>
-                  <p class="like-count">0</p>
-                  <i class="bx bxs-chat comment-btn"></i>
+              </div>
+
+              <div class="post-footer">
+                <div class="posted-by">
+                  Posted By
+                  <a href="#"
+                    ><font style="color: #4285f4">Aniket Kudtarkar</font></a
+                  >
                 </div>
-              </li>
-              <li>
-                <h3>Can my Mobile keep overheating when I charge it?</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-                  vitae accusamus obcaecati. Laboriosam cupiditate distinctio
-                  quasi sint iure! Ducimus est quaerat cupiditate ratione ad
-                  voluptate ea, alias, voluptates, maiores explicabo repellendus
-                  deleniti molestiae nisi sit quisquam error. Commodi, nihil
-                  sed.
-                </p>
-                <p class="line"></p>
-                <div class="post-footer">
-                  <p class="posted-by">
-                    Posted By
-                    <a href="#"
-                      ><font style="color: #4285f4">Aniket Kudtarkar</font></a
-                    >
-                  </p>
-                  <i class="bx bxs-like like-btn"></i>
+                <div class="icon-area">
+                  <i class="bx bxs-like like-icon"></i>
                   <p class="like-count">0</p>
-                  <i class="bx bxs-chat comment-btn"></i>
+                  <i class="bx bxs-chat comment-icon"></i>
                 </div>
-              </li>
-              <li>
-                <h3>Can my Mobile keep overheating when I charge it?</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-                  vitae accusamus obcaecati. Laboriosam cupiditate distinctio
-                  quasi sint iure! Ducimus est quaerat cupiditate ratione ad
-                  voluptate ea, alias, voluptates, maiores explicabo repellendus
-                  deleniti molestiae nisi sit quisquam error. Commodi, nihil
-                  sed.
-                </p>
-                <p class="line"></p>
-                <div class="post-footer">
-                  <p class="posted-by">
-                    Posted By
-                    <a href="#"
-                      ><font style="color: #4285f4">Aniket Kudtarkar</font></a
-                    >
-                  </p>
-                  <i class="bx bxs-like like-btn"></i>
-                  <p class="like-count">0</p>
-                  <i class="bx bxs-chat comment-btn"></i>
+              </div>
+
+              <div class="comment-section">
+                <p class="comment-heading">Comments</p>
+                <div class="comment-div">
+                  <div class="comment">
+                    <a href="#">@Random-</a> <br />
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Rerum, voluptatum!
+                  </div>
+                  <div class="comment">
+                    <a href="#">@Random-</a> <br />
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Rerum, voluptatum!
+                  </div>
+                  <div class="comment">
+                    <a href="#">@Random-</a> <br />
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Rerum, voluptatum!
+                  </div>
+                  <div class="comment">
+                    <a href="#">@Random-</a> <br />
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Rerum, voluptatum!
+                  </div>
+                  <!-- insert more comments here -->
                 </div>
-              </li>
-              <li>
-                <h3>Can my Mobile keep overheating when I charge it?</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-                  vitae accusamus obcaecati. Laboriosam cupiditate distinctio
-                  quasi sint iure! Ducimus est quaerat cupiditate ratione ad
-                  voluptate ea, alias, voluptates, maiores explicabo repellendus
-                  deleniti molestiae nisi sit quisquam error. Commodi, nihil
-                  sed.
-                </p>
-                <p class="line"></p>
-                <div class="post-footer">
-                  <p class="posted-by">
-                    Posted By
-                    <a href="#"
-                      ><font style="color: #4285f4">Aniket Kudtarkar</font></a
-                    >
-                  </p>
-                  <i class="bx bxs-like like-btn"></i>
-                  <p class="like-count">0</p>
-                  <i class="bx bxs-chat comment-btn"></i>
+                <div class="add-comment">
+                  <form action="#">
+                    <input class="comment-input" placeholder="Add Comment" />
+                    <input class="comment-btn" type="submit" value="Send" />
+                  </form>
                 </div>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -211,16 +171,7 @@
               <p>News</p>
               <a href="./news.html">View All</a>
             </div>
-            <div id="newsFeed" class="news-from-api">
-              <!-- <div class="news-card">
-                  <img src="./skins/intel.png" />
-                  <p class="news-headline">
-                    The Intel Innovation 2022 event saw the debut of the new 13th
-                    generation Intel Core processors, the introduction of the new
-                    Intel Geti computer vision platform
-                  </p>
-                </div> -->
-            </div>
+            <div id="newsFeed" class="news-from-api"></div>
           </div>
         </div>
       </div>

@@ -37,10 +37,10 @@ function getNews() {
     });
 }
 
-getNews();
+// getNews();
 
-const like_btn = Array.from(document.getElementsByClassName("like-btn"));
-const cmnt_btn = document.getElementById("commentButton");
+const like_btn = Array.from(document.getElementsByClassName("like-icon"));
+const cmnt_btn = Array.from(document.getElementsByClassName("comment-icon"));
 
 like_btn.forEach((like_btn) => {
   like_btn.style.transition = "all 300ms";
