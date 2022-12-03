@@ -498,6 +498,12 @@ textarea {
   color: #8a8a8a;
 }
 
+.main-column .forums-showcase .post-footer .icon-area .icon-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .main-column .forums-showcase .post-footer .icon-area .like-icon.active {
   color: #4285f4;
 }
