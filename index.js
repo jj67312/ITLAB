@@ -138,10 +138,10 @@ app.get('/logout', (req, res, next) => {
 
 // get all posts
 app.get('/forums', async (req, res) => {
-  const allPosts = await postModel.find({});
+  const allPosts = await postModel.find({}).populate('author');
   // console.log(allPosts);
-  res.json(allPosts);
-  // res.render('forums.ejs', { allPosts });
+  // res.json(allPosts);
+  res.render('forums.ejs', { allPosts });
 });
 
 app.get('/forums/new', async (req, res) => {
@@ -159,8 +159,8 @@ app.post('/', async (req, res) => {
   const newPost = req.body;
   const post = await postModel.create(newPost);
   await post.save();
-  // res.redirect('/forums');
-  res.json(newPost);
+  res.redirect('/forums');
+  // res.json(newPost);
 });
 
 // for deleting post:
@@ -175,6 +175,8 @@ app.delete('/:id', async (req, res) => {
     .catch((err) => {
       res.status(404).send('Failed to delete');
     });
+
+  res.redirect('/forums');
 });
 
 // update data:
