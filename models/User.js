@@ -8,4 +8,4 @@ const UserSchema = new mongoose.Schema({
   hashedPassword: String,
 });
 
-module.exports = mongoose.model('UserSchema', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

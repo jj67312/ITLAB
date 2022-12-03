@@ -4,6 +4,8 @@ const app = express();
 const passport = require('passport');
 
 const genPassword = require('./utils').genPassword;
+const { check, validationResult } = require('express-validator');
+const validator = require('validator')
 
 const isAuth = require('./authMiddleware').isAuth;
 
@@ -14,6 +16,7 @@ require('./config/database');
 
 // Session store
 const session = require('express-session');
+const flash = require('connect-flash')
 
 const MongoStore = require('connect-mongo');
 const sessionStore = new MongoStore({
@@ -32,18 +35,19 @@ app.use(
     },
   })
 );
+app.use(flash())
 
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
-require('./config/passport');
+require('./config/passport')(passport);
 
 // Google auth
-require('./config/passportGoogle');
+require('./config/passportGoogle')(passport);
 
 app.use((req, res, next) => {
-  // console.log(req.session);
-  // console.log(req.user);
+  console.log(req.session);
+  console.log(req.user);
   next();
 });
 
@@ -58,43 +62,88 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 //models
 const postModel = require('./models/Post');
-const User = require('./models/User');
+const User = require('./models/User')
 
 // login and register routes --------------------
 
 app.get('/login', (req, res) => {
-  res.render('login.ejs');
+  res.render('login.ejs', {message: req.flash('error_msg')});
 });
 
 app.get('/register', (req, res) => {
-  res.render('register.ejs');
+  res.render('register.ejs', {message: req.flash('error_msg')});
 });
 
-app.post(
-  '/login',
-  passport.authenticate('local', {
-    failureRedirect: '/login-failure',
-    successRedirect: '/login-success',
+app.post('/login', passport.authenticate('local', {
+  failureRedirect: '/login-failure',
+  successRedirect: '/login-success',
+}));
+
+app.post('/register', 
+    check('password', 'Password is weak')
+    .isAlphanumeric()
+    .isLength({min:8}),
+    check('email', 'Incorrect email format')
+    .isEmail(), 
+    (req, res, next) => {
+  
+  // if(!username || !password || !email){
+  //   req.flash('error_msg', 'Enter all fields')
+  //   res.redirect('/register')
+  // }
+  // if(!validator.isEmail(email)){
+  //   req.flash('error_msg', 'Incorrect email format')
+  //   res.redirect('/register')
+  // }
+  // if(!validator.isStrongPassword(req.body.password)){
+  //   req.flash('error_msg', 'Weak Password')
+  //   res.redirect('/register')
+  // }
+  User.findOne({username:req.body.username})
+  .then((user)=>{
+    if(user){
+      req.flash('error_msg', 'User already exists')
+      res.redirect('/register')
+    }
+    else{
+      const errors = validationResult(req)
+      
+      console.log(errors);
+      if(!errors.isEmpty()){
+        const alert = errors.array()
+        req.flash('error_msg', {alert})
+        res.redirect('/register')
+      }
+      else{
+        const saltHash = genPassword(req.body.password);
+
+        const salt = saltHash.salt;
+        const hash = saltHash.hash;
+      
+        const newUser = new User({
+          username: req.body.username,
+          email: null,
+          googleId: null,
+          salt: salt,
+          hashedPassword: hash,
+        });
+      
+        newUser.save().then((user) => {
+          console.log(user);
+        });
+      
+        res.redirect('/login');
+      }
+
+      
+    }
   })
-);
+  .catch((err)=>{
+    next(err)
+  })
+  
 
-app.post('/register', (req, res, next) => {
-  const saltHash = genPassword(req.body.password);
-
-  const salt = saltHash.salt;
-  const hash = saltHash.hash;
-
-  const newUser = new User({
-    username: req.body.username,
-    salt: salt,
-    hashedPassword: hash,
-  });
-
-  newUser.save().then((user) => {
-    console.log(user);
-  });
-
-  res.redirect('/home');
+ 
 });
 
 app.get('/home', (req, res) => {
@@ -123,7 +172,7 @@ app.get('/login-success', isAuth, (req, res, next) => {
   );
 });
 
-app.get('/login-failure', isAuth, (req, res, next) => {
+app.get('/login-failure', (req, res, next) => {
   res.send('Wrong user credentials');
 });
 
@@ -138,10 +187,10 @@ app.get('/logout', (req, res, next) => {
 
 // get all posts
 app.get('/forums', async (req, res) => {
-  const allPosts = await postModel.find({});
+  const allPosts = await postModel.find({}).populate('author');
   // console.log(allPosts);
-  res.json(allPosts);
-  // res.render('forums.ejs', { allPosts });
+  // res.json(allPosts);
+  res.render('forums.ejs', { allPosts });
 });
 
 app.get('/forums/new', async (req, res) => {
@@ -159,8 +208,8 @@ app.post('/', async (req, res) => {
   const newPost = req.body;
   const post = await postModel.create(newPost);
   await post.save();
-  // res.redirect('/forums');
-  res.json(newPost);
+  res.redirect('/forums');
+  // res.json(newPost);
 });
 
 // for deleting post:
@@ -175,6 +224,8 @@ app.delete('/:id', async (req, res) => {
     .catch((err) => {
       res.status(404).send('Failed to delete');
     });
+
+  res.redirect('/forums');
 });
 
 // update data:
