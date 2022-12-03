@@ -64,7 +64,7 @@ a {
 }
 
 .logo {
-  margin: 4rem 0 1rem 1rem;
+  margin: 3rem 0 1rem 1rem;
   font-family: Poppins, sans-serif;
   font-weight: bolder;
   font-size: 2.6rem;
@@ -134,7 +134,7 @@ a {
 .main-column .header-div {
   position: relative;
   width: 500px;
-  margin: 4rem 0 0 0rem;
+  margin: 3rem 0 0 0rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
