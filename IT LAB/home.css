@@ -65,7 +65,7 @@ a {
 }
 
 .logo {
-  margin: 3rem 0 1rem 1rem;
+  margin: 2rem 0 1rem 1rem;
   font-family: Poppins, sans-serif;
   font-weight: bolder;
   font-size: 2.6rem;
@@ -132,7 +132,7 @@ a {
 
 .main-column .top-bar {
   width: 856px;
-  margin: 3rem 0 0 2rem;
+  margin: 2rem 0 0 2rem;
   display: flex;
 }
 

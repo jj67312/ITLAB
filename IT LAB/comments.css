@@ -66,8 +66,8 @@ a {
 }
 
 .logo {
-  margin: 3rem 0 1rem 1rem;
-  font-family: Poppins, sans-serif;
+  margin: 2rem 0 1rem 1rem;
+  font-family: Poppins, sans-serif!important;
   font-weight: bolder;
   font-size: 2.6rem;
   line-height: 1.2;
@@ -134,7 +134,7 @@ a {
 .post-card {
   position: relative;
   width: 856px;
-  margin: 3rem 0 1.4rem 0;
+  margin: 2rem 0 1.4rem 0;
   padding: 20px 30px 10px 30px;
 
   background-color: #fff;

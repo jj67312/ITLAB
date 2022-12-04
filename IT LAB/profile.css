@@ -64,7 +64,7 @@ a {
 }
 
 .logo {
-  margin: 3rem 0 1rem 1rem;
+  margin: 2rem 0 1rem 1rem;
   font-family: Poppins, sans-serif;
   font-weight: bolder;
   font-size: 2.6rem;
@@ -134,7 +134,7 @@ a {
 .main-column .header-div {
   position: relative;
   width: 500px;
-  margin: 3rem 0 0 0rem;
+  margin: 2rem 0 0 0rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -269,7 +269,11 @@ a {
   color: #8a8a8a;
 
   font-family: Inter, sans-serif;
+  font-style: normal;
   text-align: justify;
+}
+.main-column .Comments li {
+  color: #28282b!important;
 }
 
 .main-column .Posts li:nth-child(1),
