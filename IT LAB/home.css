@@ -394,6 +394,7 @@ textarea {
 
   overflow-y: visible;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar {

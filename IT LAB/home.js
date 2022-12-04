@@ -39,6 +39,13 @@ function getNews() {
 
 // getNews();
 
+var x = document.querySelector(".profile-text1").innerHTML;
+var y = document.querySelector(".profile-logo-text");
+
+y.innerHTML= x[0];
+
+
+
 const like_btn = Array.from(document.getElementsByClassName("like-icon"));
 const cmnt_btn = Array.from(document.getElementsByClassName("comment-icon"));
 
@@ -54,3 +61,4 @@ like_btn.forEach((like_btn) => {
     }
   });
 });
+
