@@ -139,8 +139,9 @@ a {
 }
 
 .main-column .news-container-heading {
-  margin: 2rem 55rem 0 0rem;
-  font-size: 38px;
+  margin: 2.1rem 55rem 1rem 0rem;
+  font-size: 42px;
+  font-weight: bold;
 }
 
 #slide {
@@ -149,16 +150,18 @@ a {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  width: 1140px;
+  height: 350px;
   padding-top: 5px;
   padding-bottom: 5px;
-  width: 1140px;
-  height: 400px;
   margin-bottom: 1rem;
 }
 
 #news-content {
+  width: 710px;
   display: flex;
   flex-direction: column;
+  float: left;
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -193,7 +196,7 @@ a {
 #news-image {
   margin-left: 0.4rem;
   width: 400px;
-  height: 350px;
+  height: 250px;
 }
 
 #news-heading {

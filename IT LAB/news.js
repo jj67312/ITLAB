@@ -43,11 +43,12 @@ function getNews() {
           "</p><p id='date-time'>" +
           response.articles[i].publishedAt +
           "</p></div><p id='main-content'>" +
-          response.articles[i].content +"</p><a id='read-more' href='" +
-          response.articles[i].url +"'>Read More</a></div></div>";
+          response.articles[i].content +
+          "</p><a id='read-more' href='" +
+          response.articles[i].url +
+          "'>Read More</a></div></div>";
       }
     });
 }
 
-  // getNews();
-
+getNews();
