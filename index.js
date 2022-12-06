@@ -5,7 +5,7 @@ const passport = require('passport');
 
 const genPassword = require('./utils').genPassword;
 const { check, validationResult } = require('express-validator');
-const validator = require('validator')
+const validator = require('validator');
 
 const isAuth = require('./authMiddleware').isAuth;
 
@@ -16,7 +16,7 @@ require('./config/database');
 
 // Session store
 const session = require('express-session');
-const flash = require('connect-flash')
+const flash = require('connect-flash');
 
 const MongoStore = require('connect-mongo');
 const sessionStore = new MongoStore({
@@ -35,7 +35,7 @@ app.use(
     },
   })
 );
-app.use(flash())
+app.use(flash());
 
 // Passport
 app.use(passport.initialize());
@@ -62,89 +62,83 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 //models
 const postModel = require('./models/Post');
-const User = require('./models/User')
+const User = require('./models/User');
 
 // login and register routes --------------------
 
 app.get('/login', (req, res) => {
-  res.render('login.ejs', {message: req.flash('error_msg')});
+  res.render('login.ejs', { message: req.flash('error_msg') });
 });
 
 app.get('/register', (req, res) => {
-  res.render('register.ejs', {message: req.flash('error_msg')});
+  res.render('register.ejs', { message: req.flash('error_msg') });
 });
 
-app.post('/login', passport.authenticate('local', {
-  failureRedirect: '/login-failure',
-  successRedirect: '/login-success',
-}));
-
-app.post('/register', 
-    check('password', 'Password is weak')
-    .isAlphanumeric()
-    .isLength({min:8}),
-    check('email', 'Incorrect email format')
-    .isEmail(), 
-    (req, res, next) => {
-  
-  // if(!username || !password || !email){
-  //   req.flash('error_msg', 'Enter all fields')
-  //   res.redirect('/register')
-  // }
-  // if(!validator.isEmail(email)){
-  //   req.flash('error_msg', 'Incorrect email format')
-  //   res.redirect('/register')
-  // }
-  // if(!validator.isStrongPassword(req.body.password)){
-  //   req.flash('error_msg', 'Weak Password')
-  //   res.redirect('/register')
-  // }
-  User.findOne({username:req.body.username})
-  .then((user)=>{
-    if(user){
-      req.flash('error_msg', 'User already exists')
-      res.redirect('/register')
-    }
-    else{
-      const errors = validationResult(req)
-      
-      console.log(errors);
-      if(!errors.isEmpty()){
-        const alert = errors.array()
-        req.flash('error_msg', {alert})
-        res.redirect('/register')
-      }
-      else{
-        const saltHash = genPassword(req.body.password);
-
-        const salt = saltHash.salt;
-        const hash = saltHash.hash;
-      
-        const newUser = new User({
-          username: req.body.username,
-          email: null,
-          googleId: null,
-          salt: salt,
-          hashedPassword: hash,
-        });
-      
-        newUser.save().then((user) => {
-          console.log(user);
-        });
-      
-        res.redirect('/login');
-      }
-
-      
-    }
+app.post(
+  '/login',
+  passport.authenticate('local', {
+    failureRedirect: '/login-failure',
+    successRedirect: '/login-success',
   })
-  .catch((err)=>{
-    next(err)
-  })
-  
+);
 
- 
-});
+app.post(
+  '/register',
+  check('password', 'Password is weak').isAlphanumeric().isLength({ min: 8 }),
+  check('email', 'Incorrect email format').isEmail(),
+  (req, res, next) => {
+    // if(!username || !password || !email){
+    //   req.flash('error_msg', 'Enter all fields')
+    //   res.redirect('/register')
+    // }
+    // if(!validator.isEmail(email)){
+    //   req.flash('error_msg', 'Incorrect email format')
+    //   res.redirect('/register')
+    // }
+    // if(!validator.isStrongPassword(req.body.password)){
+    //   req.flash('error_msg', 'Weak Password')
+    //   res.redirect('/register')
+    // }
+    User.findOne({ username: req.body.username })
+      .then((user) => {
+        if (user) {
+          req.flash('error_msg', 'User already exists');
+          res.redirect('/register');
+        } else {
+          const errors = validationResult(req);
+
+          console.log(errors);
+          if (!errors.isEmpty()) {
+            const alert = errors.array();
+            req.flash('error_msg', { alert });
+            res.redirect('/register');
+          } else {
+            const saltHash = genPassword(req.body.password);
+
+            const salt = saltHash.salt;
+            const hash = saltHash.hash;
+
+            const newUser = new User({
+              username: req.body.username,
+              email: null,
+              googleId: null,
+              salt: salt,
+              hashedPassword: hash,
+            });
+
+            newUser.save().then((user) => {
+              console.log(user);
+            });
+
+            res.redirect('/login');
+          }
+        }
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
 app.get('/home', (req, res) => {
   res.render('landing.ejs');
@@ -189,8 +183,8 @@ app.get('/logout', (req, res, next) => {
 app.get('/forums', async (req, res) => {
   const allPosts = await postModel.find({}).populate('author');
   // console.log(allPosts);
-  res.json(allPosts);
-  // res.render('forums.ejs', { allPosts });
+  // res.json(allPosts);
+  res.render('forums.ejs', { allPosts });
 });
 
 app.get('/forums/new', async (req, res) => {
@@ -200,7 +194,7 @@ app.get('/forums/new', async (req, res) => {
 // get specified forums
 app.get('/forums/:id', async (req, res) => {
   const post = await postModel.findById(req.params.id).populate('comments');
-  res.send(post);
+  res.render('comments.ejs', { post });
 });
 
 // create new post
@@ -263,7 +257,8 @@ app.post('/:id/comment', async (req, res) => {
   // push the comment into the selected post
   currPost.comments.push(newComment._id);
   await currPost.save();
-  res.send(currPost);
+  // res.send(currPost);
+  res.redirect(`/forums/${postID}`);
 });
 
 // delete a comment:

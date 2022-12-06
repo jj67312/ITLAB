@@ -71,7 +71,7 @@
           <ul>
             <% for(let post of allPosts) {%>
             <li>
-              <h3><%= post.title %> </h3>
+              <h3> <a href="/forums/<%= post._id %>"><%= post.title %></a></h3>
               <p><%= post.description %> </p>
               <p class="line"></p>
               <div class="post-footer">
