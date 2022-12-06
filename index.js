@@ -337,7 +337,7 @@ const cheerio = require('cheerio');
 const webCrawler = require('./utils')
 
 urlTag ='.btn_prcList_sn flt-rt target_link_external impressions_gts'
-app.get('/products', async (req,res)=>{
+app.get('/market', async (req,res)=>{
     let ans,ans2
     let finalData = []
     const predecessor = "https://www.91mobiles.com"

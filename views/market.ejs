@@ -1,178 +1,148 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/stylesheets/market.css" />
-    <title>Home</title>
-  </head>
-  <body>
-    <div class="final-wrapper">
-      <div class="container">
-        <div class="sidebar-column">
-          <div class="logo">bit<font style="color: #4285f4">bot.</font></div>
-          <ul class="links">
-            <li>
-              <a href="/forums"
-                ><i class="bx bx-home icon"></i
-                ><span class="text">Home</span></a
-              >
-            </li>
-            <li>
-              <a href="/news"
-                ><i class="bx bx-news icon"></i
-                ><span class="text">News</span></a
-              >
-            </li>
-            <li>
-              <a href="/products"
-                ><i class="bx bx-store icon"></i
-                ><span class="text">Products</span></a
-              >
-            </li>
-            <li>
-              <a href="#"
-                ><i class="bx bx-log-out icon"></i>
-                <span class="text">Log Out</span></a
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="main-column">
-          <p class="heading1">Browse through your favourite products</p>
-          <p class="heading2">Assorted products, just for you</p>
 
-          <div class="product-grid">
-            <% for(let item of finalData){ %>
-              
-            <div class="row">
-              <div class="column">
-                <div class="card">
-                  <img
-                    class="product-item"
-                    src= <%= item.imageUrl %>
-                  />
-                  <p class="product-name"><%= item.title %></p>
-                  <p class="product-name"><%= item.price %></p>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/stylesheets/market.css" />
+  <title>Home</title>
+</head>
+
+<body>
+  <div class="final-wrapper">
+    <div class="container">
+      <div class="sidebar-column">
+        <div class="logo">bit<font style="color: #4285f4">bot.</font>
+        </div>
+        <ul class="links">
+          <li>
+            <a href="/forums"><i class="bx bx-home icon"></i><span class="text">Home</span></a>
+          </li>
+          <li>
+            <a href="/news"><i class="bx bx-news icon"></i><span class="text">News</span></a>
+          </li>
+          <li>
+            <a href="/market"><i class="bx bx-store icon"></i><span class="text">Products</span></a>
+          </li>
+          <li>
+            <% if(currentUser) {%>
+            <a href="#"><i class="bx bx-log-out icon"></i>
+              <span class="text">Log Out</span></a>
+            <% } else {%>
+            <a href="#"><i class="bx bx-log-in icon"></i>
+              <span class="text">Log In</span></a>
+            <%} %>
+          </li>
+        </ul>
+      </div>
+      <div class="main-column">
+        <p class="heading1">Browse through your favourite products</p>
+        <p class="heading2">Assorted products, just for you</p>
+
+        <div class="product-grid">
+          <% for(let item of finalData){ %>
+          <div class="row">
+            <% for(let ele of item) {%>
+            <div class="column">
+              <div class="card">
+                <img class="product-item" src=<%= ele.imageUrl %> />
+                <p class="product-name"><%= ele.title %></p>
+                <p class="product-name"><%= ele.price %></p>
+                <a href=<%= ele.productLink %>>
                   <button class="view-product-btn">
-                    <a href=<%= item.productLink %>></a>
                     <i class="bx bx-plus add-icon"></i>Buy Now
                   </button>
-                </div>
+                </a>
               </div>
             </div>
             <% } %>
-            <div class="row">
-              <div class="column">
-                <div class="card">
-                  <img
-                    class="product-item"
-                    src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg"
-                  />
-                  <p class="product-name">I Phone SE</p>
-                  <button class="view-product-btn">
-                    <i class="bx bx-plus add-icon"></i>Buy Now
-                  </button>
-                </div>
-              </div>
-              <div class="column">
-                <div class="card">
-                  <img
-                    class="product-item"
-                    src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg"
-                  />
-                  <p class="product-name">I Phone SE</p>
-                  <button class="view-product-btn">
-                    <i class="bx bx-plus add-icon"></i>Buy Now
-                  </button>
-                </div>
-              </div>
-              <div class="column">
-                <div class="card">
-                  <img
-                    class="product-item"
-                    src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg"
-                  />
-                  <p class="product-name">I Phone SE</p>
-                  <button class="view-product-btn">
-                    <i class="bx bx-plus add-icon"></i>Buy Now
-                  </button>
-                </div>
-              </div>
-              <div class="column">
-                <div class="card">
-                  <img
-                    class="product-item"
-                    src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg"
-                  />
-                  <p class="product-name">I Phone SE</p>
-                  <button class="view-product-btn">
-                    <i class="bx bx-plus add-icon"></i>Buy Now
-                  </button>
-                </div>
+          </div>
+          <% } %>
+          <div class="row">
+            <div class="column">
+              <div class="card">
+                <img class="product-item" src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg" />
+                <p class="product-name">I Phone SE</p>
+                <button class="view-product-btn">
+                  <i class="bx bx-plus add-icon"></i>Buy Now
+                </button>
               </div>
             </div>
-
-            <div class="row">
-              <div class="column">
-                <div class="card">
-                  <img
-                    class="product-item"
-                    src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg"
-                  />
-                  <p class="product-name">I Phone SE</p>
-                  <button class="view-product-btn">
-                    <i class="bx bx-plus add-icon"></i>Buy Now
-                  </button>
-                </div>
+            <div class="column">
+              <div class="card">
+                <img class="product-item" src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg" />
+                <p class="product-name">I Phone SE</p>
+                <button class="view-product-btn">
+                  <i class="bx bx-plus add-icon"></i>Buy Now
+                </button>
               </div>
-              <div class="column">
-                <div class="card">
-                  <img
-                    class="product-item"
-                    src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg"
-                  />
-                  <p class="product-name">I Phone SE</p>
-                  <button class="view-product-btn">
-                    <i class="bx bx-plus add-icon"></i>Buy Now
-                  </button>
-                </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                <img class="product-item" src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg" />
+                <p class="product-name">I Phone SE</p>
+                <button class="view-product-btn">
+                  <i class="bx bx-plus add-icon"></i>Buy Now
+                </button>
               </div>
-              <div class="column">
-                <div class="card">
-                  <img
-                    class="product-item"
-                    src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg"
-                  />
-                  <p class="product-name">I Phone SE</p>
-                  <button class="view-product-btn">
-                    <i class="bx bx-plus add-icon"></i>Buy Now
-                  </button>
-                </div>
-              </div>
-              <div class="column">
-                <div class="card">
-                  <img
-                    class="product-item"
-                    src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg"
-                  />
-                  <p class="product-name">I Phone SE</p>
-                  <button class="view-product-btn">
-                    <i class="bx bx-plus add-icon"></i>Buy Now
-                  </button>
-                </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                <img class="product-item" src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg" />
+                <p class="product-name">I Phone SE</p>
+                <button class="view-product-btn">
+                  <i class="bx bx-plus add-icon"></i>Buy Now
+                </button>
               </div>
             </div>
           </div>
-          
+
+          <div class="row">
+            <div class="column">
+              <div class="card">
+                <img class="product-item" src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg" />
+                <p class="product-name">I Phone SE</p>
+                <button class="view-product-btn">
+                  <i class="bx bx-plus add-icon"></i>Buy Now
+                </button>
+              </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                <img class="product-item" src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg" />
+                <p class="product-name">I Phone SE</p>
+                <button class="view-product-btn">
+                  <i class="bx bx-plus add-icon"></i>Buy Now
+                </button>
+              </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                <img class="product-item" src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg" />
+                <p class="product-name">I Phone SE</p>
+                <button class="view-product-btn">
+                  <i class="bx bx-plus add-icon"></i>Buy Now
+                </button>
+              </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                <img class="product-item" src="https://m.media-amazon.com/images/I/61A0Zu4K-TL._SL1500_.jpg" />
+                <p class="product-name">I Phone SE</p>
+                <button class="view-product-btn">
+                  <i class="bx bx-plus add-icon"></i>Buy Now
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
-    <!-- <script src="/javascripts/forums.js" defer></script> -->
-  </body>
+  </div>
+  <!-- <script src="/javascripts/forums.js" defer></script> -->
+</body>
+
 </html>
