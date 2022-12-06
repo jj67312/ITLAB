@@ -1,23 +1,23 @@
-let btn = document.querySelector(".follow-btn");
-btn.style.transition= "all 300ms";
+// let btn = document.querySelector(".follow-btn");
+// btn.style.transition= "all 300ms";
 
-// Change button text on click
-btn.addEventListener("click", ()=>{
+// // Change button text on click
+// btn.addEventListener("click", ()=>{
 
-    if(btn.innerText === "Follow"){
-        btn.innerText = "Following";
-        btn.style.backgroundColor= '#f2f2f2';
-        btn.style.color= "#4285f4";
-        btn.style.border= "1px solid #4285f4";
-        btn.style.width= "95px";
-    }else{
-        btn.innerText= "Follow";
-        btn.style.backgroundColor= '#4285f4';
-        btn.style.color= "#f2f2f2";
-        btn.style.border= "none";
-        btn.style.width= "90px";
-    }
-});
+//     if(btn.innerText === "Follow"){
+//         btn.innerText = "Following";
+//         btn.style.backgroundColor= '#f2f2f2';
+//         btn.style.color= "#4285f4";
+//         btn.style.border= "1px solid #4285f4";
+//         btn.style.width= "95px";
+//     }else{
+//         btn.innerText= "Follow";
+//         btn.style.backgroundColor= '#4285f4';
+//         btn.style.color= "#f2f2f2";
+//         btn.style.border= "none";
+//         btn.style.width= "90px";
+//     }
+// });
 
 const toggleToPosts = document.querySelector(".posts_toggle");
 const toggleToComments = document.querySelector(".comments_toggle");

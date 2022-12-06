@@ -78,8 +78,8 @@ app.get('/register', (req, res) => {
 app.post(
   '/login',
   passport.authenticate('local', {
-    failureRedirect: '/login-failure',
-    successRedirect: '/login-success',
+    failureRedirect: '/login',
+    successRedirect: '/forums',
   })
 );
 
@@ -153,8 +153,8 @@ app.get(
 app.get(
   '/google/callback',
   passport.authenticate('google', {
-    failureRedirect: '/login-failure',
-    successRedirect: '/login-success',
+    failureRedirect: '/login',
+    successRedirect: '/forums',
   }),
   (req, res) => {
     //res.redirect('/login-success')
@@ -194,7 +194,13 @@ app.get('/forums/new', async (req, res) => {
 
 // get specified forums
 app.get('/forums/:id', async (req, res) => {
-  const post = await postModel.findById(req.params.id).populate('comments');
+  const post = await postModel.findById(req.params.id).populate({
+    path: 'comments',
+    populate: {
+      path: 'author',
+    },
+  }).populate('author');
+  // const postAuthor = await User.findById(post.author);
   res.render('comments.ejs', { post });
 });
 
@@ -272,13 +278,13 @@ app.get('/user/:id', async (req, res) => {
   }
 
   for (let comment of userComments) {
-    comment.populate('postId')
+    comment.populate('postId');
   }
 
   console.log(userComments);
   console.log(userPosts);
 
-  res.render('profile.ejs', { userComments, userPosts });
+  res.render('profile.ejs', { userComments, userPosts, user });
 });
 
 // Comments -------------------

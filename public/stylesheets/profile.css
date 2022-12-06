@@ -137,7 +137,7 @@ a {
   margin: 2rem 0 0 0rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -171,9 +171,12 @@ a {
 .main-column .follow-info ul {
   display: flex;
   flex-direction: row;
+  padding-left: 100px;
+  /* margin-left: 20%; */
+  /* justify-content: space-between; */
 }
 
-.main-column .follow-info li {
+.main-column .follow-info ul li {
   font-family: Inter, sans-serif;
   font-style: normal;
   font-size: 18px;
