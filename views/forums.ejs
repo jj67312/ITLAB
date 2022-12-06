@@ -27,15 +27,22 @@
             <a href="#"><i class="bx bx-store icon"></i><span class="text">Products</span></a>
           </li>
           <li>
-            <a href="/logout"><i class="bx bx-log-out icon"></i>
-              <span class="text">Log Out</span></a>
+            <% if(currentUser) {%>
+            <a href="/logout"><i class="bx bx-log-out icon"></i><span class="text">Log Out</span></a>
+            <% } else{%>
+            <a href="/login"><i class="bx bx-log-in icon"></i><span class="text">Log In</span></a>
+            <% } %>
           </li>
         </ul>
       </div>
       <div class="main-column">
-        <p class="heading1">Hello Prabhat!</p>
+        <% if(currentUser) {%>
+        <p class="heading1">Hello <%= currentUser.username %> !</p>
         <p class="heading2">How are you feeling today?</p>
-
+        <% } else {%>
+        <p class="heading1">Hello User !</p>
+        <p class="heading2">How are you feeling today?</p>
+        <% } %>
         <form class="forum" action="#">
           <input type="search" class="forum-search-bar" placeholder="What's on your mind?" />
           <input type="button" class="forum-search-btn" value="Search" />
@@ -45,9 +52,11 @@
           <p class="heading3">
             <i class="bx bx-down-arrow down"></i>Hot Topics
           </p>
+          <% if(currentUser) {%>
           <button class="start-thread-btn">
             <i class="bx bx-plus add-icon"></i>Start a New Thread
           </button>
+          <% } %>
         </div>
 
         <dialog class="post_modal">
@@ -57,6 +66,7 @@
             Remeber, all your posts are public and can be viewed by everyone.
           </p>
 
+          <% if(currentUser) {%>
           <form method="POST" class="post-form" action="/">
             <p class="title">Title*</p>
             <input name="title" required class="title_input" type="text" placeholder="Title" />
@@ -65,6 +75,7 @@
             <input type="submit" class="post_publish_btn" value="Publish Post" />
             <input type="button" class="post_close_btn" value="Cancel" />
           </form>
+          <% } %>
         </dialog>
 
         <div class="forums-showcase">
@@ -77,8 +88,8 @@
               <div class="post-footer">
                 <p class="posted-by">
                   Posted By
-                  <a href="#">
-                    <font style="color: #4285f4"><%= post.author %> </font>
+                  <a href="/user/<%= post.author._id %>">
+                    <font style="color: #4285f4"><%= post.author.username %> </font>
                   </a>
                 </p>
                 <i class="bx bxs-like like-btn"></i>
@@ -92,15 +103,19 @@
       </div>
 
       <div class="news-profile-column">
+        <% if(currentUser) {%>
         <div class="profile">
           <div class="profile-logo">
             <p class="profile-logo-text">P</p>
           </div>
-          <p class="profile-text1">Prabhat Mattoo</p>
+          <p class="profile-text1"><%= currentUser.username %> </p>
           <p class="profile-text2">4 Threads • 11k Followers</p>
-          <button class="profile-btn" onclick="window.location.href = 'profile.html'">
-            View Profile
-          </button>
+          <a href="/user/<%= currentUser._id %>">
+            <button class="profile-btn" onclick="window.location.href = 'profile.html'">
+              View Profile
+            </button>
+          </a>
+          <% } %>
         </div>
         <div class="news">
           <div class="header">

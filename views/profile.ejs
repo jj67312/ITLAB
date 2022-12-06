@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheets/profile.css" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <title>Profile page</title>
+</head>
+
+<body>
+  <div class="final-wrapper">
+    <div class="container">
+      <div class="sidebar-column">
+        <div class="logo">bit<font style="color: #4285f4">bot.</font>
+        </div>
+        <ul class="links">
+          <li>
+            <a href="/home"><i class="bx bx-home icon"></i><span class="text">Home</span></a>
+          </li>
+          <li>
+            <a href="/news"><i class="bx bx-news icon"></i><span class="text">News</span></a>
+          </li>
+          <li>
+            <a href="/market"><i class="bx bx-store icon"></i><span class="text">Products</span></a>
+          </li>
+          <li>
+            <a href="#"><i class="bx bx-log-out icon"></i>
+              <span class="text">Log Out</span></a>
+          </li>
+        </ul>
+      </div>
+      <div class="main-column">
+        <div class="header-div">
+          <p class="name"><%= currentUser.username %> </p>
+          <button id="follow-btn" class="follow-btn">Follow</button>
+        </div>
+        <div class="follow-info">
+          <ul>
+            <li><b><%= userPosts.length %> </b> Posts</li>
+            <!-- <li><b>200</b> Followers</li>
+            <li><b>69</b> Following</li> -->
+          </ul>
+        </div>
+        <div class="partition"></div>
+
+        <div class="links">
+          <ul>
+            <li class="posts_toggle">Posts</li>
+            <li class="comments_toggle">Comments</li>
+          </ul>
+        </div>
+
+
+        <div id="Posts" class="Posts">
+          <ul>
+            <% for(let post of userPosts) {%>
+            <li>
+              <h3><%= post.title %> </h3>
+              <p>
+                <%= post.description %>
+              </p>
+            </li>
+            <% } %>
+
+          </ul>
+        </div>
+        <div id="Comments" class="Comments">
+          <ul>
+            <% for(let comment of userComments) {%>
+            <li>
+              <p>
+                You commented "<%= comment.commentBody %>" on this <a href="/forums/<%= comment.postId %>">post</a>
+              </p>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/javascripts/profile.js"></script>
+</body>
+
+</html>

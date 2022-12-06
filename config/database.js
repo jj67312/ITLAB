@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const url = 'mongodb://localhost:27017/itlab'
+const url = 'mongodb://localhost:27017/bitbotDB'
 
 mongoose.connect(url, {
     useNewUrlParser : true,

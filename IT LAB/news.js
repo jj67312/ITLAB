@@ -33,7 +33,7 @@ function getNews() {
     .then((a) => a.json())
     .then((response) => {
       for (var i = 0; i < response.articles.length; i++) {
-        document.getElementById("newsFeed").innerHTML +=
+        document.getElementById('newsFeed').innerHTML +=
           "<div id='slide'><img id='news-image' src='" +
           response.articles[i].urlToImage +
           "'/><div id='news-content'><p id='news-heading'>" +

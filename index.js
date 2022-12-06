@@ -21,7 +21,7 @@ const flash = require('connect-flash');
 const MongoStore = require('connect-mongo');
 const sessionStore = new MongoStore({
   collectionName: 'sessions',
-  mongoUrl: 'mongodb://localhost:27017/itlab',
+  mongoUrl: 'mongodb://localhost:27017/bitbotDB',
 });
 
 app.use(
@@ -31,7 +31,7 @@ app.use(
     saveUninitialized: true,
     store: sessionStore,
     cookie: {
-      maxAge: 1000 * 60, // 1min
+      maxAge: 1000 * 60 * 60 * 24, // 1min
     },
   })
 );
@@ -46,12 +46,13 @@ require('./config/passport')(passport);
 require('./config/passportGoogle')(passport);
 
 app.use((req, res, next) => {
-  // console.log(req.session);
-  // console.log(req.user);
+  res.locals.currentUser = req.user;
+  // console.log(req.
   next();
 });
 
-//ejs
+//ejssession);
+// console.log(req.user);
 app.set('view-engine', 'ejs');
 
 //static
@@ -84,8 +85,8 @@ app.post(
 
 app.post(
   '/register',
-  check('password', 'Password is weak').isAlphanumeric().isLength({ min: 8 }),
-  check('email', 'Incorrect email format').isEmail(),
+  // check('password', 'Password is weak').isAlphanumeric().isLength({ min: 8 }),
+  // check('email', 'Incorrect email format').isEmail(),
   (req, res, next) => {
     // if(!username || !password || !email){
     //   req.flash('error_msg', 'Enter all fields')
@@ -102,7 +103,7 @@ app.post(
     User.findOne({ username: req.body.username })
       .then((user) => {
         if (user) {
-          req.flash('error_msg', 'User already exists');
+          // req.flash('error_msg', 'User already exists');
           res.redirect('/register');
         } else {
           const errors = validationResult(req);
@@ -110,7 +111,7 @@ app.post(
           console.log(errors);
           if (!errors.isEmpty()) {
             const alert = errors.array();
-            req.flash('error_msg', { alert });
+            // req.flash('error_msg', { alert });
             res.redirect('/register');
           } else {
             const saltHash = genPassword(req.body.password);
@@ -120,7 +121,7 @@ app.post(
 
             const newUser = new User({
               username: req.body.username,
-              email: null,
+              email: req.body.email,
               googleId: null,
               salt: salt,
               hashedPassword: hash,
@@ -200,10 +201,14 @@ app.get('/forums/:id', async (req, res) => {
 // create new post
 app.post('/', async (req, res) => {
   const newPost = req.body;
+  console.log('Current user:');
+  console.log(req.user);
+  const currUserId = req.user._id;
   const post = await postModel.create(newPost);
+  post.author = currUserId;
   await post.save();
-  // res.redirect('/forums');
-  res.json(newPost);
+  res.redirect('/forums');
+  // res.json(newPost);
 });
 
 // for deleting post:
@@ -240,6 +245,42 @@ app.put('/:id', async (req, res) => {
   res.json(post);
 });
 
+// Profile
+app.get('/user/:id', async (req, res) => {
+  const userId = req.params.id;
+  const user = await User.findById(userId);
+  const allPosts = await postModel.find();
+  const allComments = await commentModel.find();
+  // console.log(user);
+  // console.log(allPosts);
+  // console.log(allComments);
+
+  let userPosts = [];
+  let userComments = [];
+
+  for (let post of allPosts) {
+    if (post.author.equals(user._id)) {
+      userPosts.push(post);
+    }
+  }
+
+  for (let comment of allComments) {
+    console.log(comment);
+    if (comment.author.equals(user._id)) {
+      userComments.push(comment);
+    }
+  }
+
+  for (let comment of userComments) {
+    comment.populate('postId')
+  }
+
+  console.log(userComments);
+  console.log(userPosts);
+
+  res.render('profile.ejs', { userComments, userPosts });
+});
+
 // Comments -------------------
 
 const commentModel = require('./models/Comment');
@@ -256,6 +297,12 @@ app.post('/:id/comment', async (req, res) => {
   const newComment = await commentModel.create(comment);
   // push the comment into the selected post
   currPost.comments.push(newComment._id);
+  newComment.author = req.user._id;
+  newComment.postId = currPost._id;
+
+  console.log(newComment);
+
+  await newComment.save();
   await currPost.save();
   // res.send(currPost);
   res.redirect(`/forums/${postID}`);
