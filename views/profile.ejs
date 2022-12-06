@@ -34,12 +34,13 @@
       </div>
       <div class="main-column">
         <div class="header-div">
-          <p class="name"><%= currentUser.username %> </p>
-          <button id="follow-btn" class="follow-btn">Follow</button>
+          <p class="name"><%= user.username %> </p>
+          <!-- <button id="follow-btn" class="follow-btn"></button> -->
         </div>
         <div class="follow-info">
           <ul>
             <li><b><%= userPosts.length %> </b> Posts</li>
+            <li><b><%= userComments.length %> </b> Comments</li>
             <!-- <li><b>200</b> Followers</li>
             <li><b>69</b> Following</li> -->
           </ul>
@@ -58,7 +59,9 @@
           <ul>
             <% for(let post of userPosts) {%>
             <li>
-              <h3><%= post.title %> </h3>
+              <a href="/forums/<%= post._id %>">
+                <h3><%= post.title %> </h3>
+              </a>
               <p>
                 <%= post.description %>
               </p>

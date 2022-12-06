@@ -25,11 +25,14 @@
             <a href="/news"><i class="bx bx-news icon"></i><span class="text">News</span></a>
           </li>
           <li>
-            <a href="./market.html"><i class="bx bx-store icon"></i><span class="text">Products</span></a>
+            <a href="/market"><i class="bx bx-store icon"></i><span class="text">Products</span></a>
           </li>
           <li>
-            <a href="#"><i class="bx bx-log-out icon"></i>
-              <span class="text">Log Out</span></a>
+            <% if(currentUser) {%>
+            <a href="/logout"><i class="bx bx-log-out icon"></i><span class="text">Log Out</span></a>
+            <% } else {%>
+            <a href="/login"><i class="bx bx-log-in icon"></i><span class="text">Log In</span></a>
+            <% } %>
           </li>
         </ul>
       </div>
@@ -44,8 +47,8 @@
           <div class="post-footer">
             <div class="posted-by">
               Posted By
-              <a href="#">
-                <font style="color: #4285f4">Aniket Kudtarkar</font>
+              <a href="/user/<%= post.author._id %> ">
+                <font style="color: #4285f4"><%= post.author.username %> </font>
               </a>
             </div>
             <div class="icon-area">
@@ -66,8 +69,8 @@
             <ul>
               <% for(let comment of post.comments) {%>
               <li>
-                <a href="#">@Random-</a> <br />
-                <%= comment.commentBody %> 
+                <a href="/user/<%= comment.author._id %>"><%= comment.author.username %> </a> <br />
+                <%= comment.commentBody %>
               </li>
               <% } %>
             </ul>
@@ -82,16 +85,20 @@
       </div>
 
       <div class="news-profile-column">
+        <% if(currentUser) {%>
         <div class="profile">
           <div class="profile-logo">
-            <p class="profile-logo-text">P</p>
+            <p class="profile-logo-text"><%= currentUser.username[0] %> </p>
           </div>
-          <p class="profile-text1">Prabhat Mattoo</p>
-          <p class="profile-text2">4 Threads • 11k Followers</p>
-          <button class="profile-btn" onclick="window.location.href = 'profile.html'">
-            View Profile
-          </button>
+          <p class="profile-text1"><%= currentUser.username %> </p>
+          <p class="profile-text2"></p>
+          <a href="/user/<%=currentUser._id%>">
+            <button class="profile-btn" onclick="window.location.href = 'profile.html'">
+              View Profile
+            </button>
+          </a>
         </div>
+        <% } %>
         <div class="news">
           <div class="header">
             <p>News</p>
