@@ -6,8 +6,6 @@
   box-sizing: border-box;
 }
 
-
-
 body {
   font-family: Inter, sans-serif;
   font-weight: normal;
@@ -22,110 +20,6 @@ li {
 
 a {
   text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Float four columns side by side */
-.column {
-  float: left;
-  width: 24%;
-  padding: 0 10px;
-}
-
-/* Remove extra left and right margins, due to padding in columns */
-
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-
-.card {
-  margin: 1rem 0 0 2rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
-  padding: 16px;
-  align-items: center;
-  text-align: center;
-  background-color: #fff;
-}
-
-
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-    align-content: center;
-  }
-}
-
-.view-product-btn {
-  width: 200px;
-  height: 40px;
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-size: 1rem;
-
-  background-color: #4285f4;
-  color: #fff;
-  border: none;
-  border-radius: 0px;
-  
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  transition: all 300ms ease;
-
-  min-width: 25px;
-  font-size: 18px;
-}
-
-.view-product-btn:hover {
-  background-color: #f2f2f2;
-  color: #4285f4;
-  border: 1px solid #4285f4;
-}
-
-.main-column h2 {
-    font-family: Poppins, sans-serif; 
-    margin-top: 1.5em;
-    align-self: center;
-}
-
-.main-column h4 {
-    font-family: Poppins, sans-serif; 
-    color: #4285f4;
-    margin-top: 0.5em;
-    margin-bottom: 2em;
-    align-self: center;
-}
-
-.main-column .row .column .card {
-    font-family: Poppins, sans-serif;
-    align-content: center;
-}
-
-.main-column .product-grid {
-    scroll-behavior: smooth;
-    overflow-y: scroll; 
-    overflow-x:hidden; 
-}
-
-.product-item {
-    height: 13em;
-    width: 13em;
 }
 
 .final-wrapper {
@@ -157,8 +51,7 @@ body {
 }
 
 .sidebar-column,
-.main-column,
-.news-profile-column {
+.main-column {
   float: left;
 }
 
@@ -231,59 +124,59 @@ body {
 
 .main-column {
   position: relative;
-  min-width: 60%;
+  min-width: 82%;
 
   background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
 }
 
-
-
-.main-column .top-bar .forum-search-bar,
-select,
-textarea {
-  font-family: Inter;
-  font-size: 1rem;
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
 
-.main-column .top-bar .forum-search-bar:focus {
-  outline: none;
-  border-color: #4285f4;
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 24%;
+  padding: 0 10px;
 }
 
-.main-column .top-bar .forum-search-btn {
-  width: 90px;
-  height: 40px;
-  margin-left: 1rem;
-  margin-right: 1rem;
+/* Remove extra left and right margins, due to padding in columns */
 
-  font-size: 1rem;
-  font-family: Inter;
-  font-style: normal;
-  color: #fff;
-
-  background-color: #4285f4;
-  border: none;
-  border-radius: 2px;
-
-  transition: all 300ms;
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-.main-column .top-bar .forum-search-btn:hover {
-  opacity: 0.9;
+.card {
+  margin: 1rem 0 0 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #fff;
 }
 
-.main-column .top-bar .forum-search-btn:active {
-  opacity: 0.7;
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+    align-content: center;
+  }
 }
 
-.main-column .top-bar .start-thread-btn {
+.view-product-btn {
   width: 200px;
   height: 40px;
-  font-family: Inter, sans-serif;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 0.9rem;
 
   background-color: #4285f4;
   color: #fff;
@@ -294,203 +187,49 @@ textarea {
   justify-content: center;
   align-items: center;
 
-  transition: all 300ms ease;
-}
+  transition: all 300ms;
 
-.main-column .top-bar .start-thread-btn .add-icon {
   min-width: 25px;
   font-size: 18px;
 }
 
-.main-column .top-bar .start-thread-btn:hover {
-  background-color: #f2f2f2;
+.view-product-btn:hover {
+  background-color: #fff;
   color: #4285f4;
   border: 1px solid #4285f4;
 }
 
-.main-column .post_modal {
-  position: fixed;
-  margin: 0 auto;
-  top: 12.5%;
-
-  width: 800px;
-  height: 550px;
-
-  border: none;
+.main-column .heading1 {
+  font-size: 30px;
+  margin-top: 1.5em;
+  align-self: center;
 }
 
-.main-column .post_modal[open] {
-  animation: slide-up 1000ms forwards, fade-in 500ms forwards;
+.main-column .heading2 {
+  color: #4285f4;
+  font-size: 1.2rem;
+  margin-top: 0.5em;
+  margin-bottom: 1.5em;
+  align-self: center;
 }
 
-.main-column .post_modal[close] {
-  display: block;
-  pointer-events: none;
-  animation: slide-down 500ms forwards;
+.main-column .row .column .card {
+  align-content: center;
 }
 
-.main-column .forums-showcase {
-  width: 856px;
-  height: 635px;
-  margin: 1rem 0 0 2rem;
-  padding-top: 1rem;
-
-  overflow-y: visible;
-  overflow-x: hidden;
+.main-column .product-grid {
   scroll-behavior: smooth;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
-::-webkit-scrollbar {
-  width: 0;
-  background: transparent;
+.product-name {
+  margin-bottom: 1rem;
 }
 
-.main-column .forums-showcase .forum-card {
-  position: relative;
-  width: 856px;
-  margin-bottom: 1.4rem;
-  padding: 20px 30px 10px 30px;
-
-  background-color: #fff;
-  color: #8a8a8a;
-
-  font-family: Inter, sans-serif;
-  text-align: justify;
-}
-
-.main-column .forums-showcase .forum-card .comment-section {
-  background-color: re;
-  width: 790px;
-}
-
-.main-column .forums-showcase .forum-card .comment-heading {
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-size: 19px;
-  color: #28282b;
-  margin: 1rem 0 0.8rem 0.9rem;
-}
-
-.main-column .forums-showcase .forum-card .comment-div {
-  margin: 0 0 0 1rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.main-column .forums-showcase .forum-card .comment-div .comment {
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-size: 14px;
-  margin: 0 0 0.7rem 0.2rem;
-}
-
-.main-column .forums-showcase .forum-card .comment-div a {
-  font-size: 16px;
-  color: #4285f4;
-}
-
-.main-column .forums-showcase .forum-card .post-header {
-  width: 790px;
-}
-
-.main-column .forums-showcase .forum-card h3 {
-  color: #28282b;
-  margin-bottom: 0.6rem;
-}
-
-.main-column .forums-showcase .line {
-  position: relative;
-  width: 790px;
-  margin-top: 1rem;
-  display: inline-flex;
-  align-items: center;
-}
-
-.main-column .forums-showcase .line:before,
-.main-column .forums-showcase .line:after {
-  content: "";
-  flex: 1 1;
-  border-bottom: 1px solid #dfdede;
-  margin: auto;
-}
-
-.main-column .forums-showcase .post-footer {
-  width: 800px;
-  height: 30px;
-  margin-top: 0.3rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.main-column .forums-showcase .post-footer .posted-by {
-  font-size: 15px;
-}
-
-.main-column .forums-showcase .post-footer .icon-area {
-  width: 100px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.main-column .forums-showcase .post-footer .icon-area .like-icon {
-  font-size: 22px;
-  cursor: pointer;
-  color: #8a8a8a;
-}
-
-.main-column .forums-showcase .post-footer .icon-area .icon-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.main-column .forums-showcase .post-footer .icon-area .like-icon.active {
-  color: #4285f4;
-}
-
-.main-column .forums-showcase .post-footer .icon-area .like-count {
-  margin: 0 0 0 0.2rem;
-  font-size: 13px;
-}
-
-.main-column .forums-showcase .post-footer .icon-area .comment-icon {
-  margin: 0 0 0 1rem;
-  font-size: 22px;
-  cursor: pointer;
-}
-
-.main-column .forums-showcase .forum-card .comment-section .add-comment {
-  margin: 0.6rem 0 0 1.2rem;
-}
-
-.main-column .forums-showcase .forum-card .comment-section .add-comment form {
-  display: flex;
-}
-
-.main-column .forums-showcase .forum-card .comment-section .comment-input {
-  resize: none;
-  width: 450px;
-  height: 26px;
-  padding-left: 5px;
-  font-size: 14px;
-  outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
-}
-
-.main-column .forums-showcase .forum-card .comment-section .comment-btn {
-  margin-left: 0.6rem;
-  border: none;
-  color: #fff;
-  font-size: 13px;
-  background-color: #4285f4;
-  width: 45px;
-  border-radius: 2px;
-  transition: all 300ms;
+.product-item {
+  height: 12em;
+  width: 12em;
 }
 
 .comment-btn:hover {
