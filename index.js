@@ -323,46 +323,30 @@ app.delete('/:id/comment/:commentID', async (req, res) => {
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-// "samsung" "oneplus" "vivo" "oppo"
-const brand = 'xiaomi';
+// // "samsung" "oneplus" "vivo" "oppo"
+// const brand = 'xiaomi';
 
-const url =
-  'https://www.91mobiles.com/' + brand + '-mobile-price-list-in-india';
+//const url ='https://www.91mobiles.com/' + brand + '-mobile-price-list-in-india';
 
-const products = [];
-const titles = [];
-const prices = [];
+const webCrawler = require('./utils')
 
-app.get('/products', (req, res) => {
-  res.send('hello');
-  axios(url)
-    .then((resp) => {
-      const html = resp.data;
-      //console.log(html);
-      //res.send(html)
-      const $ = cheerio.load(html);
-      $('.finder_pro_image', html).each(function () {
-        //console.log($(this));
-        const link = $(this).attr('src');
-        //const title = $(this).text()
-        products.push(link);
-      });
-      $('.hover_blue_link', html).each(function () {
-        const title = $(this).text().replace('\n', '');
-        titles.push(title);
-      });
-      $('.price', html).each(function () {
-        const price = $(this).text();
-        prices.push(price);
-      });
-      console.log(products);
-      console.log(titles);
-      console.log(prices);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+urlTag ='.btn_prcList_sn flt-rt target_link_external impressions_gts'
+app.get('/products', async (req,res)=>{
+    let ans,ans2
+    let finalData = []
+    const predecessor = "https://www.91mobiles.com"
+    const url2 = 'https://www.91mobiles.com/top-10-mobiles-in-india'
+    ans = await webCrawler.crawlData(url2)
+    console.log(ans);
+    for(let j=0;j<12;j++){
+        ans2 = await webCrawler.scrapeData(predecessor+ans[j],'.overview_lrg_pic_img','.h1_pro_head','.store_prc','.btn_prcList_sn.flt-rt.target_link_external.impressions_gts')
+        //console.log(ans2);
+        finalData.push(ans2)
+        
+    }
+    console.log(finalData);
+    res.render('market.ejs', {finalData})
+})
 
 // news
 // const NewsAPI = require('newsapi');
