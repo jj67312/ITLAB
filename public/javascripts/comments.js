@@ -16,7 +16,7 @@ function getNews() {
     });
 }
 
-// getNews();
+getNews();
 
 var x = document.querySelector(".profile-text1").innerHTML;
 var y = document.querySelector(".profile-logo-text");

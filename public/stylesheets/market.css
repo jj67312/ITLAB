@@ -153,12 +153,15 @@ a {
 }
 
 .card {
+  height: 21em;
+  width: 16em;
   margin: 1rem 0 0 2rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   text-align: center;
   background-color: #fff;
 }
@@ -229,7 +232,7 @@ a {
 
 .product-item {
   height: 12em;
-  width: 12em;
+  width: 11em;
 }
 
 .comment-btn:hover {
