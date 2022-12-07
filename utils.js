@@ -57,10 +57,10 @@ async function scrapeData(url, imageTag, titleTag, priceTag, linkTag){
         data.productLink = predecessor+productLink
     })
     if(data.productLink === undefined){
-        data.productLink = 'This product is not yet launched'
+        data.productLink = 'Not Launched'
     }
     if(data.price === undefined){
-        data.price = 'This product is not yet launched'
+        data.price = 'Not Launched'
     }    
     finalData.push(data) 
     return finalData
