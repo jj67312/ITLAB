@@ -230,6 +230,11 @@ app.get('/forums', async (req, res) => {
   res.render('forums.ejs', { allPosts, userPosts, userComments });
 });
 
+app.get('/test/forums', async (req, res) => {
+  const allPosts = await postModel.find({}).populate('author');
+  res.json(allPosts);
+});
+
 app.get('/forums/new', async (req, res) => {
   res.render('newForum.ejs');
 });
@@ -249,6 +254,11 @@ app.get('/forums/:id', async (req, res) => {
   res.render('comments.ejs', { post });
 });
 
+app.get('/test/forums/:id', async (req, res) => {
+  const post = await postModel.findById(req.params.id).populate('comments');
+  res.json(post);
+});
+
 // create new post
 app.post('/', async (req, res) => {
   const newPost = req.body;
@@ -260,6 +270,18 @@ app.post('/', async (req, res) => {
   await post.save();
   res.redirect('/forums');
   // res.json(newPost);
+});
+
+app.post('/test', async (req, res) => {
+  const newPost = req.body;
+  // console.log('Current user:');
+  // console.log(req.user);
+  // const currUserId = req.user._id;
+  const post = await postModel.create(newPost);
+  // post.author = currUserId;
+  await post.save();
+  // res.redirect('/forums');
+  res.json(newPost);
 });
 
 // for deleting post:
@@ -276,6 +298,21 @@ app.delete('/:id', async (req, res) => {
     });
 
   res.redirect('/forums');
+});
+
+app.delete('/test/:id', async (req, res) => {
+  const postId = req.params.id;
+  const post = await postModel
+    .findById(postId)
+    .then((data) => {
+      postModel.deleteOne(data);
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(404).send('Failed to delete');
+    });
+  res.json(post);
+  // res.redirect('/forums');
 });
 
 // update data:

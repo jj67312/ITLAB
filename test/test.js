@@ -24,7 +24,7 @@ describe('Find all posts', () => {
   it('It should find all posts', (done) => {
     chai
       .request(server)
-      .get('/forums')
+      .get('/test/forums')
       .end((err, res) => {
         // console.log(res.body);
         res.body.should.be.a('array');
@@ -39,7 +39,7 @@ describe('Creating a new post', () => {
     let description = 'sample text for making a post.';
     chai
       .request(server)
-      .post('/')
+      .post('/test')
       .set('content-type', 'application/x-www-form-urlencoded')
       .send({ name, description })
       .end((err, res) => {
@@ -55,7 +55,7 @@ describe('Deleting a post', () => {
   it('It should delete an existing post', (done) => {
     chai
       .request(server)
-      .delete('/' + postId)
+      .delete('/test/' + postId)
       .end((err, res) => {
         // console.log('/portfolio/' + userId + '/' + portfolioId);
         // console.log(res.body);
@@ -69,7 +69,7 @@ describe('Deleting a post', () => {
   it('It should not delete a post which does not exist.', (done) => {
     chai
       .request(server)
-      .delete('/' + 0)
+      .delete('/test/' + 0)
       .end((err, res) => {
         // console.log('/portfolio/' + userId + '/' + portfolioId);
         res.should.have.status(404);
@@ -84,7 +84,7 @@ describe('Correct details to view a specific post', () => {
   it('It should get the post by id', (done) => {
     chai
       .request(server)
-      .get('/forums/' + postId)
+      .get('/test/forums/' + postId)
       .end((err, res) => {
         res.body.should.have.property('_id');
         res.body.should.have.property('title');
