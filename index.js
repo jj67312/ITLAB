@@ -178,14 +178,56 @@ app.get('/logout', (req, res, next) => {
   });
 });
 
+app.get('/allTitles', async (req, res) => {
+  const allCamps = await postModel.find({});
+  const campTitles = allCamps.map((camp) => camp.title);
+  res.json({ campTitles });
+});
+
+app.post('/allTitles', async (req, res) => {
+  const { campTitle } = req.body;
+  console.log(campTitle);
+  const camp = await postModel.findOne({ title: campTitle });
+  if (camp === null) {
+    res.redirect('/forums');
+  } else {
+    res.redirect(`/forums/${camp._id}`);
+  }
+});
+
 // post and comment routes ------------------------------------------------------------
 
 // get all posts
 app.get('/forums', async (req, res) => {
   const allPosts = await postModel.find({}).populate('author');
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+
+  // const allPosts = await postModel.find();
+  const allComments = await commentModel.find();
+
+  let userPosts = [];
+  let userComments = [];
+
+  for (let post of allPosts) {
+    if (post.author.equals(user._id)) {
+      userPosts.push(post);
+    }
+  }
+
+  for (let comment of allComments) {
+    console.log(comment);
+    if (comment.author.equals(user._id)) {
+      userComments.push(comment);
+    }
+  }
+
+  for (let comment of userComments) {
+    comment.populate('postId');
+  }
   // console.log(allPosts);
   // res.json(allPosts);
-  res.render('forums.ejs', { allPosts });
+  res.render('forums.ejs', { allPosts, userPosts, userComments });
 });
 
 app.get('/forums/new', async (req, res) => {
@@ -194,12 +236,15 @@ app.get('/forums/new', async (req, res) => {
 
 // get specified forums
 app.get('/forums/:id', async (req, res) => {
-  const post = await postModel.findById(req.params.id).populate({
-    path: 'comments',
-    populate: {
-      path: 'author',
-    },
-  }).populate('author');
+  const post = await postModel
+    .findById(req.params.id)
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'author',
+      },
+    })
+    .populate('author');
   // const postAuthor = await User.findById(post.author);
   res.render('comments.ejs', { post });
 });
@@ -334,25 +379,30 @@ const cheerio = require('cheerio');
 
 //const url ='https://www.91mobiles.com/' + brand + '-mobile-price-list-in-india';
 
-const webCrawler = require('./utils')
+const webCrawler = require('./utils');
 
-urlTag ='.btn_prcList_sn flt-rt target_link_external impressions_gts'
-app.get('/market', async (req,res)=>{
-    let ans,ans2
-    let finalData = []
-    const predecessor = "https://www.91mobiles.com"
-    const url2 = 'https://www.91mobiles.com/top-10-mobiles-in-india'
-    ans = await webCrawler.crawlData(url2)
-    console.log(ans);
-    for(let j=0;j<12;j++){
-        ans2 = await webCrawler.scrapeData(predecessor+ans[j],'.overview_lrg_pic_img','.h1_pro_head','.store_prc','.btn_prcList_sn.flt-rt.target_link_external.impressions_gts')
-        //console.log(ans2);
-        finalData.push(ans2)
-        
-    }
-    console.log(finalData);
-    res.render('market.ejs', {finalData})
-})
+urlTag = '.btn_prcList_sn flt-rt target_link_external impressions_gts';
+app.get('/market', async (req, res) => {
+  let ans, ans2;
+  let finalData = [];
+  const predecessor = 'https://www.91mobiles.com';
+  const url2 = 'https://www.91mobiles.com/top-10-mobiles-in-india';
+  ans = await webCrawler.crawlData(url2);
+  console.log(ans);
+  for (let j = 0; j < 12; j++) {
+    ans2 = await webCrawler.scrapeData(
+      predecessor + ans[j],
+      '.overview_lrg_pic_img',
+      '.h1_pro_head',
+      '.store_prc',
+      '.btn_prcList_sn.flt-rt.target_link_external.impressions_gts'
+    );
+    //console.log(ans2);
+    finalData.push(ans2);
+  }
+  console.log(finalData);
+  res.render('market.ejs', { finalData });
+});
 
 // news
 // const NewsAPI = require('newsapi');

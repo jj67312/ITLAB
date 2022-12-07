@@ -7,7 +7,8 @@
   <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/stylesheets/forums.css" />
-  <title>Home</title>
+  <link rel="stylesheet" href="/stylesheets/searchBar.css" />
+  <title>Forums</title>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
         </div>
         <ul class="links">
           <li>
-            <a href="./home"><i class="bx bx-home icon"></i><span class="text">Home</span></a>
+            <a href="/forums"><i class="bx bx-home icon"></i><span class="text">Forums</span></a>
           </li>
           <li>
             <a href="/news"><i class="bx bx-news icon"></i><span class="text">News</span></a>
@@ -43,9 +44,11 @@
         <p class="heading1">Hello User !</p>
         <p class="heading2">How are you feeling today?</p>
         <% } %>
-        <form class="forum" action="#">
-          <input type="search" class="forum-search-bar" placeholder="What's on your mind?" />
-          <input type="button" class="forum-search-btn" value="Search" />
+        <form class="forum" action="/allTitles" method="POST">
+          <div class="autocomplete">
+            <input id="myInput" name="campTitle" type="search" class="forum-search-bar" placeholder="What's on your mind?" />
+          </div>
+          <input type="submit" class="forum-search-btn" value="Search" />
         </form>
 
         <div class="thread">
@@ -106,10 +109,10 @@
         <% if(currentUser) {%>
         <div class="profile">
           <div class="profile-logo">
-            <p class="profile-logo-text">P</p>
+            <p class="profile-logo-text"><%= currentUser.username[0] %> </p>
           </div>
           <p class="profile-text1"><%= currentUser.username %> </p>
-          <p class="profile-text2">4 Threads • 11k Followers</p>
+          <p class="profile-text2"><%= userPosts.length %> posts • <%= userComments.length %> comments</p>
           <a href="/user/<%= currentUser._id %>">
             <button class="profile-btn" onclick="window.location.href = 'profile.html'">
               View Profile
@@ -137,7 +140,7 @@
     </div>
   </div>
   <script src="./javascripts/forums.js"></script>
-  <script src="./javascripts/a.js"></script>
+  <script src="./javascripts/searchBar.js"></script>
 </body>
 
 </html>
