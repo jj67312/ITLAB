@@ -51,16 +51,6 @@
                 <font style="color: #4285f4"><%= post.author.username %> </font>
               </a>
             </div>
-            <div class="icon-area">
-              <form class="icon-form" action="#">
-                <i class="bx bxs-like like-icon"></i>
-                <p class="like-count">0</p>
-              </form>
-
-              <!-- <form class="comment-form" action="#">
-                    <i class="bx bxs-chat comment-icon"></i>
-                  </form> -->
-            </div>
           </div>
         </div>
         <div class="comment-section">
@@ -88,10 +78,10 @@
         <% if(currentUser) {%>
         <div class="profile">
           <div class="profile-logo">
-            <p class="profile-logo-text"><%= currentUser.username[0] %> </p>
+            <%= currentUser.username[0] %>
           </div>
           <p class="profile-text1"><%= currentUser.username %> </p>
-          <p class="profile-text2"></p>
+
           <a href="/user/<%=currentUser._id%>">
             <button class="profile-btn" onclick="window.location.href = 'profile.html'">
               View Profile

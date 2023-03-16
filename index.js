@@ -21,7 +21,7 @@ const flash = require('connect-flash');
 const MongoStore = require('connect-mongo');
 const sessionStore = new MongoStore({
   collectionName: 'sessions',
-  mongoUrl: 'mongodb://localhost:27017/bitbotDB',
+  mongoUrl: 'mongodb://127.0.0.1:27017/bitbotDB',
 });
 
 app.use(

@@ -456,6 +456,11 @@ textarea {
   margin-bottom: 0.6rem;
 }
 
+.main-column .forums-showcase li h3 a {
+  color: #4285f4;
+  text-decoration: none;
+}
+
 .main-column .forums-showcase .line {
   position: relative;
   width: 790px;
@@ -514,6 +519,10 @@ textarea {
 
 .news-profile-column .profile {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   width: 310px;
   height: 300px;
 
@@ -527,29 +536,30 @@ textarea {
 
 .news-profile-column .profile-logo {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 80px;
   height: 80px;
-  left: 100px;
-  top: 40px;
+
+  color: #f2f2f2;
+  font-family: Inter, sans-serif;
+  font-size: 40px;
 
   border-radius: 80px;
   background: #193926;
 }
 
-.news-profile-column .profile-logo .profile-logo-text {
+.news-profile-column .profile .profile-text {
   position: relative;
-  text-align: center;
-
-  font-family: Inter, sans-serif;
-  font-size: 40px;
-  top: 16px;
-  left: 2px;
-  color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  margin-top: -3rem;
 }
 
 .news-profile-column .profile-text1 {
   position: relative;
-  top: 55px;
+  /* top: 55px; */
   font-size: 26px;
   font-family: Inter;
   font-style: normal;
@@ -558,7 +568,7 @@ textarea {
 
 .news-profile-column .profile-text2 {
   position: relative;
-  top: 55px;
+  /* top: 55px; */
 
   font-size: 13px;
   font-family: Inter;
@@ -570,7 +580,7 @@ textarea {
 
 .news-profile-column .profile-btn {
   position: relative;
-  top: 100px;
+  /* top: 100px; */
 
   width: 240px;
   height: 45px;

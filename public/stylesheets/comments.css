@@ -66,8 +66,8 @@ a {
 }
 
 .logo {
-  margin: 2rem 0 1rem 1rem;
-  font-family: Poppins, sans-serif!important;
+  margin: 4rem 0 1rem 1rem;
+  font-family: Poppins, sans-serif !important;
   font-weight: bolder;
   font-size: 2.6rem;
   line-height: 1.2;
@@ -248,24 +248,24 @@ a {
 .main-column .add-comment-area {
   width: 856px;
   margin-top: 12px;
-  height: 40px;
+  height: 94px;
   background-color: #fff;
 
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .main-column .add-comment-area .comment-input {
   width: 765px;
-  height: 30px;
+  height: 34px;
   padding-left: 5px;
   font-size: 14px;
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
+  border-radius: 4px;
 
   font-style: normal;
+  margin-top: 10px;
 }
 
 .main-column .add-comment-area .comment-btn {
@@ -298,6 +298,11 @@ a {
 
 .news-profile-column .profile {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
   width: 310px;
   height: 300px;
 
@@ -311,49 +316,31 @@ a {
 
 .news-profile-column .profile-logo {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 80px;
   height: 80px;
-  left: 100px;
-  top: 40px;
+
+  color: #f2f2f2;
+  font-family: Inter, sans-serif;
+  font-size: 40px;
 
   border-radius: 80px;
   background: #193926;
 }
 
-.news-profile-column .profile-logo .profile-logo-text {
-  position: relative;
-  text-align: center;
-
-  font-size: 40px;
-  top: 16px;
-  left: 2px;
-  color: #f2f2f2;
-}
-
 .news-profile-column .profile-text1 {
   position: relative;
-  top: 55px;
+  margin-top: -3rem;
   font-size: 26px;
   font-family: Inter;
   font-style: normal;
   font-weight: 700;
 }
 
-.news-profile-column .profile-text2 {
-  position: relative;
-  top: 55px;
-
-  font-size: 13px;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 400;
-
-  color: #8a8a8a;
-}
-
 .news-profile-column .profile-btn {
   position: relative;
-  top: 100px;
 
   width: 240px;
   height: 45px;

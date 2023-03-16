@@ -1,132 +1,174 @@
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/stylesheets/forums.css" />
+    <link rel="stylesheet" href="/stylesheets/searchBar.css" />
+    <title>Forums</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/stylesheets/forums.css" />
-  <link rel="stylesheet" href="/stylesheets/searchBar.css" />
-  <title>Forums</title>
-</head>
-
-<body>
-  <div class="final-wrapper">
-    <div class="container">
-      <div class="sidebar-column">
-        <div class="logo">bit<font style="color: #4285f4">bot.</font>
-        </div>
-        <ul class="links">
-          <li>
-            <a href="/forums"><i class="bx bx-home icon"></i><span class="text">Forums</span></a>
-          </li>
-          <li>
-            <a href="/news"><i class="bx bx-news icon"></i><span class="text">News</span></a>
-          </li>
-          <li>
-            <a href="/market"><i class="bx bx-store icon"></i><span class="text">Products</span></a>
-          </li>
-          <li>
-            <% if(currentUser) {%>
-            <a href="/logout"><i class="bx bx-log-out icon"></i><span class="text">Log Out</span></a>
-            <% } else{%>
-            <a href="/login"><i class="bx bx-log-in icon"></i><span class="text">Log In</span></a>
-            <% } %>
-          </li>
-        </ul>
-      </div>
-      <div class="main-column">
-        <% if(currentUser) {%>
-        <p class="heading1">Hello <%= currentUser.username %> !</p>
-        <p class="heading2">How are you feeling today?</p>
-        <% } else {%>
-        <p class="heading1">Hello User !</p>
-        <p class="heading2">How are you feeling today?</p>
-        <% } %>
-        <form class="forum" action="/allTitles" method="POST">
-          <div class="autocomplete">
-            <input id="myInput" name="campTitle" type="search" class="forum-search-bar" placeholder="What's on your mind?" />
-          </div>
-          <input type="submit" class="forum-search-btn" value="Search" />
-        </form>
-
-        <div class="thread">
-          <p class="heading3">
-            <i class="bx bx-down-arrow down"></i>Hot Topics
-          </p>
-          <% if(currentUser) {%>
-          <button class="start-thread-btn">
-            <i class="bx bx-plus add-icon"></i>Start a New Thread
-          </button>
-          <% } %>
-        </div>
-
-        <dialog class="post_modal">
-          <p class="modal_heading1">Write a new post.</p>
-          <p class="modal_heading2">
-            Create a new post, and share your thoughts or queries on bitbot!
-            Remeber, all your posts are public and can be viewed by everyone.
-          </p>
-
-          <% if(currentUser) {%>
-          <form method="POST" class="post-form" action="/">
-            <p class="title">Title*</p>
-            <input name="title" required class="title_input" type="text" placeholder="Title" />
-            <p class="desc">Description*</p>
-            <textarea name="description" required class="desc_input" maxlength="500" placeholder="Description (max 500 words)"></textarea>
-            <input type="submit" class="post_publish_btn" value="Publish Post" />
-            <input type="button" class="post_close_btn" value="Cancel" />
-          </form>
-          <% } %>
-        </dialog>
-
-        <div class="forums-showcase">
-          <ul>
-            <% for(let post of allPosts) {%>
+  <body>
+    <div class="final-wrapper">
+      <div class="container">
+        <div class="sidebar-column">
+          <div class="logo">bit<font style="color: #4285f4">bot.</font></div>
+          <ul class="links">
             <li>
-              <h3> <a href="/forums/<%= post._id %>"><%= post.title %></a></h3>
-              <p><%= post.description %> </p>
-              <p class="line"></p>
-              <div class="post-footer">
-                <p class="posted-by">
-                  Posted By
-                  <a href="/user/<%= post.author._id %>">
-                    <font style="color: #4285f4"><%= post.author.username %> </font>
-                  </a>
-                </p>
-                <!-- <i class="bx bxs-like like-btn"></i> -->
-                <!-- <p class="like-count">0</p> -->
-                <!-- <i class="bx bxs-chat comment-btn"></i> -->
-              </div>
+              <a href="/forums"
+                ><i class="bx bx-home icon"></i
+                ><span class="text">Forums</span></a
+              >
             </li>
-            <% } %>
+            <li>
+              <a href="/news"
+                ><i class="bx bx-news icon"></i
+                ><span class="text">News</span></a
+              >
+            </li>
+            <li>
+              <a href="/market"
+                ><i class="bx bx-store icon"></i
+                ><span class="text">Products</span></a
+              >
+            </li>
+            <li>
+              <% if(currentUser) {%>
+              <a href="/logout"
+                ><i class="bx bx-log-out icon"></i
+                ><span class="text">Log Out</span></a
+              >
+              <% } else{%>
+              <a href="/login"
+                ><i class="bx bx-log-in icon"></i
+                ><span class="text">Log In</span></a
+              >
+              <% } %>
+            </li>
           </ul>
         </div>
-      </div>
-
-      <div class="news-profile-column">
-        <% if(currentUser) {%>
-        <div class="profile">
-          <div class="profile-logo">
-            <p class="profile-logo-text"><%= currentUser.username[0] %> </p>
-          </div>
-          <p class="profile-text1"><%= currentUser.username %> </p>
-          <p class="profile-text2"><%= userPosts.length %> posts • <%= userComments.length %> comments</p>
-          <a href="/user/<%= currentUser._id %>">
-            <button class="profile-btn" onclick="window.location.href = 'profile.html'">
-              View Profile
-            </button>
-          </a>
+        <div class="main-column">
+          <% if(currentUser) {%>
+          <p class="heading1">Hello <%= currentUser.username %> !</p>
+          <p class="heading2">How are you feeling today?</p>
+          <% } else {%>
+          <p class="heading1">Hello User !</p>
+          <p class="heading2">How are you feeling today?</p>
           <% } %>
-        </div>
-        <div class="news">
-          <div class="header">
-            <p>News</p>
-            <a href="./news.html">View All</a>
+          <form class="forum" action="/allTitles" method="POST">
+            <div class="autocomplete">
+              <input
+                id="myInput"
+                name="campTitle"
+                type="search"
+                class="forum-search-bar"
+                placeholder="What's on your mind?"
+              />
+            </div>
+            <input type="submit" class="forum-search-btn" value="Search" />
+          </form>
+
+          <div class="thread">
+            <p class="heading3">
+              <i class="bx bx-down-arrow down"></i>Hot Topics
+            </p>
+            <% if(currentUser) {%>
+            <button class="start-thread-btn">
+              <i class="bx bx-plus add-icon"></i>Start a New Thread
+            </button>
+            <% } %>
           </div>
-          <div id="newsFeed" class="news-from-api">
-            <!-- <div class="news-card">
+
+          <dialog class="post_modal">
+            <p class="modal_heading1">Write a new post.</p>
+            <p class="modal_heading2">
+              Create a new post, and share your thoughts or queries on bitbot!
+              Remeber, all your posts are public and can be viewed by everyone.
+            </p>
+
+            <% if(currentUser) {%>
+            <form method="POST" class="post-form" action="/">
+              <p class="title">Title*</p>
+              <input
+                name="title"
+                required
+                class="title_input"
+                type="text"
+                placeholder="Title"
+              />
+              <p class="desc">Description*</p>
+              <textarea
+                name="description"
+                required
+                class="desc_input"
+                maxlength="500"
+                placeholder="Description (max 500 words)"
+              ></textarea>
+              <input
+                type="submit"
+                class="post_publish_btn"
+                value="Publish Post"
+              />
+              <input type="button" class="post_close_btn" value="Cancel" />
+            </form>
+            <% } %>
+          </dialog>
+          <div class="forums-showcase">
+            <ul>
+              <% for(let post of allPosts) {%>
+              <li>
+                <h3><a href="/forums/<%= post._id %>"><%= post.title %></a></h3>
+                <p><%= post.description %></p>
+                <p class="line"></p>
+                <div class="post-footer">
+                  <p class="posted-by">
+                    Posted By
+                    <a href="/user/<%= post.author._id %>">
+                      <font style="color: #4285f4"
+                        ><%= post.author.username %>
+                      </font>
+                    </a>
+                  </p>
+                </div>
+              </li>
+              <% } %>
+            </ul>
+          </div>
+        </div>
+
+        <div class="news-profile-column">
+          <% if(currentUser) {%>
+          <div class="profile">
+            <div class="profile-logo"><%= currentUser.username[0] %></div>
+            <div class="profile-text">
+              <p class="profile-text1"><%= currentUser.username %></p>
+              <p class="profile-text2">
+                <%= userPosts.length %> posts • <%= userComments.length %>
+                comments
+              </p>
+            </div>
+            <a href="/user/<%= currentUser._id %>">
+              <button
+                class="profile-btn"
+                onclick="window.location.href = 'profile.html'"
+              >
+                View Profile
+              </button>
+            </a>
+            <% } %>
+          </div>
+          <div class="news">
+            <div class="header">
+              <p>News</p>
+              <a href="./news.html">View All</a>
+            </div>
+            <div id="newsFeed" class="news-from-api">
+              <!-- <div class="news-card">
                   <img src="./skins/intel.png" />
                   <p class="news-headline">
                     The Intel Innovation 2022 event saw the debut of the new 13th
@@ -134,13 +176,12 @@
                     Intel Geti computer vision platform
                   </p>
                 </div> -->
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <script src="./javascripts/forums.js"></script>
-  <script src="./javascripts/searchBar.js"></script>
-</body>
-
+    <script src="./javascripts/forums.js"></script>
+    <script src="./javascripts/searchBar.js"></script>
+  </body>
 </html>

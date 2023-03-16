@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const url = 'mongodb://localhost:27017/bitbotDB'
+const url = 'mongodb://127.0.0.1:27017/bitbotDB'
 
 mongoose.connect(url, {
     useNewUrlParser : true,
@@ -10,7 +10,7 @@ mongoose.connect(url, {
 const con = mongoose.connection
 
 con.on('open', ()=>{
-    // console.log("Database connected");
+    console.log("Database connected");
 })
 
 

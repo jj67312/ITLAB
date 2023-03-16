@@ -27,8 +27,16 @@
             <a href="/market"><i class="bx bx-store icon"></i><span class="text">Products</span></a>
           </li>
           <li>
-            <a href="#"><i class="bx bx-log-out icon"></i>
-              <span class="text">Log Out</span></a>
+            <% if(currentUser) {%>
+            <a href="/logout"
+              ><i class="bx bx-log-out icon"></i
+              ><span class="text">Log Out</span></a
+            >
+            <% } else{%>
+            <a href="/login">
+              <i class="bx bx-log-in icon"></i
+              ><span class="text">Log In</span></a>
+            <% } %>
           </li>
         </ul>
       </div>
