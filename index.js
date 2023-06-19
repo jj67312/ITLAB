@@ -47,12 +47,9 @@ require('./config/passportGoogle')(passport);
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
-  // console.log(req.
   next();
 });
 
-//ejssession);
-// console.log(req.user);
 app.set('view-engine', 'ejs');
 
 //static
@@ -65,15 +62,15 @@ app.use(express.static(path.join(__dirname, 'static')));
 const postModel = require('./models/Post');
 const User = require('./models/User');
 
+// ROUTES
+const postRoutes = require('./routes/posts');
+const commentRoutes = require('./routes/comments');
+const userRoutes = require('./routes/user');
+app.use('/forums', postRoutes);
+app.use('/comments', commentRoutes);
+app.use('/', userRoutes);
+
 // login and register routes --------------------
-
-app.get('/login', (req, res) => {
-  res.render('login.ejs', { message: req.flash('error_msg') });
-});
-
-app.get('/register', (req, res) => {
-  res.render('register.ejs', { message: req.flash('error_msg') });
-});
 
 app.post(
   '/login',
@@ -141,10 +138,6 @@ app.post(
   }
 );
 
-app.get('/home', (req, res) => {
-  res.render('landing.ejs');
-});
-
 app.get(
   '/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
@@ -157,7 +150,7 @@ app.get(
     successRedirect: '/forums',
   }),
   (req, res) => {
-    //res.redirect('/login-success')
+    res.redirect('/login-success')
   }
 );
 
@@ -181,6 +174,7 @@ app.get('/logout', (req, res, next) => {
 app.get('/allTitles', async (req, res) => {
   const allCamps = await postModel.find({});
   const campTitles = allCamps.map((camp) => camp.title);
+  
   res.json({ campTitles });
 });
 
@@ -195,385 +189,11 @@ app.post('/allTitles', async (req, res) => {
   }
 });
 
-// post and comment routes ------------------------------------------------------------
-
-// get all posts
-app.get('/forums', async (req, res) => {
-  const allPosts = await postModel.find({}).populate('author');
-  const userId = req.user._id;
-  const user = await User.findById(userId);
-
-  // const allPosts = await postModel.find();
-  const allComments = await commentModel.find();
-
-  let userPosts = [];
-  let userComments = [];
-
-  // user.likedPosts
-  allPosts.map((post) => {
-    for (let likedPost of user.likedPosts) {
-      if (post._id.equals(likedPost._id)) {
-        post.isLikedByUser = true;
-      } else {
-        post.isLikedByUser = false;
-      }
-    }
-
-    for (let dislikedPost of user.dislikedPosts) {
-      if (post._id.equals(dislikedPost._id)) {
-        post.isDisLikedByUser = true;
-      } else {
-        post.isDisLikedByUser = false;
-      }
-    }
-  });
-
-  // user.dislikedPosts
-
-  for (let post of allPosts) {
-    if (post.author.equals(user._id)) {
-      userPosts.push(post);
-    }
-  }
-
-  for (let comment of allComments) {
-    if (comment.author.equals(user._id)) {
-      userComments.push(comment);
-    }
-  }
-
-  for (let comment of userComments) {
-    comment.populate('postId');
-  }
-  // console.log(allPosts);
-  // res.json(allPosts);
-  res.render('forums.ejs', { allPosts, userPosts, userComments });
-});
-
-app.get('/test/forums', async (req, res) => {
-  const allPosts = await postModel.find({}).populate('author');
-  res.json(allPosts);
-});
-
-app.get('/forums/new', async (req, res) => {
-  res.render('newForum.ejs');
-});
-
-app.post('/forums/like/:postId', async (req, res) => {
-  const { postId } = req.params;
-  const currPost = await postModel.findById(postId);
-  const userId = req.user._id;
-  const user = await User.findById(userId);
-
-  // remove from dislikedPost
-  user.dislikedPosts.map((dislikedPost) => {
-    if (dislikedPost._id.equals(currPost._id)) {
-      currPost.dislikeCount -= 1;
-      // remove currPost from dislikedPosts
-      user.dislikedPosts = user.dislikedPosts.filter(
-        (item) => !item.equals(currPost._id)
-      );
-    }
-  });
-
-  currPost.likeCount += 1;
-  user.likedPosts.push(postId);
-
-  console.log(currPost);
-  console.log(user);
-
-  await currPost.save();
-  await user.save();
-
-  res.redirect('/forums');
-});
-
-app.post('/forums/dislike/:postId', async (req, res) => {
-  const { postId } = req.params;
-  const currPost = await postModel.findById(postId);
-  const userId = req.user._id;
-  const user = await User.findById(userId);
-
-  // remove from likedPost
-  user.likedPosts.map((likedPost) => {
-    if (likedPost._id.equals(currPost._id)) {
-      currPost.likeCount -= 1;
-      // remove currPost from dislikedPosts
-      user.likedPosts = user.likedPosts.filter(
-        (item) => !item.equals(currPost._id)
-      );
-    }
-  });
-
-  currPost.dislikeCount += 1;
-  user.dislikedPosts.push(postId);
-
-  console.log(currPost);
-  console.log(user);
-
-  await currPost.save();
-  await user.save();
-
-  res.redirect('/forums');
-});
-
-// LIKE AND DISLIKE COMMENT
-
-app.post('/comments/like/:commentId', async (req, res) => {
-  const { commentId } = req.params;
-  const currComment = await commentModel.findById(commentId);
-  const userId = req.user._id;
-  const user = await User.findById(userId);
-
-  // remove from dislikedPost
-  user.dislikedComments.map((dislikedComment) => {
-    if (dislikedComment._id.equals(currComment._id)) {
-      currComment.dislikeCount -= 1;
-      // remove currComment from dislikedComments
-      user.dislikedComments = user.dislikedComments.filter(
-        (item) => !item.equals(currComment._id)
-      );
-    }
-  });
-
-  currComment.likeCount += 1;
-  user.likedComments.push(commentId);
-
-  console.log(currComment);
-  console.log(user);
-
-  await currComment.save();
-  await user.save();
-
-  res.redirect(`/forums/${currComment.postId}`);
-});
-
-app.post('/comments/dislike/:commentId', async (req, res) => {
-  const { commentId } = req.params;
-  const currComment = await commentModel.findById(commentId);
-  const userId = req.user._id;
-  const user = await User.findById(userId);
-
-  // remove from dislikedPost
-  user.likedComments.map((likedComment) => {
-    if (likedComment._id.equals(currComment._id)) {
-      currComment.likeCount -= 1;
-      // remove currComment from dislikedComments
-      user.likedComments = user.likedComments.filter(
-        (item) => !item.equals(currComment._id)
-      );
-    }
-  });
-
-  currComment.dislikeCount += 1;
-  user.dislikedComments.push(commentId);
-
-  console.log(currComment);
-  console.log(user);
-
-  await currComment.save();
-  await user.save();
-
-  res.redirect(`/forums/${currComment.postId}`);
-});
-
-
-// get specified forums
-app.get('/forums/:id', async (req, res) => {
-  const userId = req.user._id;
-  const user = await User.findById(userId);
-
-  const post = await postModel
-    .findById(req.params.id)
-    .populate({
-      path: 'comments',
-      populate: {
-        path: 'author',
-      },
-    })
-    .populate('author');
-  // const postAuthor = await User.findById(post.author);
-
-  post.comments.map((comment) => {
-    for (let likedComment of user.likedComments) {
-      if (comment._id.equals(likedComment._id)) {
-        comment.isLikedByUser = true;
-      } else {
-        comment.isLikedByUser = false;
-      }
-    }
-
-    for (let dislikedComment of user.dislikedComments) {
-      if (comment._id.equals(dislikedComment._id)) {
-        comment.isDisLikedByUser = true;
-      } else {
-        comment.isDisLikedByUser = false;
-      }
-    }
-  })
-
-  res.render('comments.ejs', { post });
-});
-
-app.get('/test/forums/:id', async (req, res) => {
-  const post = await postModel.findById(req.params.id).populate('comments');
-  res.json(post);
-});
-
-// create new post
-app.post('/', async (req, res) => {
-  const newPost = req.body;
-  console.log('Current user:');
-  console.log(req.user);
-  const currUserId = req.user._id;
-  const post = await postModel.create(newPost);
-  post.author = currUserId;
-  await post.save();
-  res.redirect('/forums');
-  // res.json(newPost);
-});
-
-app.post('/test', async (req, res) => {
-  const newPost = req.body;
-  // console.log('Current user:');
-  // console.log(req.user);
-  // const currUserId = req.user._id;
-  const post = await postModel.create(newPost);
-  // post.author = currUserId;
-  await post.save();
-  // res.redirect('/forums');
-  res.json(newPost);
-});
-
-// for deleting post:
-app.delete('/:id', async (req, res) => {
-  const postId = req.params.id;
-  await postModel
-    .findById(postId)
-    .then((data) => {
-      postModel.deleteOne(data);
-      res.status(200).json(data);
-    })
-    .catch((err) => {
-      res.status(404).send('Failed to delete');
-    });
-
-  res.redirect('/forums');
-});
-
-app.delete('/test/:id', async (req, res) => {
-  const postId = req.params.id;
-  const post = await postModel
-    .findById(postId)
-    .then((data) => {
-      postModel.deleteOne(data);
-      res.status(200).json(data);
-    })
-    .catch((err) => {
-      res.status(404).send('Failed to delete');
-    });
-  res.json(post);
-  // res.redirect('/forums');
-});
-
-// update data:
-app.put('/:id', async (req, res) => {
-  const postId = req.params.id;
-  // old post
-  const post = await postModel.findById(postId);
-  console.log('OLD POST');
-  console.log(post);
-  // edited post
-  const newPost = req.body;
-  console.log('NEW POST');
-  console.log(newPost);
-  // update title and description
-  post.title = newPost.title;
-  post.description = newPost.description;
-  await post.save();
-  res.json(post);
-});
-
-// Profile
-app.get('/user/:id', async (req, res) => {
-  const userId = req.params.id;
-  const user = await User.findById(userId);
-  const allPosts = await postModel.find();
-  const allComments = await commentModel.find();
-  // console.log(user);
-  // console.log(allPosts);
-  // console.log(allComments);
-
-  let userPosts = [];
-  let userComments = [];
-
-  for (let post of allPosts) {
-    if (post.author.equals(user._id)) {
-      userPosts.push(post);
-    }
-  }
-
-  for (let comment of allComments) {
-    console.log(comment);
-    if (comment.author.equals(user._id)) {
-      userComments.push(comment);
-    }
-  }
-
-  for (let comment of userComments) {
-    comment.populate('postId');
-  }
-
-  console.log(userComments);
-  console.log(userPosts);
-
-  res.render('profile.ejs', { userComments, userPosts, user });
-});
-
 // Comments -------------------
-
-const commentModel = require('./models/Comment');
-
-// make a new comment
-app.post('/:id/comment', async (req, res) => {
-  // find the post under which the comments are made
-  const postID = req.params.id;
-  // get the comment from the form
-  const comment = req.body;
-  // find the post from the db
-  const currPost = await postModel.findById(postID);
-  // make new comment and enter into the db
-  const newComment = await commentModel.create(comment);
-  // push the comment into the selected post
-  currPost.comments.push(newComment._id);
-  newComment.author = req.user._id;
-  newComment.postId = currPost._id;
-
-  console.log(newComment);
-
-  await newComment.save();
-  await currPost.save();
-  // res.send(currPost);
-  res.redirect(`/forums/${postID}`);
-});
-
-// delete a comment:
-app.delete('/:id/comment/:commentID', async (req, res) => {
-  const { id, commentID } = req.params;
-  const currPost = await postModel.findByIdAndUpdate(id, {
-    $pull: { comments: commentID },
-  });
-  const currComment = await commentModel.findByIdAndDelete(commentID);
-
-  res.send({ currPost, currComment });
-});
 
 // web scraping
 const axios = require('axios');
 const cheerio = require('cheerio');
-
-// // "samsung" "oneplus" "vivo" "oppo"
-// const brand = 'xiaomi';
 
 //const url ='https://www.91mobiles.com/' + brand + '-mobile-price-list-in-india';
 
@@ -595,10 +215,8 @@ app.get('/market', async (req, res) => {
       '.store_prc',
       '.btn_prcList_sn.flt-rt.target_link_external.impressions_gts'
     );
-    //console.log(ans2);
     finalData.push(ans2);
   }
-  console.log(finalData);
   res.render('market.ejs', { finalData });
 });
 
@@ -609,14 +227,6 @@ app.get('/market', async (req, res) => {
 
 app.get('/news', async (req, res) => {
   res.render('news.ejs');
-  // newsapi.v2.topHeadlines({
-  //   category: 'technology',
-  //   language: 'en'
-  // })
-  // .then(data=>{
-  //   res.render('news.ejs' , {articles: data.articles})
-  // })
-  // .catch(err => {console.log(err);})
 });
 
 app.listen(3000, (req, res) => {

@@ -32,7 +32,7 @@ module.exports = (passport) => {
               hashedPassword: null,
             });
 
-            newUser.save()
+            newUser.save();
             // newUser.save(function (err, user) {
             //   console.log('New user');
             //   return done(null, user);

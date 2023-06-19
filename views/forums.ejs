@@ -70,7 +70,7 @@
           </p>
 
           <% if(currentUser) {%>
-          <form method="POST" class="post-form" action="/">
+          <form method="POST" class="post-form" action="/forums">
             <p class="title">Title*</p>
             <input name="title" required class="title_input" type="text" placeholder="Title" />
             <p class="desc">Description*</p>
@@ -90,7 +90,7 @@
               <div class="post-footer">
                 <p class="posted-by">
                   Posted By
-                  <a href="/user/<%= post.author._id %>">
+                  <a href="/users/<%= post.author._id %>">
                     <font style="color: #4285f4"><%= post.author.username %>
                     </font>
                   </a>
@@ -124,7 +124,7 @@
               comments
             </p>
           </div>
-          <a href="/user/<%= currentUser._id %>">
+          <a href="/users/<%= currentUser._id %>">
             <button class="profile-btn" onclick="window.location.href = 'profile.html'">
               View Profile
             </button>

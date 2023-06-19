@@ -59,7 +59,7 @@
             <ul>
               <% for(let comment of post.comments) {%>
               <li>
-                <a href="/user/<%= comment.author._id %>"><%= comment.author.username %> </a> <br />
+                <a href="/users/<%= comment.author._id %>"><%= comment.author.username %> </a> <br />
                 <%= comment.commentBody %>
                 
                 <% if(!comment.isLikedByUser) {%>
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="add-comment-area">
-          <form action="/<%= post._id %>/comment" method="POST">
+          <form action="/comments/<%= post._id %>" method="POST">
             <input name="commentBody" class="comment-input" placeholder="Add Comment" />
             <input class="comment-btn" type="submit" value="Send" />
           </form>
@@ -91,7 +91,7 @@
           </div>
           <p class="profile-text1"><%= currentUser.username %> </p>
 
-          <a href="/user/<%=currentUser._id%>">
+          <a href="/users/<%=currentUser._id%>">
             <button class="profile-btn" onclick="window.location.href = 'profile.html'">
               View Profile
             </button>
