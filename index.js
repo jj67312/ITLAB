@@ -209,6 +209,27 @@ app.get('/forums', async (req, res) => {
   let userPosts = [];
   let userComments = [];
 
+  // user.likedPosts
+  allPosts.map((post) => {
+    for (let likedPost of user.likedPosts) {
+      if (post._id.equals(likedPost._id)) {
+        post.isLikedByUser = true;
+      } else {
+        post.isLikedByUser = false;
+      }
+    }
+
+    for (let dislikedPost of user.dislikedPosts) {
+      if (post._id.equals(dislikedPost._id)) {
+        post.isDisLikedByUser = true;
+      } else {
+        post.isDisLikedByUser = false;
+      }
+    }
+  });
+
+  // user.dislikedPosts
+
   for (let post of allPosts) {
     if (post.author.equals(user._id)) {
       userPosts.push(post);
@@ -216,7 +237,6 @@ app.get('/forums', async (req, res) => {
   }
 
   for (let comment of allComments) {
-    console.log(comment);
     if (comment.author.equals(user._id)) {
       userComments.push(comment);
     }
@@ -239,8 +259,130 @@ app.get('/forums/new', async (req, res) => {
   res.render('newForum.ejs');
 });
 
+app.post('/forums/like/:postId', async (req, res) => {
+  const { postId } = req.params;
+  const currPost = await postModel.findById(postId);
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+
+  // remove from dislikedPost
+  user.dislikedPosts.map((dislikedPost) => {
+    if (dislikedPost._id.equals(currPost._id)) {
+      currPost.dislikeCount -= 1;
+      // remove currPost from dislikedPosts
+      user.dislikedPosts = user.dislikedPosts.filter(
+        (item) => !item.equals(currPost._id)
+      );
+    }
+  });
+
+  currPost.likeCount += 1;
+  user.likedPosts.push(postId);
+
+  console.log(currPost);
+  console.log(user);
+
+  await currPost.save();
+  await user.save();
+
+  res.redirect('/forums');
+});
+
+app.post('/forums/dislike/:postId', async (req, res) => {
+  const { postId } = req.params;
+  const currPost = await postModel.findById(postId);
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+
+  // remove from likedPost
+  user.likedPosts.map((likedPost) => {
+    if (likedPost._id.equals(currPost._id)) {
+      currPost.likeCount -= 1;
+      // remove currPost from dislikedPosts
+      user.likedPosts = user.likedPosts.filter(
+        (item) => !item.equals(currPost._id)
+      );
+    }
+  });
+
+  currPost.dislikeCount += 1;
+  user.dislikedPosts.push(postId);
+
+  console.log(currPost);
+  console.log(user);
+
+  await currPost.save();
+  await user.save();
+
+  res.redirect('/forums');
+});
+
+// LIKE AND DISLIKE COMMENT
+
+app.post('/comments/like/:commentId', async (req, res) => {
+  const { commentId } = req.params;
+  const currComment = await commentModel.findById(commentId);
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+
+  // remove from dislikedPost
+  user.dislikedComments.map((dislikedComment) => {
+    if (dislikedComment._id.equals(currComment._id)) {
+      currComment.dislikeCount -= 1;
+      // remove currComment from dislikedComments
+      user.dislikedComments = user.dislikedComments.filter(
+        (item) => !item.equals(currComment._id)
+      );
+    }
+  });
+
+  currComment.likeCount += 1;
+  user.likedComments.push(commentId);
+
+  console.log(currComment);
+  console.log(user);
+
+  await currComment.save();
+  await user.save();
+
+  res.redirect(`/forums/${currComment.postId}`);
+});
+
+app.post('/comments/dislike/:commentId', async (req, res) => {
+  const { commentId } = req.params;
+  const currComment = await commentModel.findById(commentId);
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+
+  // remove from dislikedPost
+  user.likedComments.map((likedComment) => {
+    if (likedComment._id.equals(currComment._id)) {
+      currComment.likeCount -= 1;
+      // remove currComment from dislikedComments
+      user.likedComments = user.likedComments.filter(
+        (item) => !item.equals(currComment._id)
+      );
+    }
+  });
+
+  currComment.dislikeCount += 1;
+  user.dislikedComments.push(commentId);
+
+  console.log(currComment);
+  console.log(user);
+
+  await currComment.save();
+  await user.save();
+
+  res.redirect(`/forums/${currComment.postId}`);
+});
+
+
 // get specified forums
 app.get('/forums/:id', async (req, res) => {
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+
   const post = await postModel
     .findById(req.params.id)
     .populate({
@@ -251,6 +393,25 @@ app.get('/forums/:id', async (req, res) => {
     })
     .populate('author');
   // const postAuthor = await User.findById(post.author);
+
+  post.comments.map((comment) => {
+    for (let likedComment of user.likedComments) {
+      if (comment._id.equals(likedComment._id)) {
+        comment.isLikedByUser = true;
+      } else {
+        comment.isLikedByUser = false;
+      }
+    }
+
+    for (let dislikedComment of user.dislikedComments) {
+      if (comment._id.equals(dislikedComment._id)) {
+        comment.isDisLikedByUser = true;
+      } else {
+        comment.isDisLikedByUser = false;
+      }
+    }
+  })
+
   res.render('comments.ejs', { post });
 });
 

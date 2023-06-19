@@ -18,8 +18,14 @@ const postSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  likeCount: Number,
-  dislikeCount: Number,
+  likeCount: {
+    type: Number,
+    default: 0,
+  },
+  dislikeCount: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const Post = mongoose.model('Post', postSchema);

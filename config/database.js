@@ -1,16 +1,14 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const url = 'mongodb://127.0.0.1:27017/bitbotDB'
+const url = 'mongodb://127.0.0.1:27017/ITLABDB';
 
 mongoose.connect(url, {
-    useNewUrlParser : true,
-    useUnifiedTopology: true
-})
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-const con = mongoose.connection
+const con = mongoose.connection;
 
-con.on('open', ()=>{
-    console.log("Database connected");
-})
-
-
+con.on('open', () => {
+  console.log('Database connected');
+});
