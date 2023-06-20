@@ -15,13 +15,8 @@ module.exports = (passport) => {
         callbackURL: 'http://localhost:3000/google/callback',
       },
       function (accessToken, refreshToken, profile, done) {
-        console.log(profile.emails.values);
-        console.log(profile.photos);
-        console.log('insidr Passport google config');
-
         User.findOne({ email: profile.emails[0].value }).then((user) => {
           if (user) {
-            console.log('Found user');
             return done(null, user);
           } else {
             const newUser = new User({
@@ -33,10 +28,7 @@ module.exports = (passport) => {
             });
 
             newUser.save();
-            // newUser.save(function (err, user) {
-            //   console.log('New user');
-            //   return done(null, user);
-            // });
+            return done(null, user);
           }
         });
       }

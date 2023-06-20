@@ -1,5 +1,6 @@
 const commentModel = require('../models/Comment');
 const User = require('../models/User');
+const postModel = require('../models/Post');
 
 module.exports.createComment = async (req, res) => {
   const postID = req.params.id;

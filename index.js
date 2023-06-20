@@ -85,30 +85,30 @@ app.post(
   // check('password', 'Password is weak').isAlphanumeric().isLength({ min: 8 }),
   // check('email', 'Incorrect email format').isEmail(),
   (req, res, next) => {
-    // if(!username || !password || !email){
-    //   req.flash('error_msg', 'Enter all fields')
-    //   res.redirect('/register')
+    // const { username, password, email } = req.body;
+    // console.log(req.body)
+    // if (!username || !password || !email) {
+    //   req.flash('error_msg', 'Enter all fields');
+    //   res.redirect('/register');
     // }
-    // if(!validator.isEmail(email)){
-    //   req.flash('error_msg', 'Incorrect email format')
-    //   res.redirect('/register')
+    // if (!validator.isEmail(email)) {
+    //   req.flash('error_msg', 'Incorrect email format');
+    //   res.redirect('/register');
     // }
-    // if(!validator.isStrongPassword(req.body.password)){
-    //   req.flash('error_msg', 'Weak Password')
-    //   res.redirect('/register')
+    // if (!validator.isStrongPassword(req.body.password)) {
+    //   req.flash('error_msg', 'Weak Password');
+    //   res.redirect('/register');
     // }
     User.findOne({ username: req.body.username })
       .then((user) => {
         if (user) {
-          // req.flash('error_msg', 'User already exists');
+          req.flash('error_msg', 'User already exists');
           res.redirect('/register');
         } else {
           const errors = validationResult(req);
-
-          console.log(errors);
           if (!errors.isEmpty()) {
             const alert = errors.array();
-            // req.flash('error_msg', { alert });
+            req.flash('error_msg', { alert });
             res.redirect('/register');
           } else {
             const saltHash = genPassword(req.body.password);
@@ -124,10 +124,7 @@ app.post(
               hashedPassword: hash,
             });
 
-            newUser.save().then((user) => {
-              console.log(user);
-            });
-
+            newUser.save();
             res.redirect('/login');
           }
         }
@@ -150,7 +147,7 @@ app.get(
     successRedirect: '/forums',
   }),
   (req, res) => {
-    res.redirect('/login-success')
+    res.redirect('/login-success');
   }
 );
 
@@ -174,13 +171,11 @@ app.get('/logout', (req, res, next) => {
 app.get('/allTitles', async (req, res) => {
   const allCamps = await postModel.find({});
   const campTitles = allCamps.map((camp) => camp.title);
-  
   res.json({ campTitles });
 });
 
 app.post('/allTitles', async (req, res) => {
   const { campTitle } = req.body;
-  console.log(campTitle);
   const camp = await postModel.findOne({ title: campTitle });
   if (camp === null) {
     res.redirect('/forums');
@@ -206,7 +201,6 @@ app.get('/market', async (req, res) => {
   const predecessor = 'https://www.91mobiles.com';
   const url2 = 'https://www.91mobiles.com/top-10-mobiles-in-india';
   ans = await webCrawler.crawlData(url2);
-  console.log(ans);
   for (let j = 0; j < 12; j++) {
     ans2 = await webCrawler.scrapeData(
       predecessor + ans[j],

@@ -49,8 +49,6 @@ module.exports.getAllPosts = async (req, res) => {
   for (let comment of userComments) {
     comment.populate('postId');
   }
-  // console.log(allPosts);
-  // res.json(allPosts);
   res.render('forums.ejs', { allPosts, userPosts, userComments });
 };
 
@@ -78,9 +76,6 @@ module.exports.likePost = async (req, res) => {
   currPost.likeCount += 1;
   user.likedPosts.push(postId);
 
-  console.log(currPost);
-  console.log(user);
-
   await currPost.save();
   await user.save();
 
@@ -107,9 +102,6 @@ module.exports.dislikePost = async (req, res) => {
   currPost.dislikeCount += 1;
   user.dislikedPosts.push(postId);
 
-  console.log(currPost);
-  console.log(user);
-
   await currPost.save();
   await user.save();
 
@@ -119,8 +111,6 @@ module.exports.dislikePost = async (req, res) => {
 module.exports.getSinglePost = async (req, res) => {
   const userId = req.user._id;
   const user = await User.findById(userId);
-
-  console.log('Req params = ' + req.params.id)
 
   const post = await postModel
     .findById(req.params.id)
@@ -156,8 +146,11 @@ module.exports.getSinglePost = async (req, res) => {
 module.exports.createPost = async (req, res) => {
   const newPost = req.body;
   const currUserId = req.user._id;
+  const user = await User.findById(currUserId);
   const post = await postModel.create(newPost);
   post.author = currUserId;
+  user.userPosts.push(post._id);
+  await user.save();
   await post.save();
   res.redirect('/forums');
 };

@@ -5,12 +5,9 @@ const localStrategy = require('passport-local').Strategy;
 module.exports = (passport) => {
   passport.use(
     new localStrategy((username, password, done) => {
-      console.log('Hello passport');
-
       User.findOne({ username: username })
         .then((user) => {
           if (!user) {
-            console.log('Didnt find user');
             return done(null, false);
           }
           const isValid = validPassword(
@@ -19,10 +16,8 @@ module.exports = (passport) => {
             user.salt
           );
           if (isValid) {
-            console.log('valid pass');
             return done(null, user);
           } else {
-            console.log('invalid pass');
             return done(null, false);
           }
         })
