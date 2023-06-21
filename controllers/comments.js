@@ -33,17 +33,10 @@ module.exports.likeComment = async (req, res) => {
   const userId = req.user._id;
   const user = await User.findById(userId);
 
-  // remove from dislikedPost
-  user.dislikedComments.map((dislikedComment) => {
-    if (dislikedComment._id.equals(currComment._id)) {
-      currComment.dislikeCount -= 1;
-      // remove currComment from dislikedComments
-      user.dislikedComments = user.dislikedComments.filter(
-        (item) => !item.equals(currComment._id)
-      );
-    }
-  });
-
+  // remove the likedComment if it exists in the dislikeComments array of the user
+  let prevLen = user.dislikedComments.length;
+  user.dislikedComments.pull(currComment._id);
+  if (user.dislikedComments.length < prevLen) currComment.dislikeCount--;
   currComment.likeCount += 1;
   user.likedComments.push(commentId);
 
@@ -60,15 +53,9 @@ module.exports.dislikeComment = async (req, res) => {
   const user = await User.findById(userId);
 
   // remove from dislikedPost
-  user.likedComments.map((likedComment) => {
-    if (likedComment._id.equals(currComment._id)) {
-      currComment.likeCount -= 1;
-      user.likedComments = user.likedComments.filter(
-        (item) => !item.equals(currComment._id)
-      );
-    }
-  });
-
+  let prevLen = user.likedComments.length;
+  user.likedComments.pull(currComment._id);
+  if (user.likedComments.length < prevLen) currComment.likeCount--;
   currComment.dislikeCount += 1;
   user.dislikedComments.push(commentId);
 

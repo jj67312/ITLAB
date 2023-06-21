@@ -6,33 +6,36 @@ module.exports.getAllPosts = async (req, res) => {
   const allPosts = await postModel.find({}).populate('author');
   const userId = req.user._id;
   const user = await User.findById(userId);
-
-  // const allPosts = await postModel.find();
   const allComments = await commentModel.find();
 
   let userPosts = [];
   let userComments = [];
 
-  // user.likedPosts
-  allPosts.map((post) => {
-    for (let likedPost of user.likedPosts) {
-      if (post._id.equals(likedPost._id)) {
-        post.isLikedByUser = true;
-      } else {
-        post.isLikedByUser = false;
-      }
-    }
+  /*
+    Have an allPosts array with each post populated
+      have to mark each of these posts on two parameters: isLikedByUser and isDisLikedByUser
 
-    for (let dislikedPost of user.dislikedPosts) {
-      if (post._id.equals(dislikedPost._id)) {
-        post.isDisLikedByUser = true;
-      } else {
-        post.isDisLikedByUser = false;
-      }
-    }
-  });
+      a post is isLikedByUser if: it exists in the user.likedPosts array of object ids
+      a post is isDisLikedByUser if it exists in the user.dislikedPosts array of object ids
+  */
 
-  // user.dislikedPosts
+  for (let post of allPosts) {
+    const postIsLiked = user.likedPosts.some((likedPost) =>
+      likedPost.equals(post._id)
+    );
+    const postIsDisliked = user.dislikedPosts.some((dislikedPost) =>
+      dislikedPost.equals(post._id)
+    );
+    if (postIsLiked) {
+      post.isLikedByUser = true;
+      post.isDisLikedByUser = false;
+    }
+    if (postIsDisliked) {
+      post.isLikedByUser = false;
+      post.isDisLikedByUser = true;
+    }
+    await post.save();
+  }
 
   for (let post of allPosts) {
     if (post.author.equals(user._id)) {
@@ -62,17 +65,9 @@ module.exports.likePost = async (req, res) => {
   const userId = req.user._id;
   const user = await User.findById(userId);
 
-  // remove from dislikedPost
-  user.dislikedPosts.map((dislikedPost) => {
-    if (dislikedPost._id.equals(currPost._id)) {
-      currPost.dislikeCount -= 1;
-      // remove currPost from dislikedPosts
-      user.dislikedPosts = user.dislikedPosts.filter(
-        (item) => !item.equals(currPost._id)
-      );
-    }
-  });
-
+  let prevLen = user.dislikedPosts.length;
+  user.dislikedPosts.pull(currPost._id);
+  if (user.dislikedPosts.length < prevLen) currPost.dislikeCount--;
   currPost.likeCount += 1;
   user.likedPosts.push(postId);
 
@@ -88,16 +83,9 @@ module.exports.dislikePost = async (req, res) => {
   const userId = req.user._id;
   const user = await User.findById(userId);
 
-  // remove from likedPost
-  user.likedPosts.map((likedPost) => {
-    if (likedPost._id.equals(currPost._id)) {
-      currPost.likeCount -= 1;
-      // remove currPost from dislikedPosts
-      user.likedPosts = user.likedPosts.filter(
-        (item) => !item.equals(currPost._id)
-      );
-    }
-  });
+  let prevLen = user.likedPosts.length;
+  user.likedPosts.pull(currPost._id);
+  if (user.likedPosts.length < prevLen) currPost.likeCount--;
 
   currPost.dislikeCount += 1;
   user.dislikedPosts.push(postId);
@@ -111,9 +99,9 @@ module.exports.dislikePost = async (req, res) => {
 module.exports.getSinglePost = async (req, res) => {
   const userId = req.user._id;
   const user = await User.findById(userId);
-
+  const postId = req.params.id;
   const post = await postModel
-    .findById(req.params.id)
+    .findById(postId)
     .populate({
       path: 'comments',
       populate: {
@@ -122,23 +110,24 @@ module.exports.getSinglePost = async (req, res) => {
     })
     .populate('author');
 
-  post.comments.map((comment) => {
-    for (let likedComment of user.likedComments) {
-      if (comment._id.equals(likedComment._id)) {
-        comment.isLikedByUser = true;
-      } else {
-        comment.isLikedByUser = false;
-      }
-    }
 
-    for (let dislikedComment of user.dislikedComments) {
-      if (comment._id.equals(dislikedComment._id)) {
-        comment.isDisLikedByUser = true;
-      } else {
-        comment.isDisLikedByUser = false;
-      }
+  for (let comment of post.comments) {
+    const isCommentLiked = user.likedComments.some((likedComment) =>
+      likedComment.equals(comment._id)
+    );
+    const isCommentDisliked = user.dislikedComments.some((dislikedComment) =>
+      dislikedComment.equals(comment._id)
+    );
+    if (isCommentLiked) {
+      comment.isLikedByUser = true;
+      comment.isDisLikedByUser = false;
     }
-  });
+    if (isCommentDisliked) {
+      comment.isDisLikedByUser = true;
+      comment.isLikedByUser = false;
+    }
+    await comment.save();
+  }
 
   res.render('comments.ejs', { post });
 };
