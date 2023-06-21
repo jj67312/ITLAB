@@ -41,6 +41,14 @@
       </div>
       <div class="row5">
         <form action="/login" method="POST">
+          <div class="error password-error">
+            <i class="bx bx-error-circle error-icon"></i>
+            <p class="error-text3">
+              <% if(message.length>0){%>
+                <p class="error-text2"><%= message %></p>
+              <% } %>
+            </p>
+          </div>
           <div class="group1">
             <input type="name" name="username" id="username" placeholder="Name" class="name" required="" />
             <label for="username" class="form-label">Username</label>

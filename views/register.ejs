@@ -44,12 +44,11 @@
           <% if(message.length>0){%>
             <p class="error-text2"><%= message %></p>
           <% } %>
-
-          <% if(typeof alert != 'undefined'){ %>
+          <!-- <% if(typeof alert != 'undefined'){ %>
             <% alert.forEach(function(error){ %>
               <p class="error-text2"><%= error.msg %></p>
             <% }) %>
-          <% } %>
+          <% } %> -->
           <div class="group1">
             <input name="username" type="text" id="username" placeholder="Name" class="name" require  d />
             <label for="username" class="form-label">Username</label>
@@ -62,6 +61,10 @@
             </div>
             <div class="error email-error">
               <i class="bx bx-error-circle error-icon"></i>
+              <% if(message.length>0 ){%>
+                <p class="error-text2"><%= message %></p>
+              <% } %>
+    
             </div>
           </div>
 
@@ -73,9 +76,10 @@
             </div>
             <div class="error password-error">
               <i class="bx bx-error-circle error-icon"></i>
-              <% if(message.length>0){%>
+              <% if(message.length>0 ){%>
                 <p class="error-text2"><%= message %></p>
               <% } %>
+    
             </div>
           </div>
 

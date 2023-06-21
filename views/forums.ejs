@@ -97,13 +97,11 @@
 
                   <!-- like post -->
                   
-                  <%= post.likeCount - post.dislikeCount %>
+                  <%= post.likeCount %>
                   <% if(!post.isLikedByUser) {%>
                     <form action="/forums/like/<%= post._id %>" method="post"><button>Like</button></form>
-                  <%}%>
-
-                  <% if(!post.isDisLikedByUser) {%>
-                    <form action="/forums/dislike/<%= post._id %>" method="post"><button>Dislike</button></form>
+                  <%} else { %>
+                    <form action="/forums/dislike/<%= post._id %>" method="post"><button>Dislike</button></form>   
                   <%}%>
                 
                 </p>

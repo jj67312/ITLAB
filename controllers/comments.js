@@ -34,9 +34,10 @@ module.exports.likeComment = async (req, res) => {
   const user = await User.findById(userId);
 
   // remove the likedComment if it exists in the dislikeComments array of the user
-  let prevLen = user.dislikedComments.length;
-  user.dislikedComments.pull(currComment._id);
-  if (user.dislikedComments.length < prevLen) currComment.dislikeCount--;
+  // let prevLen = user.dislikedComments.length;
+  // user.dislikedComments.pull(currComment._id);
+  // if (user.dislikedComments.length < prevLen) currComment.dislikeCount--;
+
   currComment.likeCount += 1;
   user.likedComments.push(commentId);
 
@@ -53,11 +54,13 @@ module.exports.dislikeComment = async (req, res) => {
   const user = await User.findById(userId);
 
   // remove from dislikedPost
-  let prevLen = user.likedComments.length;
+  // let prevLen = user.likedComments.length;
+  // user.likedComments.pull(currComment._id);
+  // if (user.likedComments.length < prevLen) currComment.likeCount--;
+  
+  currComment.likeCount -= 1;
   user.likedComments.pull(currComment._id);
-  if (user.likedComments.length < prevLen) currComment.likeCount--;
-  currComment.dislikeCount += 1;
-  user.dislikedComments.push(commentId);
+  //user.dislikedComments.push(commentId);
 
   await currComment.save();
   await user.save();

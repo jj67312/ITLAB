@@ -4,10 +4,11 @@ const app = express();
 const passport = require('passport');
 
 const genPassword = require('./utils').genPassword;
-const { check, validationResult } = require('express-validator');
+//const { check, validationResult } = require('express-validator');
 const validator = require('validator');
 
 const isAuth = require('./authMiddleware').isAuth;
+const isLoggedIn = require('./authMiddleware').isLoggedIn;
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -72,61 +73,47 @@ app.use('/', userRoutes);
 
 // login and register routes --------------------
 
-app.post(
-  '/login',
-  passport.authenticate('local', {
-    failureRedirect: '/login',
-    successRedirect: '/forums',
-  })
-);
+app.post('/login', passport.authenticate('local' , {successRedirect:'/forums', failureRedirect:'/login'}));
 
 app.post(
-  '/register',
-  // check('password', 'Password is weak').isAlphanumeric().isLength({ min: 8 }),
-  // check('email', 'Incorrect email format').isEmail(),
-  (req, res, next) => {
-    // const { username, password, email } = req.body;
-    // console.log(req.body)
-    // if (!username || !password || !email) {
-    //   req.flash('error_msg', 'Enter all fields');
-    //   res.redirect('/register');
-    // }
-    // if (!validator.isEmail(email)) {
-    //   req.flash('error_msg', 'Incorrect email format');
-    //   res.redirect('/register');
-    // }
-    // if (!validator.isStrongPassword(req.body.password)) {
-    //   req.flash('error_msg', 'Weak Password');
-    //   res.redirect('/register');
-    // }
+  '/register', (req, res, next) => {
+    const { username, password, email } = req.body;
+    console.log(req.body)
+    if (!username || !password || !email) {
+      req.flash('error_msg', 'Enter all fields');
+      return res.redirect('/register');
+    }
+    if (!validator.isEmail(email)) {
+      req.flash('error_msg', 'Incorrect email format');
+      return res.redirect('/register');
+    }
+    if (!validator.isStrongPassword(req.body.password)) {
+      req.flash('error_msg', 'Weak Password');
+      return res.redirect('/register');
+    }
+
     User.findOne({ username: req.body.username })
       .then((user) => {
         if (user) {
           req.flash('error_msg', 'User already exists');
           res.redirect('/register');
-        } else {
-          const errors = validationResult(req);
-          if (!errors.isEmpty()) {
-            const alert = errors.array();
-            req.flash('error_msg', { alert });
-            res.redirect('/register');
-          } else {
-            const saltHash = genPassword(req.body.password);
+        }
+        else {
+          const saltHash = genPassword(req.body.password);
 
-            const salt = saltHash.salt;
-            const hash = saltHash.hash;
+          const salt = saltHash.salt;
+          const hash = saltHash.hash;
 
-            const newUser = new User({
-              username: req.body.username,
-              email: req.body.email,
-              googleId: null,
-              salt: salt,
-              hashedPassword: hash,
-            });
+          const newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+            googleId: null,
+            salt: salt,
+            hashedPassword: hash,
+          });
 
-            newUser.save();
-            res.redirect('/login');
-          }
+          newUser.save();
+          res.redirect('/login');
         }
       })
       .catch((err) => {

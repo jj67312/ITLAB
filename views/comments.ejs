@@ -62,11 +62,10 @@
                 <a href="/users/<%= comment.author._id %>"><%= comment.author.username %> </a> <br />
                 <%= comment.commentBody %>
                 
+                <%= comment.likeCount %>
                 <% if(!comment.isLikedByUser) {%>
                   <form action="/comments/like/<%= comment._id %>" method="post"><button>Like</button></form>
-                <%}%>
-
-                <% if(!comment.isDisLikedByUser) {%>
+                <%} else {%>
                   <form action="/comments/dislike/<%= comment._id %>" method="post"><button>Dislike</button></form>
                 <%}%>
 
