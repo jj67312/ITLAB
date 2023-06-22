@@ -96,7 +96,7 @@ app.post(
     }
 
     if (!validator.isStrongPassword(req.body.password)) {
-      req.flash('error_msg', 'Weak Password');
+      req.flash('error_msg', 'Enter a strong password with numbers, symbols, small and capital letters.');
       return res.redirect('/register');
     }
 

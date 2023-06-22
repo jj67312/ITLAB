@@ -15,36 +15,3 @@ showPassword.addEventListener("click", function () {
   this.classList.toggle("fa-eye-slash");
 });
 
-// function checkPass() {
-//   const passPattern =
-//     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-//   if (!pass.value.match(passPattern)) {
-//     return passField.classList.add("invalid");
-//   }
-//   passField.classList.remove("invalid");
-// }
-
-// function checkEmail() {
-//   const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-//   if (!mail.value.match(emailPattern)) {
-//     return emailField.classList.add("invalid");
-//   }
-//   emailField.classList.remove("invalid");
-// }
-
-// form.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   checkPass();
-//   checkEmail();
-
-//   mail.addEventListener("keyup", checkEmail);
-//   pass.addEventListener("keyup", checkPass);
-
-//   if (
-//     !emailField.classList.contains("invalid") &&
-//     !passField.classList.contains("invalid")
-//   ) {
-//     location.href = form.getAttribute("action");
-//   }
-// });

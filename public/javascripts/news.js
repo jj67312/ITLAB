@@ -1,30 +1,3 @@
-// const slides = document.querySelectorAll(".slide");
-
-// var counter = 0;
-// //console.log(slides);
-
-// slides.forEach((slide, index) => {
-//   slide.style.left = `${index * 100}%`;
-// });
-
-// const slideNews = () => {
-//   slides.forEach((slide) => {
-//     slide.style.transform = `translateX(-${counter * 100}%)`;
-//   });
-// };
-
-// const goNext = () => {
-//   if (counter <= 10) {
-//     counter++;
-//     slideNews();
-//   }
-// };
-
-// const goPrev = () => {
-//   counter--;
-//   slideNews();
-// };
-
 const api_key = `b6648609e6dc43d8b134e6300e80c212`;
 var url = `https://newsapi.org/v2/top-headlines?country=us&language=en&category=technology&apikey=${api_key} `;
 

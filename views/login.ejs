@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheets/signup.css" />
+    <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Sign In</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="stylesheets/signup.css">
-  <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
-  <script src="https://kit.fontawesome.com/a81368914c.js"></script>
-  <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
-  <title>Sign Up</title>
-</head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <div class="row1">
+          <p class="text1">Sign In</p>
+        </div>
 
-<body>
-  <div class="container">
-    <div class="left">
-      <div class="row1">
-        <p class="text1">Log In</p>
-      </div>
+        <div class="row2">
+          <p class="text2">
+            Welcome back!
+            <font style="color: #4285f4"
+              >Get all your Tech Cravings satisfied here!</font
+            >
+            Please enter your credintials below.
+          </p>
+        </div>
 
-      <div class="row2">
-        <p class="text2">
-          By continuing, you are setting up a BitBot account and agree to our
-          <a href="#" style="color: #4285f4">User Agreement</a> and
-          <a href="#" style="color: #4285f4">Privacy Policy.</a>
-        </p>
-      </div>
-
-      <div class="row3">
+        <div class="row3">
           <div onclick="window.location.href='/google'" class="google-btn">
             <div class="google-icon-wrapper">
               <img class="google-icon" src="./skins/google-logo.png" />
@@ -36,67 +40,57 @@
           </div>
         </div>
 
-      <div class="row4">
-        <h5 class="partition">OR</h5>
-      </div>
-      <div class="row5">
-        <form action="/login" method="POST">
-          <div class="error password-error">
-            <i class="bx bx-error-circle error-icon"></i>
-            <p class="error-text3">
+        <div class="row4">
+          <h5 class="partition">OR</h5>
+        </div>
+        <div class="row5">
+          <form action="/login" method="POST">
+            <div class="group1">
+              <input
+                type="name"
+                name="username"
+                id="username"
+                placeholder="Name"
+                class="name"
+              />
+              <label for="username" class="form-label">Username</label>
+            </div>
+
+            <div class="field group3">
+              <div class="input-field">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  class="password"
+                />
+                <label for="password" class="form-label">Password</label>
+                <i class="far fa-eye" id="show-password"></i>
+              </div>
+            </div>
+            <div class="error">
               <% if(message.length>0){%>
-                <p class="error-text2"><%= message %></p>
+              <i class="bx bx-error-circle error-icon"></i>
+              <p class="error-text"><%=message%></p>
               <% } %>
-            </p>
-          </div>
-          <div class="group1">
-            <input type="name" name="username" id="username" placeholder="Name" class="name" required="" />
-            <label for="username" class="form-label">Username</label>
-          </div>
+            </div>
 
-          <!-- <div class="field group2">
-            <div class="input-field">
-              <input type="email" id="email" placeholder="Email" class="email" />
-              <label for="email" class="form-label">Email</label>
-            </div>
-            <div class="error email-error">
-              <i class="bx bx-error-circle error-icon"></i>
-              <p class="error-text2">Please enter a valid email</p>
-            </div>
-          </div> -->
+            <input type="submit" value="Continue" />
+          </form>
+        </div>
 
-          <div class="field group3">
-            <div class="input-field">
-              <input type="password" name="password" id="password" placeholder="Password" class="password" />
-              <label for="password" class="form-label">Password</label>
-              <i class="far fa-eye" id="show-password"></i>
-            </div>
-            <div class="error password-error">
-              <i class="bx bx-error-circle error-icon"></i>
-              <p class="error-text3">
-                Please enter atleast 8 charatcters with numbers, symbols,
-                small and capital letters.
-              </p>
-            </div>
-          </div>
-
-          <input type="submit" value="Continue" />
-        </form>
+        <div class="row6">
+          <p class="signin">
+            New User?
+            <a href="/register" style="text-decoration: none">
+              <font style="color: #4285f4"> Sign Up</font>
+            </a>
+          </p>
+        </div>
       </div>
-
-      <div class="row6">
-        <p class="signin">
-          New User? Sign Up!
-          <a href="/register" style="text-decoration: none">
-            <font style="color: #4285f4"> Sign Up</font>
-          </a>
-        </p>
-      </div>
+      <div class="right"></div>
     </div>
-    <div class="right">
-    </div>
-  </div>
-  <script src="javascripts/signup.js"></script>
-</body>
-
+    <script src="javascripts/signup.js"></script>
+  </body>
 </html>

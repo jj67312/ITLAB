@@ -8,7 +8,7 @@ module.exports = (passport) => {
       User.findOne({ username: username })
         .then((user) => {
           if (!user) {
-            return done(null, false , { message: 'Email is not registered'});
+            return done(null, false , { message: 'Username not found'});
           }
           const isValid = validPassword(
             password,

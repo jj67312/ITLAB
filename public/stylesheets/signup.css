@@ -23,287 +23,273 @@ a {
 }
 
 .container {
-    background-color: #ffffff;
+  background-color: #ffffff;
 
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    
-    justify-content: space-between;
-    align-items: center;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  align-items: center;
 }
 
 .right {
-    height: 100%;
-    width: 50%;
-    background: url('./signup_side_image.png');
-    background-size: cover;
+  height: 100%;
+  width: 50%;
+  background: url("./signup_side_image.png");
+  background-size: cover;
 }
 
 .left {
-    width: 30rem;
-    margin-left: 15rem;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .text1 {
-    font-family: Inter, sans-serif;
-    font-size: 1.5rem;
-    font-weight: 500;
-  }
-  
-  .text2 {
-    text-align: justify;
-    width: 20rem;
-    font-family: Inter;
-    font-size: 0.9rem;
-    margin: 1rem 0 1.5rem;
-  }
-  
-  .row3 {
-    margin: 0 0 1rem;
-  }
-  
-  .google-btn {
-    display: flex;
-    flex-direction: row;
-  
-    width: 17.5rem;
-    height: 3rem;
-    margin: 1rem 0 1rem;
-  
-    color: #4285f4;
-    background-color: #ffffff;
-  
-    border-radius: 3px;
-    border: 1px solid #4285f4;
-  
-    transition: all 300ms;
-  }
-  
-  .google-btn:hover {
-    color: #ffffff;
-    background-color: #4285f4;
-    border: none;
-  }
-  
-  .google-btn:active {
-    background-color: #3367d6;
-  }
-  
-  .google-icon-wrapper {
-    position: relative;
-    margin-top: 1.6px;
-    margin-left: 2px;
-    width: 2.8rem;
-    height: 2.75rem;
-    border-radius: 2px;
-    background-color: #fff;
-  }
-  
-  .google-icon {
-    position: relative;
-    margin-top: 8.5px;
-    margin-left: 8.5px;
-    width: 27px;
-    height: 27px;
-  }
-  
-  .btn-text {
-    margin-left: 1.2rem;
-  
-    line-height: 48px;
-    vertical-align: top;
-  
-    font-size: 14px;
-    letter-spacing: 0.45px;
-  
-    text-transform: uppercase;
-    font-family: Roboto, sans-serif;
-  }
-  
-  .partition {
-    margin: 0rem 0 2rem;
-    font-family: Inter;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.3);
-    text-align: center;
-  }
-  
-  .partition {
-    width: 17.5rem;
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .partition:before,
-  .partition:after {
-    content: "";
-    flex: 1 1;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-    margin: auto;
-  }
-  
-  .row5 {
-    width: 17.5rem;
-    font-family: Inter;
-    transition: 300ms;
-  }
-  
-  .email,
-  .name,
-  .password {
-    box-sizing: border-box;
-    box-shadow: none;
-  
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
-  
-    width: 100%;
-    height: 45px;
-    padding-top: 10px;
-    padding-left: 5px;
-  
-    transition: all 300ms;
-  }
-  
-  .email,
-  .name,
-  .password,
-  select,
-  textarea {
-    font-size: 0.8rem;
-    font-family: Inter;
-    color: rgba(0, 0, 0, 0.85);
-  }
-  
-  .email::placeholder,
-  .name::placeholder,
-  .password::placeholder {
-    color: transparent;
-  }
-  
-  .email:focus,
-  .name:focus,
-  .password:focus {
-    box-shadow: none;
-    outline: none;
-    border-color: #5bacdf;
-  }
-  
-  .form-label {
-    display: block;
-    font-size: 0.8rem;
-    color: #999;
-    opacity: 1;
-  
-    transform: translate(0.5rem, -2rem);
-    transform-origin: 0 0;
-    transition: all 300ms;
-  }
-  
-  .group1,
-  .group2,
-  .group3 {
-    transition: all 300ms;
-  }
-  
-  .group1:focus-within,
-  .group2:focus-within,
-  .group3:focus-within {
-    transform: scale(1.05, 1.05);
-  }
-  
-  .email:focus + .form-label,
-  .email:not(:placeholder-shown) + .form-label {
-    transform: translate(0.2rem, -2.6rem) scale(0.8);
-  }
-  
-  .name:focus + .form-label,
-  .name:not(:placeholder-shown) + .form-label {
-    transform: translate(0.2rem, -2.6rem) scale(0.8);
-  }
-  
-  .password:focus + .form-label,
-  .password:not(:placeholder-shown) + .form-label {
-    transform: translate(0.2rem, -2.6rem) scale(0.8);
-  }
-  
-  .fa-eye {
-    position: relative;
-    top: -3rem;
-    left: 15rem;
-    color: rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    transition: all 300ms;
-  }
-  
-  .group2 .error-icon {
-    position: relative;
-    top: -10px;
-  }
-  
-  .error-text2 {
-    position: relative;
-    top: -13px;
-    left: 5px;
-    z-index: 999;
-  }
-  
-  .group3 .error-icon {
-    position: relative;
-    top: -30px;
-  }
-  
-  .error-text3 {
-    position: relative;
-    top: -32px;
-    left: 5px;
-    z-index: 999;
-  }
-  
-  .field .error {
-    display: flex;
-    color: #d93025;
-    font-family: Inter, sans-serif;
-    font-size: 0.7rem;
-    display: none;
-  }
-  
-  .invalid .error {
-    display: flex;
-  }
-  
-  .row5 input[type="submit"] {
-    position: static;
-    width: 100%;
-    height: 35px;
-    cursor: pointer;
-    border-radius: 4px;
-    letter-spacing: 0.5px;
-  
-    border: none;
-    font-weight: 600;
-    text-transform: uppercase;
-  
-    color: #ffffff;
-    background: #4285f4;
-    transition: all 0.3s;
-  }
-  
-  .row5 input[type="submit"]:hover {
-    opacity: 0.75;
-  }
-  
-  .row5 input[type="submit"]:active {
-    opacity: 0.45;
-  }
-  
-  .row6 {
-    margin: 1rem 0 0;
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    font-size: 0.8rem;
-  }
+  margin-left: 15rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.text1 {
+  font-family: Inter, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.text2 {
+  text-align: justify;
+  width: 20rem;
+  font-family: Inter;
+  font-size: 0.9rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.row3 {
+  margin: 0 0 1rem;
+}
+
+.google-btn {
+  display: flex;
+  flex-direction: row;
+
+  width: 17.5rem;
+  height: 3rem;
+  margin: 1rem 0 1rem;
+
+  color: #4285f4;
+  background-color: #ffffff;
+
+  border-radius: 3px;
+  border: 1px solid #4285f4;
+
+  transition: all 300ms;
+}
+
+.google-btn:hover {
+  color: #ffffff;
+  background-color: #4285f4;
+  border: none;
+}
+
+.google-btn:active {
+  background-color: #3367d6;
+}
+
+.google-icon-wrapper {
+  position: relative;
+  margin-top: 1.6px;
+  margin-left: 2px;
+  width: 2.8rem;
+  height: 2.75rem;
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+.google-icon {
+  position: relative;
+  margin-top: 8.5px;
+  margin-left: 8.5px;
+  width: 27px;
+  height: 27px;
+}
+
+.btn-text {
+  margin-left: 1.2rem;
+
+  line-height: 48px;
+  vertical-align: top;
+
+  font-size: 14px;
+  letter-spacing: 0.45px;
+
+  text-transform: uppercase;
+  font-family: Roboto, sans-serif;
+}
+
+.partition {
+  margin: 0rem 0 2rem;
+  font-family: Inter;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.partition {
+  width: 17.5rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.partition:before,
+.partition:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  margin: auto;
+}
+
+.row5 {
+  width: 17.5rem;
+  font-family: Inter;
+  transition: 300ms;
+}
+
+.email,
+.name,
+.password {
+  box-sizing: border-box;
+  box-shadow: none;
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+
+  width: 100%;
+  height: 45px;
+  padding-top: 10px;
+  padding-left: 5px;
+
+  transition: all 300ms;
+}
+
+.email,
+.name,
+.password,
+select,
+textarea {
+  font-size: 0.8rem;
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.email::placeholder,
+.name::placeholder,
+.password::placeholder {
+  color: transparent;
+}
+
+.email:focus,
+.name:focus,
+.password:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #5bacdf;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #999;
+  opacity: 1;
+
+  transform: translate(0.5rem, -2rem);
+  transform-origin: 0 0;
+  transition: all 300ms;
+}
+
+.group1,
+.group2,
+.group3 {
+  transition: all 300ms;
+}
+
+.group1:focus-within,
+.group2:focus-within,
+.group3:focus-within {
+  transform: scale(1.05, 1.05);
+}
+
+.email:focus + .form-label,
+.email:not(:placeholder-shown) + .form-label {
+  transform: translate(0.2rem, -2.6rem) scale(0.8);
+}
+
+.name:focus + .form-label,
+.name:not(:placeholder-shown) + .form-label {
+  transform: translate(0.2rem, -2.6rem) scale(0.8);
+}
+
+.password:focus + .form-label,
+.password:not(:placeholder-shown) + .form-label {
+  transform: translate(0.2rem, -2.6rem) scale(0.8);
+}
+
+.fa-eye {
+  position: relative;
+  top: -3rem;
+  left: 15rem;
+  color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.error {
+  width: 100%;
+  top: -20px;
+  position: relative;
+  display: flex;
+}
+
+.error .error-icon {
+  margin-right: 0.2rem;
+}
+
+.error .error-text {
+  top: -2px;
+}
+
+.error .error-text,
+.error .error-icon {
+  font-size: 0.8rem;
+  font-family: Inter, sans-serif;
+  color: #d93025;
+  position: relative;
+}
+
+.row5 input[type="submit"] {
+  position: static;
+  width: 100%;
+  height: 35px;
+  cursor: pointer;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+
+  border: none;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  color: #ffffff;
+  background: #4285f4;
+  transition: all 0.3s;
+}
+
+.row5 input[type="submit"]:hover {
+  opacity: 0.75;
+}
+
+.row5 input[type="submit"]:active {
+  opacity: 0.45;
+}
+
+.row6 {
+  margin: 1rem 0 0;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+}
