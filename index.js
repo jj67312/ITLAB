@@ -73,20 +73,28 @@ app.use('/', userRoutes);
 
 // login and register routes --------------------
 
-app.post('/login', passport.authenticate('local' , {successRedirect:'/forums', failureRedirect:'/login'}));
+app.post('/login',(req,res,next)=>{
+  passport.authenticate('local',{
+    successRedirect:'/forums',
+    failureRedirect:'/login',
+    failureFlash:true
+  })(req,res,next);
+})
 
 app.post(
   '/register', (req, res, next) => {
     const { username, password, email } = req.body;
-    console.log(req.body)
+    
     if (!username || !password || !email) {
       req.flash('error_msg', 'Enter all fields');
       return res.redirect('/register');
     }
+
     if (!validator.isEmail(email)) {
       req.flash('error_msg', 'Incorrect email format');
       return res.redirect('/register');
     }
+
     if (!validator.isStrongPassword(req.body.password)) {
       req.flash('error_msg', 'Weak Password');
       return res.redirect('/register');
@@ -132,21 +140,7 @@ app.get(
   passport.authenticate('google', {
     failureRedirect: '/login',
     successRedirect: '/forums',
-  }),
-  (req, res) => {
-    res.redirect('/login-success');
-  }
-);
-
-app.get('/login-success', isAuth, (req, res, next) => {
-  res.send(
-    '<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>'
-  );
-});
-
-app.get('/login-failure', (req, res, next) => {
-  res.send('Wrong user credentials');
-});
+  }));
 
 app.get('/logout', (req, res, next) => {
   req.logout((err) => {

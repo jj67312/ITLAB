@@ -7,7 +7,7 @@ module.exports.renderHomePage = (req, res) => {
 }
 
 module.exports.renderLoginPage = (req, res) => {
-  res.render('login.ejs', { message: req.flash('error_msg') });
+  res.render('login.ejs', { message: req.flash('error') });
 };
 
 module.exports.renderRegisterPage = (req, res) => {
