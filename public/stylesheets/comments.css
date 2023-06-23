@@ -125,6 +125,9 @@ a {
   position: relative;
   min-width: 60%;
 
+  overflow-y: visible;
+  overflow-x: hidden;
+
   background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
@@ -307,8 +310,11 @@ a {
 }
 
 .main-column .add-comment-area {
+  position: relative;
   width: 856px;
-  margin-top: 12px;
+  margin-top: 5px;
+  padding-bottom: 90px;
+  margin-bottom: 1rem;
   height: 94px;
   background-color: #fff;
 
