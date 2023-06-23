@@ -182,35 +182,6 @@ a {
   font-size: 15px;
 }
 
-.main-column .post-footer .icon-area {
-  width: 100px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.main-column .post-footer .icon-area .like-icon {
-  font-size: 22px;
-  cursor: pointer;
-  color: #8a8a8a;
-}
-
-.main-column .post-footer .icon-area .icon-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.main-column .post-footer .icon-area .like-icon.active {
-  color: #4285f4;
-}
-
-.main-column .post-footer .icon-area .like-count {
-  margin: 0 0 0 0.2rem;
-  font-size: 13px;
-}
-
 .main-column .comment-section {
   padding: 20px 30px 10px 30px;
   width: 856px;
@@ -243,6 +214,96 @@ a {
   font-style: normal;
   font-size: 16px;
   color: #4285f4;
+}
+
+.main-column .comment-section .comment-div .comment-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.main-column .comment-section .comment-div .comment-body .comment-body-header {
+  font-family: Inter, sans-serif;
+  width: 88%;
+  word-wrap: break-word;
+  text-align: justify;
+}
+
+.main-column .comment-section .comment-div .icon-area {
+  width: 12%;
+  height: 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-column .comment-section .comment-div .comment-body .icon-area .icon-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-column
+  .comment-section
+  .comment-div
+  .comment-body
+  .icon-area
+  .icon-form
+  .like-icon,
+.main-column
+  .comment-section
+  .comment-div
+  .comment-body
+  .icon-area
+  .icon-form
+  .dislike-icon {
+  /* margin: 0.4rem 0 0 31rem; */
+  font-size: 20px;
+  cursor: pointer;
+  color: #8a8a8a;
+}
+
+.main-column
+  .comment-section
+  .comment-div
+  .comment-body
+  .icon-area
+  .icon-form
+  .like-count {
+  margin: 0 0 0.1rem 0.2rem;
+  font-size: 13px;
+}
+
+.main-column
+  .comment-section
+  .comment-div
+  .comment-body
+  .icon-area
+  .like-count {
+  margin: 0 0 0 0.2rem;
+  font-size: 13px;
+}
+
+.main-column
+  .comment-section
+  .comment-div
+  .comment-body
+  .icon-area
+  .like-icon:hover {
+  transition: all 0.3s;
+  color: #4285f4;
+}
+
+.main-column
+  .comment-section
+  .comment-div
+  .comment-body
+  .icon-area
+  .dislike-icon:hover {
+  transition: all 0.3s;
+  color: #d93025;
 }
 
 .main-column .add-comment-area {
@@ -330,13 +391,31 @@ a {
   background: #193926;
 }
 
+.news-profile-column .profile .profile-text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: -3rem;
+}
+
 .news-profile-column .profile-text1 {
   position: relative;
-  margin-top: -3rem;
   font-size: 26px;
   font-family: Inter;
   font-style: normal;
   font-weight: 700;
+}
+
+.news-profile-column .profile-text2 {
+  position: relative;
+  /* top: 55px; */
+
+  font-size: 13px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+
+  color: #8a8a8a;
 }
 
 .news-profile-column .profile-btn {

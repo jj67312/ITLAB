@@ -84,7 +84,7 @@
           <ul>
             <% for(let post of allPosts) {%>
             <li>
-              <h3><a href="/forums/<%= post._id %>"><%= post.title %></a></h3>
+              <h3><%= post.title %></h3>
               <p><%= post.description %></p>
               <p class="line"></p>
               <div class="post-footer">
@@ -94,17 +94,23 @@
                     <font style="color: #4285f4"><%= post.author.username %>
                     </font>
                   </a>
-
-                  <!-- like post -->
-                  
-                  <%= post.likeCount %>
-                  <% if(!post.isLikedByUser) {%>
-                    <form action="/forums/like/<%= post._id %>" method="post"><button>Like</button></form>
-                  <%} else { %>
-                    <form action="/forums/dislike/<%= post._id %>" method="post"><button>Dislike</button></form>   
-                  <%}%>
-                
                 </p>
+                <div class="icon-area">
+                  <% if(!post.isLikedByUser) {%>
+                    <form class="icon-form" id="likeForm" action="/forums/like/<%= post._id %>" method="post">
+                      <i class="bx bxs-like like-icon" onClick="submitForm('likeForm')"></i>
+                      <p class="like-count"><%= post.likeCount %></p>
+                    </form>
+                  <%} else { %>
+                    <form class="icon-form" id="dislikeForm" action="/forums/dislike/<%= post._id %>" method="post">
+                      <i class="bx bxs-dislike dislike-icon" onclick="submitForm('dislikeForm')"></i>
+                      <p class="like-count"><%= post.likeCount %></p>
+                    </form>  
+                  <%}%>
+                  <a href="/forums/<%= post._id %>">
+                    <i class="bx bxs-chat comment-icon"></i>
+                  </a> 
+                </div>
               </div>
             </li>
             <% } %>
@@ -133,7 +139,7 @@
         <div class="news">
           <div class="header">
             <p>News</p>
-            <a href="./news.html">View All</a>
+            <a href="/news">View All</a>
           </div>
           <div id="newsFeed" class="news-from-api">
           </div>
@@ -141,6 +147,11 @@
       </div>
     </div>
   </div>
+  <script>
+    function submitForm(formId) {
+      document.getElementById(formId).submit();
+    }
+  </script>
   <script src="./javascripts/forums.js"></script>
   <script src="./javascripts/searchBar.js"></script>
 </body>

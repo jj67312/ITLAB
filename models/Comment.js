@@ -15,10 +15,6 @@ const commentSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  // dislikeCount: {
-  //   type: Number,
-  //   default: 0,
-  // },
 });
 
 module.exports = mongoose.model('Comment', commentSchema);

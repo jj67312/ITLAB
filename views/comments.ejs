@@ -45,35 +45,48 @@
           </div>
 
           <div class="post-footer">
-            <div class="posted-by">
+            <p class="posted-by">
               Posted By
               <a href="/user/<%= post.author._id %> ">
                 <font style="color: #4285f4"><%= post.author.username %> </font>
               </a>
-            </div>
+            </p>
           </div>
         </div>
+
         <div class="comment-section">
           <p class="comment-heading">Comments</p>
           <div class="comment-div">
             <ul>
               <% for(let comment of post.comments) {%>
               <li>
-                <a href="/users/<%= comment.author._id %>"><%= comment.author.username %> </a> <br />
-                <%= comment.commentBody %>
 
-                <%= comment.likeCount %>
-                <% if(!comment.isLikedByUser) {%>
-                <form action="/comments/like/<%= comment._id %>" method="post"><button>Like</button></form>
-                <%} else {%>
-                <form action="/comments/dislike/<%= comment._id %>" method="post"><button>Dislike</button></form>
-                <%}%>
+                <div class="comment-body">
+                  <div class="comment-body-header">
+                    <a href="/users/<%= comment.author._id %>"><%= comment.author.username %></a> <br>
+                    <%= comment.commentBody %>
+                  </div>
 
+                  <div class="icon-area">
+                    <% if(!comment.isLikedByUser) {%>
+                      <form class="icon-form" id="likeComment" action="/comments/like/<%= comment._id %>" method="post">
+                        <i class="bx bxs-like like-icon" onClick="commentForm('likeComment')"></i>
+                        <p class="like-count"><%= comment.likeCount %></p>
+                      </form>
+                      <%} else {%>
+                      <form class="icon-form" id="dislikeComment" action="/comments/dislike/<%= comment._id %>" method="post">
+                        <i class="bx bxs-dislike dislike-icon" onclick="commentForm('dislikeComment')"></i>
+                        <p class="like-count"><%= comment.likeCount %></p>
+                      </form>
+                      <%}%>
+                  </div>
+                </div>
               </li>
               <% } %>
             </ul>
           </div>
         </div>
+
         <div class="add-comment-area">
           <form action="/comments/<%= post._id %>" method="POST">
             <input name="commentBody" class="comment-input" placeholder="Add Comment" />
@@ -85,11 +98,15 @@
       <div class="news-profile-column">
         <% if(currentUser) {%>
         <div class="profile">
-          <div class="profile-logo">
-            <%= currentUser.username[0] %>
+          <div class="profile-logo"><%= currentUser.username[0] %></div>
+          <div class="profile-text">
+            <p class="profile-text1"><%= currentUser.username %> </p>
+            <p class="profile-text2">
+              <%= currentUser.userPosts.length %> posts • <%= currentUser.userComments.length %>
+              comments
+            </p>
           </div>
-          <p class="profile-text1"><%= currentUser.username %> </p>
-
+          
           <a href="/users/<%=currentUser._id%>">
             <button class="profile-btn" onclick="window.location.href = 'profile.html'">
               View Profile
@@ -114,7 +131,11 @@
       </div>
     </div>
   </div>
-  <!-- <script src="/javascripts/comments.js"></script> -->
+  <script>
+    function commentForm(formId) {
+      document.getElementById(formId).submit();
+    }
+  </script>
 </body>
 
 </html>

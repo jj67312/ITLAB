@@ -477,8 +477,19 @@ textarea {
   margin: auto;
 }
 
+.main-column .forums-showcase .post-footer {
+  /* background-color: #193926; */
+  width: 800px;
+  height: 30px;
+  margin-top: 0.3rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .main-column .forums-showcase .post-footer .posted-by {
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
   font-size: 15px;
 }
 
@@ -490,15 +501,42 @@ textarea {
   align-items: center;
 }
 
-.main-column .forums-showcase .post-footer .like-btn {
-  margin: 0.4rem 0 0 31rem;
+.main-column .forums-showcase .post-footer .icon-area {
+  width: 100px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-column .forums-showcase .post-footer .icon-area .icon-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-column .forums-showcase .post-footer .like-icon,
+.main-column .forums-showcase .post-footer .dislike-icon {
+  /* margin: 0.4rem 0 0 31rem; */
   font-size: 22px;
   cursor: pointer;
   color: #8a8a8a;
 }
 
-.main-column .forums-showcase .post-footer .like-btn.active {
+.main-column .forums-showcase .post-footer .icon-area .like-count {
+  margin: 0 0 0.1rem 0.2rem;
+  font-size: 14px;
+}
+
+.main-column .forums-showcase .post-footer .like-icon:hover {
+  transition: all 0.3s;
   color: #4285f4;
+}
+
+.main-column .forums-showcase .post-footer .dislike-icon:hover {
+  transition: all 0.3s;
+  color: #d93025;
 }
 
 .main-column .forums-showcase .post-footer .like-count {
@@ -506,11 +544,21 @@ textarea {
   font-size: 13px;
 }
 
-.main-column .forums-showcase .post-footer .comment-btn {
-  margin: 0.4rem 0 0 1rem;
+.main-column .forums-showcase .post-footer .comment-icon {
+  margin: 0 0 0 1rem;
   font-size: 22px;
   cursor: pointer;
 }
+
+.main-column .forums-showcase .post-footer .icon-area a {
+  color: #8a8a8a;
+}
+
+.main-column .forums-showcase .post-footer .icon-area a:hover {
+  transition: all 0.3s;
+  color: #4285f4;
+}
+
 .news-profile-column {
   position: relative;
   min-width: 22%;
