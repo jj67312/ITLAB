@@ -5,15 +5,20 @@ const postModel = require('../models/Post');
 module.exports.createComment = async (req, res) => {
   const postID = req.params.id;
   const comment = req.body;
+  const userId = req.user._id;
+  const user = await User.findById(userId);
   const currPost = await postModel.findById(postID);
   const newComment = await commentModel.create(comment);
 
   currPost.comments.push(newComment._id);
   newComment.author = req.user._id;
   newComment.postId = currPost._id;
+  user.userComments.push(newComment._id);
 
   await newComment.save();
   await currPost.save();
+  await user.save();
+  
   res.redirect(`/forums/${postID}`);
 };
 

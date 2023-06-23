@@ -4,11 +4,10 @@ const app = express();
 const passport = require('passport');
 
 const genPassword = require('./utils').genPassword;
-//const { check, validationResult } = require('express-validator');
 const validator = require('validator');
 
 const isAuth = require('./authMiddleware').isAuth;
-const isLoggedIn = require('./authMiddleware').isLoggedIn;
+const alreadyLoggedIn = require('./authMiddleware').alreadyLoggedIn;
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -73,7 +72,7 @@ app.use('/', userRoutes);
 
 // login and register routes --------------------
 
-app.post('/login',(req,res,next)=>{
+app.post('/login', alreadyLoggedIn, (req,res,next)=>{
   passport.authenticate('local',{
     successRedirect:'/forums',
     failureRedirect:'/login',
@@ -81,8 +80,7 @@ app.post('/login',(req,res,next)=>{
   })(req,res,next);
 })
 
-app.post(
-  '/register', (req, res, next) => {
+app.post('/register', alreadyLoggedIn, (req, res, next) => {
     const { username, password, email } = req.body;
     
     if (!username || !password || !email) {
@@ -130,10 +128,7 @@ app.post(
   }
 );
 
-app.get(
-  '/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
+app.get('/google',passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 app.get(
   '/google/callback',
@@ -176,7 +171,7 @@ const cheerio = require('cheerio');
 const webCrawler = require('./utils');
 
 urlTag = '.btn_prcList_sn flt-rt target_link_external impressions_gts';
-app.get('/market', async (req, res) => {
+app.get('/market', isAuth, async (req, res) => {
   let ans, ans2;
   let finalData = [];
   const predecessor = 'https://www.91mobiles.com';
@@ -195,12 +190,7 @@ app.get('/market', async (req, res) => {
   res.render('market.ejs', { finalData });
 });
 
-// news
-// const NewsAPI = require('newsapi');
-// const api_key = "eadeccef94e442f69bb28a13ed8b6975"
-// const newsapi = new NewsAPI(api_key)
-
-app.get('/news', async (req, res) => {
+app.get('/news', isAuth, async (req, res) => {
   res.render('news.ejs');
 });
 
@@ -209,7 +199,3 @@ app.listen(3000, (req, res) => {
 });
 
 module.exports = app;
-
-// If using ejs
-
-// Refer https://dev.to/atultyagi612/build-a-news-app-with-nodejs-express-ejs-and-newsapi-140f

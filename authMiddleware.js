@@ -6,11 +6,9 @@ module.exports.isAuth = (req, res, next) => {
     }
 }
 
-module.exports.isLoggedIn = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        res.redirect('/forums');
-    } else {
-        req.flash('error_msg', 'Incorrect credentials')
-        res.redirect('/login');
+module.exports.alreadyLoggedIn = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+      return next();
     }
+    res.redirect('/forums');      
 }
