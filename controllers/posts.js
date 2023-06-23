@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const commentModel = require('../models/Comment');
 const postModel = require('../models/Post');
+const axios = require('axios');
 
 module.exports.getAllPosts = async (req, res) => {
   const allPosts = await postModel.find({}).populate('author');
@@ -29,8 +30,7 @@ module.exports.getAllPosts = async (req, res) => {
     if (postIsLiked) {
       post.isLikedByUser = true;
       //post.isDisLikedByUser = false;
-    }
-    else{
+    } else {
       post.isLikedByUser = false;
     }
     // if (postIsDisliked) {
@@ -114,7 +114,6 @@ module.exports.getSinglePost = async (req, res) => {
     })
     .populate('author');
 
-
   for (let comment of post.comments) {
     const isCommentLiked = user.likedComments.some((likedComment) =>
       likedComment.equals(comment._id)
@@ -125,8 +124,7 @@ module.exports.getSinglePost = async (req, res) => {
     if (isCommentLiked) {
       comment.isLikedByUser = true;
       //comment.isDisLikedByUser = false;
-    }
-    else{
+    } else {
       comment.isLikedByUser = false;
     }
     // if (isCommentDisliked) {
@@ -136,7 +134,28 @@ module.exports.getSinglePost = async (req, res) => {
     await comment.save();
   }
 
-  res.render('comments.ejs', { post });
+  const api_key = `b6648609e6dc43d8b134e6300e80c212`;
+  var url = `https://newsapi.org/v2/top-headlines?language=en&category=technology&apiKey=b6648609e6dc43d8b134e6300e80c212`;
+
+  const getData = async () => {
+    const options = {
+      method: 'GET',
+      url: `https://newsapi.org/v2/top-headlines?language=en&category=technology&apiKey=b6648609e6dc43d8b134e6300e80c212`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const result = await axios(options);
+      return result.data.articles;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const newsData = await getData();
+  res.render('comments.ejs', { post, newsData });
 };
 
 module.exports.createPost = async (req, res) => {

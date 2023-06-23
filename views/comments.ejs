@@ -61,12 +61,12 @@
               <li>
                 <a href="/users/<%= comment.author._id %>"><%= comment.author.username %> </a> <br />
                 <%= comment.commentBody %>
-                
+
                 <%= comment.likeCount %>
                 <% if(!comment.isLikedByUser) {%>
-                  <form action="/comments/like/<%= comment._id %>" method="post"><button>Like</button></form>
+                <form action="/comments/like/<%= comment._id %>" method="post"><button>Like</button></form>
                 <%} else {%>
-                  <form action="/comments/dislike/<%= comment._id %>" method="post"><button>Dislike</button></form>
+                <form action="/comments/dislike/<%= comment._id %>" method="post"><button>Dislike</button></form>
                 <%}%>
 
               </li>
@@ -100,14 +100,21 @@
         <div class="news">
           <div class="header">
             <p>News</p>
-            <a href="./news.html">View All</a>
+            <a href="/news">View All</a>
           </div>
-          <div id="newsFeed" class="news-from-api"></div>
+          <div id="newsFeed" class="news-from-api">
+            <% for(let news of newsData) {%>
+            <div id="news-data">
+              <img src="<%=news.urlToImage %>" id="news-image" alt="">
+              <p id='news-headline'><%= news.title %></p>
+            </div>
+            <%}%>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <script src="/javascripts/comments.js"></script>
+  <!-- <script src="/javascripts/comments.js"></script> -->
 </body>
 
 </html>
