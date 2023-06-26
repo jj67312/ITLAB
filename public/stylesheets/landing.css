@@ -45,7 +45,7 @@ a {
   position: relative;
   padding: 1.5rem 0 2rem;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   overflow: hidden;
   background-color: var(--backgroundColor);
   display: flex;
@@ -69,31 +69,14 @@ header .container {
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
   font-family: Poppins, sans-serif;
   font-weight: bolder;
   font-size: 3rem;
   line-height: 1.2;
   color: var(--darkOne);
-}
-
-.links ul {
-  display: flex;
-  align-items: center;
-  list-style: none;
-}
-
-.links a {
-  font-family: HelveticaNeue, sans-serif;
-  color: var(--darkOne);
-  display: inline-block;
-  margin-left: 4.5rem;
-  font-size: 1.4rem;
-  transition: color 300ms, transform 300ms;
-}
-
-.links a:hover {
-  color: var(--color2);
-  transform: scale(1.05);
 }
 
 .showcase-area .container {
@@ -115,7 +98,7 @@ header .container {
   font-family: Inter;
   font-weight: 700;
   font-size: 1.7rem;
-  color: var(--darkOne);;
+  color: var(--darkOne);
   margin: 0.8rem 0 1rem;
 }
 
@@ -171,7 +154,7 @@ header .container {
 
 .person {
   width: 100%;
-  transform: translate(15%, 25px);
+  transform: translate(10%, 20px);
 }
 
 .toggle-btn {
@@ -235,5 +218,100 @@ header .container {
 
   100% {
     clip-path: circle(150% at 0 0);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .big-title {
+    font-size: 1.5rem;
+  }
+
+  .text {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 830px) {
+
+  .showcase-area .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .small-title {
+    font-size: 1.2rem;
+  }
+
+  .big-title {
+    font-size: 1.35rem;
+    line-height: 2.8rem;
+  }
+
+  .text {
+    font-size: 1rem;
+  }
+
+  .left {
+    width: 60%;
+    float: left;
+  }
+
+  .right {
+    width: 40%;
+    float: right;
+  }
+
+  .person {
+    width: 100%;
+    transform: translate(10%, -1rem);
+  }
+
+  .shape {
+    width: 450px;
+    bottom: -150px;
+    left: -120px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .person {
+    display: none;
+  }
+
+  .showcase-area .container {
+    grid-template-columns: 1fr;
+    display: flex;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .right {
+    width: 0%;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .big-title {
+    font-size: 1.2rem;
+  }
+
+  .text {
+    margin: 1rem 0 1rem;
+  }
+
+  .showcase-area .get-started-btn {
+    font-size: 0.9rem;
+    width: 8rem;
+    height: 2.5rem;
+  }
+
+  .shape {
+    width: 400px;
   }
 }
