@@ -6,16 +6,8 @@
   box-sizing: border-box;
 }
 
-html {
-  overflow: hidden;
-}
-
 body {
   cursor: context-menu;
-}
-
-img {
-  width: 100%;
 }
 
 a {
@@ -24,36 +16,56 @@ a {
 
 .container {
   background-color: #ffffff;
-
+  margin: 0 auto;
+  position: relative;
   height: 100vh;
   width: 100%;
-  display: flex;
-  flex-direction: row;
+  max-width: 96rem;
+  overflow: hidden;
 
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
-}
-
-.right {
-  height: 100%;
-  width: 50%;
-  background: url("./signup_side_image.png");
-  background-size: cover;
+  justify-content: center;
+  /* display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; */
 }
 
 .left {
-  margin-left: 15rem;
+  /* width: 50%; */
+  margin-left: 14rem;
   display: flex;
   flex-direction: column;
 }
 
+.right {
+  width: 50%;
+}
+
+.right .side-img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
 .text1 {
+  position: relative;
   font-family: Inter, sans-serif;
   font-size: 1.5rem;
   font-weight: 500;
 }
 
 .text2 {
+  position: relative;
   text-align: justify;
   width: 20rem;
   font-family: Inter;
@@ -62,10 +74,12 @@ a {
 }
 
 .row3 {
+  position: relative;
   margin: 0 0 1rem;
 }
 
 .google-btn {
+  position: relative;
   display: flex;
   flex-direction: row;
 
@@ -106,17 +120,17 @@ a {
   position: relative;
   margin-top: 8.5px;
   margin-left: 8.5px;
-  width: 27px;
-  height: 27px;
+  width: 1.6875rem;
+  height: 1.6875rem;
 }
 
 .btn-text {
   margin-left: 1.2rem;
 
-  line-height: 48px;
+  line-height: 3rem;
   vertical-align: top;
 
-  font-size: 14px;
+  font-size: 0.875rem;
   letter-spacing: 0.45px;
 
   text-transform: uppercase;
@@ -124,9 +138,10 @@ a {
 }
 
 .partition {
+  position: relative;
   margin: 0rem 0 2rem;
   font-family: Inter;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: rgba(0, 0, 0, 0.3);
   text-align: center;
 }
@@ -146,6 +161,7 @@ a {
 }
 
 .row5 {
+  position: relative;
   width: 17.5rem;
   font-family: Inter;
   transition: 300ms;
@@ -154,6 +170,7 @@ a {
 .email,
 .name,
 .password {
+  position: relative;
   box-sizing: border-box;
   box-shadow: none;
 
@@ -161,7 +178,7 @@ a {
   border-radius: 3px;
 
   width: 100%;
-  height: 45px;
+  height: 2.8125rem;
   padding-top: 10px;
   padding-left: 5px;
 
@@ -288,8 +305,143 @@ textarea {
 }
 
 .row6 {
+  position: relative;
   margin: 1rem 0 0;
   font-family: Inter, sans-serif;
   font-weight: 400;
   font-size: 0.8rem;
+}
+
+
+/* @media screen and (max-width:1245px) {
+  .left {
+    margin-left: 8rem;
+  }
+} */
+
+@media screen and (max-width: 1044px) {
+
+  .left {
+    margin-left: 5rem;
+  }
+}
+
+@media screen and (max-width: 940px) {
+
+  .right {
+    display: none;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left {
+    margin: 0;  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width:470px) {
+
+  .container {
+    justify-content: center;
+  }
+
+  .left {
+    margin: 0;
+  }
+
+  .google-btn {
+    width: 16rem;
+    height: 2.8rem;
+  }
+
+  .btn-text {
+    font-size: 0.8rem;
+    line-height: 2.9rem;
+  }
+
+  .google-icon-wrapper {
+    width: 2.6rem;
+    height: 2.55rem;
+  }
+
+  .google-icon {
+    height: 1.4875rem;
+    width: 1.4875rem;
+  }
+
+  .row5,
+  .partition {
+    width: 16rem;
+  }
+
+  .email,
+  .password,
+  .name {
+    height: 2.6rem;
+  }
+
+  .fa-eye {
+    left: 13.5rem;
+  }
+}
+
+@media screen and (max-width: 340px) {
+
+  .row1,
+  .row2,
+  .row3,
+  .row5,
+  .row6,
+  .partition {
+    margin-left: 1rem;
+  }
+
+  .partition,
+  .email,
+  .name,
+  .password,
+  .google-btn  {
+    width: 15rem;
+  }
+  
+  .text1 {
+    font-size: 1.4rem;
+  }
+
+  .text2 {
+    width: 100%;
+    max-width: 90%;
+    font-size: 0.8rem;
+  }
+
+  .btn-text {
+    margin-left: 0.9rem;
+    line-height: 2.75rem;
+    font-size: 0.73rem;
+  }
+
+  .google-icon {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .google-icon-wrapper {
+    width: 2.4rem;
+    height: 2.35rem;
+  }
+
+  .fa-eye {
+    left: 12.5rem;
+  }
+
+  .row5 input[type="submit"] {
+    width: 15rem;
+  }
 }
