@@ -89,7 +89,7 @@
 
         <div class="add-comment-area">
           <form action="/comments/<%= post._id %>" method="POST">
-            <input name="commentBody" class="comment-input" placeholder="Add Comment" />
+            <input type="text" id="myCommentInput" name="commentBody" class="comment-input" placeholder="Add Comment" />
             <input class="comment-btn" type="submit" value="Send" />
           </form>
         </div>

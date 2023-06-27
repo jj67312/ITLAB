@@ -1,98 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/profile.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Profile page</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/stylesheets/profile.css" />
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <title>Profile page</title>
-</head>
+  <body>
+    <div class="final-wrapper">
+      <div class="container">
+        <div class="sidebar-column">
+          <div class="logo">bit<font style="color: #4285f4">bot.</font></div>
 
-<body>
-  <div class="final-wrapper">
-    <div class="container">
-      <div class="sidebar-column">
-        <div class="logo">bit<font style="color: #4285f4">bot.</font>
-        </div>
-        <ul class="links">
-          <li>
-            <a href="/forums"><i class="bx bx-home icon"></i><span class="text">Forums</span></a>
-          </li>
-          <li>
-            <a href="/news"><i class="bx bx-news icon"></i><span class="text">News</span></a>
-          </li>
-          <li>
-            <a href="/market"><i class="bx bx-store icon"></i><span class="text">Products</span></a>
-          </li>
-          <li>
-            <% if(currentUser) {%>
-            <a href="/logout"
-              ><i class="bx bx-log-out icon"></i
-              ><span class="text">Log Out</span></a
-            >
-            <% } else{%>
-            <a href="/login">
-              <i class="bx bx-log-in icon"></i
-              ><span class="text">Log In</span></a>
-            <% } %>
-          </li>
-        </ul>
-      </div>
-      <div class="main-column">
-        <div class="header-div">
-          <p class="name"><%= user.username %> </p>
-          <!-- <button id="follow-btn" class="follow-btn"></button> -->
-        </div>
-        <div class="follow-info">
-          <ul>
-            <li><b><%= userPosts.length %> </b> Posts</li>
-            <li><b><%= userComments.length %> </b> Comments</li>
-            <!-- <li><b>200</b> Followers</li>
-            <li><b>69</b> Following</li> -->
-          </ul>
-        </div>
-        <div class="partition"></div>
-
-        <div class="links">
-          <ul>
-            <li class="posts_toggle">Posts</li>
-            <li class="comments_toggle">Comments</li>
-          </ul>
-        </div>
-
-
-        <div id="Posts" class="Posts">
-          <ul>
-            <% for(let post of userPosts) {%>
+          <ul class="links">
             <li>
-              <a href="/forums/<%= post._id %>">
-                <h3><%= post.title %> </h3>
-              </a>
-              <p>
-                <%= post.description %>
-              </p>
+              <a href="/forums"
+                ><i class="bx bx-home icon"></i
+                ><span class="text">Forums</span></a
+              >
             </li>
-            <% } %>
-
+            <li>
+              <a href="/news"
+                ><i class="bx bx-news icon"></i
+                ><span class="text">News</span></a
+              >
+            </li>
+            <li>
+              <a href="/market"
+                ><i class="bx bx-store icon"></i
+                ><span class="text">Products</span></a
+              >
+            </li>
+            <li>
+              <% if(currentUser) {%>
+              <a href="/logout"
+                ><i class="bx bx-log-out icon"></i
+                ><span class="text">Log Out</span></a
+              >
+              <% } else{%>
+              <a href="/login">
+                <i class="bx bx-log-in icon"></i
+                ><span class="text">Log In</span></a
+              >
+              <% } %>
+            </li>
           </ul>
         </div>
-        <div id="Comments" class="Comments">
-          <ul>
-            <% for(let comment of userComments) {%>
+
+        <div id="nav" class="hamMenu">
+          <nav>
+          <ul class="hamLinks">
             <li>
-              <p>
-                You commented "<%= comment.commentBody %>" on this <a href="/forums/<%= comment.postId %>">post</a>
-              </p>
+              <a href="/forums"
+                ><i class="bx bx-home icon"></i
+                ><span class="text">Forums</span></a
+              >
             </li>
-            <% } %>
+            <li>
+              <a href="/news"
+                ><i class="bx bx-news icon"></i
+                ><span class="text">News</span></a
+              >
+            </li>
+            <li>
+              <a href="/market"
+                ><i class="bx bx-store icon"></i
+                ><span class="text">Products</span></a
+              >
+            </li>
+            <li>
+              <% if(currentUser) {%>
+              <a href="/logout"
+                ><i class="bx bx-log-out icon"></i
+                ><span class="text">Log Out</span></a
+              >
+              <% } else{%>
+              <a href="/login">
+                <i class="bx bx-log-in icon"></i
+                ><span class="text">Log In</span></a
+              >
+              <% } %>
+            </li>
           </ul>
+          </nav>
+        </div>
+
+        <div id="main-c" class="main-column">
+          <div id="menu" onClick="hamToogle()">
+            <div id="bar1" class="bar"></div>
+            <div id="bar2" class="bar"></div>
+            <div id="bar3" class="bar"></div>
+          </div>
+
+          <div class="header-div">
+            <p class="name"><%= user.username %></p>
+          </div>
+
+          <div class="follow-info">
+            <p><b><%= userPosts.length %> </b> Posts</p>
+            <p><b><%= userComments.length %> </b> Comments</p>
+          </div>
+          <div class="partition"></div>
+
+          <div class="links">
+            <ul>
+              <li class="posts_toggle">Posts</li>
+              <li class="comments_toggle">Comments</li>
+            </ul>
+          </div>
+
+          <div id="Posts" class="Posts">
+            <ul>
+              <% for(let post of userPosts) {%>
+              <li>
+                <a href="/forums/<%= post._id %>">
+                  <h3><%= post.title %></h3>
+                </a>
+                <p><%= post.description %></p>
+              </li>
+              <% } %>
+            </ul>
+          </div>
+          <div id="Comments" class="Comments">
+            <ul>
+              <% for(let comment of userComments) {%>
+              <li>
+                <p>
+                  You commented "<%= comment.commentBody %>" on this
+                  <a class="post-link" href="/forums/<%= comment.postId %>"
+                    >post</a
+                  >
+                </p>
+              </li>
+              <% } %>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <script src="/javascripts/profile.js"></script>
-</body>
+    <script>
+      function hamToogle() {
+        document.getElementById("menu").classList.toggle("icon");
+        document.querySelector(".hamMenu").classList.toggle('hamChange');
+      }
 
+    </script>
+    <script src="/javascripts/profile.js"></script>
+  </body>
 </html>
