@@ -20,7 +20,7 @@ modalCloseBtn.addEventListener("click", () => {
 });
 
 const api_key = `b6648609e6dc43d8b134e6300e80c212`;
-var url = `https://newsapi.org/v2/top-headlines?language=en&category=technology&apiKey=b6648609e6dc43d8b134e6300e80c212`;
+var url = `https://newsapi.org/v2/top-headlines?q=tech&language=en&category=technology&apiKey=b6648609e6dc43d8b134e6300e80c212`;
 
 function getNews() {
   fetch(url)

@@ -1,5 +1,5 @@
 const api_key = `b6648609e6dc43d8b134e6300e80c212`;
-var url = `https://newsapi.org/v2/top-headlines?country=us&language=en&category=technology&apikey=${api_key} `;
+var url = `https://newsapi.org/v2/top-headlines?country=in&language=en&category=technology&apikey=${api_key} `;
 
 function getNews() {
   fetch(url)
