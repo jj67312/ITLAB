@@ -1,0 +1,154 @@
+#menu {
+  width: 35px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 100;
+  margin: 1rem 0 0 1rem;
+  display: none;
+}
+
+.bar {
+  height: 5px;
+  width: 100%;
+  background-color: black;
+  display: block;
+  border-radius: 5px;
+  transition: 0.3s ease;
+}
+
+#bar1 {
+  transform: translateY(-4px);
+}
+
+#bar3 {
+  transform: translateY(4px);
+}
+
+.icon .bar {
+  background-color: #fff;
+}
+
+.icon #bar1 {
+  transform: translateY(4px) rotate(-45deg);
+}
+
+.icon #bar3 {
+  transform: translateY(-6px) rotate(45deg);
+}
+
+.icon #bar2 {
+  opacity: 0;
+}
+
+.hamMenu {
+  visibility: hidden;
+  position: fixed;
+  left: -500px;
+  width: 50%;
+  height: 100vh;
+  background-color: #4285f4;
+  transition: 0.5s;
+  z-index: 100;
+}
+
+nav {
+  position: absolute;
+  top: 10rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 906px) {
+  .main-column {
+    width: 100%;
+  }
+
+  #menu {
+    align-self: flex-start;
+    display: block;
+  }
+
+  .Posts li a {
+    font-size: 1rem;
+  }
+
+  .main-column .partition {
+    width: 40rem;
+  }
+
+  .sidebar-column {
+    width: 0;
+  }
+
+  .sidebar-column .links,
+  .sidebar-column .logo {
+    display: none;
+  }
+
+  .hamMenu.hamChange {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .main-column .partition {
+    width: 26rem;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .main-column .partition {
+    width: 22rem;
+  }
+  .main-column .header-div .name {
+    font-size: 2.7rem;
+  }
+
+  .main-column .follow-info p {
+    font-size: 1.1rem;
+  }
+
+  .main-column .follow-info p:nth-child(2) {
+    margin: 0 0 0 5rem;
+  }
+
+  .main-column .links li:nth-child(2) {
+    margin-left: 6rem;
+  }
+
+  .hamMenu .hamLinks .icon {
+    font-size: 1.3rem;
+    width: 2.8rem;
+  }
+
+  .hamMenu .hamLinks .text {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (width: 820px) and (height: 1180px) {
+  #menu {
+    margin-top: -5rem;
+  }
+
+  .main-column .Posts,
+  .main-column .Comments {
+    height: 60vh;
+  }
+}
+
+@media screen and (width: 768px) and (height: 1024px) {
+  #menu {
+    margin-top: -1rem;
+  }
+
+  .main-column .Posts,
+  .main-column .Comments {
+    height: 60vh;
+  }
+}
