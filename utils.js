@@ -17,8 +17,10 @@ function validPassword(password, hash, salt) {
 
 const axios = require('axios')
 const cheerio = require('cheerio')
+const dotenv = require('dotenv');
+dotenv.config();  
 
-const predecessor = "https://www.91mobiles.com"
+const predecessor = process.env.PRODUCTS_URL;
 
 async function crawlData(url){
     const crawlUrls = []

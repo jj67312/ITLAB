@@ -2,6 +2,7 @@ const User = require('../models/User');
 const commentModel = require('../models/Comment');
 const postModel = require('../models/Post');
 const axios = require('axios');
+const configurations = require('../configuration');
 
 module.exports.getAllPosts = async (req, res) => {
   const allPosts = await postModel.find({}).populate('author');
@@ -30,7 +31,7 @@ module.exports.getAllPosts = async (req, res) => {
     } else {
       post.isLikedByUser = false;
     }
-    
+
     await post.save();
   }
 
@@ -112,13 +113,10 @@ module.exports.getSinglePost = async (req, res) => {
     await comment.save();
   }
 
-  const api_key = `b6648609e6dc43d8b134e6300e80c212`;
-  var url = `https://newsapi.org/v2/top-headlines?language=en&category=technology&apiKey=b6648609e6dc43d8b134e6300e80c212`;
-
   const getData = async () => {
     const options = {
       method: 'GET',
-      url: `https://newsapi.org/v2/top-headlines?language=en&category=technology&apiKey=b6648609e6dc43d8b134e6300e80c212`,
+      url: `${configurations.NEWS_URL}&apiKey=${configurations.NEWS_API_KEY}`,
       headers: {
         'Content-Type': 'application/json',
       },
