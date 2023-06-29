@@ -20,10 +20,8 @@ const cheerio = require('cheerio')
 
 const predecessor = "https://www.91mobiles.com"
 
-const crawlUrls = []
-const finalData =[]
-
 async function crawlData(url){
+    const crawlUrls = []
     const resp = await axios(url)
     const html = await resp.data
     const $ = cheerio.load(html)
@@ -62,8 +60,8 @@ async function scrapeData(url, imageTag, titleTag, priceTag, linkTag){
     if(data.price === undefined){
         data.price = 'Not Launched'
     }    
-    finalData.push(data) 
-    return finalData
+    //finalData.push(data) 
+    return data
 }
 
 module.exports.crawlData = crawlData

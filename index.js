@@ -172,22 +172,73 @@ const webCrawler = require('./utils');
 
 urlTag = '.btn_prcList_sn flt-rt target_link_external impressions_gts';
 app.get('/market', isAuth, async (req, res) => {
-  let ans, ans2;
-  let finalData = [];
   const predecessor = 'https://www.91mobiles.com';
-  const url2 = 'https://www.91mobiles.com/top-10-mobiles-in-india';
-  ans = await webCrawler.crawlData(url2);
+  
+  // mobiles
+  let mobileUrls;
+  let mobileData = [];
+  const mobile_url = 'https://www.91mobiles.com/top-10-mobiles-in-india';
+  mobileUrls = await webCrawler.crawlData(mobile_url);
   for (let j = 0; j < 12; j++) {
-    ans2 = await webCrawler.scrapeData(
-      predecessor + ans[j],
+    mobileItem = await webCrawler.scrapeData(
+      predecessor + mobileUrls[j],
       '.overview_lrg_pic_img',
       '.h1_pro_head',
       '.store_prc',
       '.btn_prcList_sn.flt-rt.target_link_external.impressions_gts'
     );
-    finalData.push(ans2);
+    mobileData.push(mobileItem);
+  }  
+
+  //laptops
+  let laptopUrls;
+  let laptopData=[];
+  const laptop_url = 'https://www.91mobiles.com/best-laptops-in-india';
+  laptopUrls = await webCrawler.crawlData(laptop_url);
+  for (let j = 0; j < 12; j++) {
+    laptopItem = await webCrawler.scrapeData(
+      predecessor + laptopUrls[j],
+      '.overview_lrg_pic_img',
+      '.h1_pro_head',
+      '.store_prc',
+      '.btn_prcList_sn.flt-rt.target_link_external.impressions_gts'
+    );
+    laptopData.push(laptopItem);
   }
-  res.render('market.ejs', { finalData });
+
+  //tablets
+  let tabletUrls;
+  let tabletData=[];
+  const tablet_url = 'https://www.91mobiles.com/best-tablets-in-india';
+  tabletUrls = await webCrawler.crawlData(tablet_url);
+  for (let j = 0; j < 10; j++) {
+    tabletItem = await webCrawler.scrapeData(
+      predecessor + tabletUrls[j],
+      '.overview_lrg_pic_img',
+      '.h1_pro_head',
+      '.store_prc',
+      '.btn_prcList_sn.flt-rt.target_link_external.impressions_gts'
+    );
+    tabletData.push(tabletItem);
+  }
+
+  //cameras
+  let cameraUrls;
+  let cameraData=[];
+  const camera_url = 'https://www.91mobiles.com/top-10-cameras-india';
+  cameraUrls = await webCrawler.crawlData(camera_url);
+  for (let j = 0; j < 12; j++) {
+    cameraItem = await webCrawler.scrapeData(
+      predecessor + cameraUrls[j],
+      '.overview_lrg_pic_img',
+      '.h1_pro_head',
+      '.store_prc',
+      '.btn_prcList_sn.flt-rt.target_link_external.impressions_gts'
+    );
+    cameraData.push(cameraItem);
+  }
+
+  res.render('market.ejs', { mobileData, laptopData, tabletData, cameraData });
 });
 
 app.get('/news', isAuth, async (req, res) => {
