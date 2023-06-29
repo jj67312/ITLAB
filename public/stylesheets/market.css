@@ -148,6 +148,11 @@ a {
   border: 1px solid #4285f4;
 }
 
+@media screen and (max-width: 906px) {
+  .main-column {
+    width: 100%;
+  }
+}
 
 @media screen and (max-width: 1024px) {
   

@@ -185,57 +185,69 @@ a {
 }
 
 @media screen and (max-width: 1245px) {
-  .logo {
-    font-size: 2.3rem;
-  }
-
-  .sidebar-column .icon {
-    font-size: 1.5rem;
-    width: 3rem;
-  }
-
-  .sidebar-column .text {
-    font-size: 1.4rem;
-  }
-
-  .sidebar-column .links li {
-    height: 2.4rem;
-    margin-top: 1.35rem;
-  }
-
-  .sidebar-column li a {
-    padding-left: 0.8rem;
-  }
-
   .main-column .partition {
     width: 45rem;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  .logo {
-    font-size: 2.2rem;
-  }
-
-  .sidebar-column .icon {
-    font-size: 1.4rem;
-    width: 2.9rem;
-  }
-
-  .sidebar-column .text {
-    font-size: 1.3rem;
-  }
-
-  .sidebar-column .links li {
-    height: 2.3rem;
-    margin-top: 1.35rem;
-  }
-
-  .sidebar-column li a {
-    padding-left: 0.6rem;
-  }
 
   .main-column .partition {
     width: 42rem;
+  }
+}
+
+@media screen and (max-width: 906px) {
+  .main-column {
+    width: 100%;
+  }
+
+  .Posts li a {
+    font-size: 1rem;
+  }
+
+  .main-column .partition {
+    width: 40rem;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .main-column .partition {
+    width: 26rem;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .main-column .partition {
+    width: 22rem;
+  }
+  .main-column .header-div .name {
+    font-size: 2.7rem;
+  }
+
+  .main-column .follow-info p {
+    font-size: 1.1rem;
+  }
+
+  .main-column .follow-info p:nth-child(2) {
+    margin: 0 0 0 5rem;
+  }
+
+  .main-column .links li:nth-child(2) {
+    margin-left: 6rem;
+  }
+}
+
+@media screen and (width: 820px) and (height: 1180px) {
+  .main-column .Posts,
+  .main-column .Comments {
+    height: 60vh;
+  }
+}
+
+@media screen and (width: 768px) and (height: 1024px) {
+  .main-column .Posts,
+  .main-column .Comments {
+    height: 60vh;
   }
 }
