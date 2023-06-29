@@ -30,10 +30,7 @@
           </li>
           <li>
             <% if(currentUser) {%>
-            <a href="/logout"
-              ><i class="bx bx-log-out icon"></i
-              ><span class="text">Log Out</span></a
-            >
+            <a href="/logout"><i class="bx bx-log-out icon"></i><span class="text">Log Out</span></a>
             <% } else{%>
             <a href="/login">
               <i class="bx bx-log-in icon"></i>
@@ -45,51 +42,25 @@
       <div id="newsFeed" class="main-column">
         <p class="news-container-heading">Breaking News</p>
 
-        <!-- <div id="slide">
-            <div id="news-content">
-              <p id="news-heading">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
-                maxime, esse a suscipit sed libero sunt magnam saepe quod
-                quibusdam.
-              </p>
-              <div id="headline-footer">
-                <p id="author">By Prabhat Mattoo</p>
-                <p id="date-time">Time</p>
-              </div>
-              <p id="main-content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-                modi iure, maiores obcaecati itaque debitis dolor, minus quis
-                impedit harum tempora consequatur corporis quia quo doloremque
-                perferendis cum doloribus, hic sunt animi quibusdam amet enim a.
-                Culpa quo facilis sed iste tempora adipisci alias, nihil facere
-                mollitia, aspernatur perferendis quam ipsam est, quia
-                repudiandae laboriosam ab commodi doloremque illo minima eaque
-                similique quidem vel! Veniam expedita laudantium odio voluptatum
-                quos corporis sapiente debitis doloribus eveniet sed provident
-                est ex, iusto non, eius voluptates eaque facilis, perspiciatis
-                reiciendis obcaecati placeat molestiae quae officia suscipit?
-                Nisi necessitatibus aliquam atque animi, dolore rem ullam
-                voluptatibus excepturi porro beatae et ad fugiat, reiciendis
-                quae maxime expedita odio! Veritatis placeat, ad dignissimos,
-                labore maxime aliquid libero accusantium, ratione quo in
-                quibusdam dolorem odio perferendis suscipit quas nemo unde ut
-                quos ullam? Ad eos quae iure dignissimos! Facilis cum, expedita
-                voluptatum fugiat illum dolores pariatur repellat!
-              </p>
-              <a id="read-more" href="#">Read More</a>
+        <% for(let news of newsData) {%>
+        <div id="slide">
+          <img src="<%=news.urlToImage %>" id="news-image" alt="">
+          <div class="news-content">
+            <p id='news-heading'><%= news.title %></p>
+            <div id="headline-footer">
+              <p id="author"> <%= news.author %> </p>
+              <p id="date-time"> <%= news.publishedAt %> </p>
             </div>
-            <img
-              id="news-image"
-              src="https://picsum.photos/id/239/300/330"
-              alt=""
-            />
-          </div> -->
-
+            <p id="main-content"><%= news.description %></p>
+            <a id="read-more" href="<%= news.url %>">Read More</a>
+          </div>
+        </div>
+        <%}%>
 
       </div>
     </div>
   </div>
-  <script src="javascripts/news.js"></script>
+  <!-- <script src="javascripts/news.js"></script> -->
 </body>
 
 </html>

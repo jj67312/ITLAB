@@ -245,7 +245,26 @@ app.get('/market', isAuth, async (req, res) => {
 });
 
 app.get('/news', isAuth, async (req, res) => {
-  res.render('news.ejs');
+  const getData = async () => {
+    const options = {
+      method: 'GET',
+      url: `${configurations.NEWS_URL}&apiKey=${configurations.NEWS_API_KEY}`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const result = await axios(options);
+      return result.data.articles;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const newsData = await getData();
+  // console.log(newsData)
+  res.render('news.ejs', {newsData});
 });
 
 app.listen(3000, (req, res) => {

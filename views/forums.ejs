@@ -144,6 +144,12 @@
             <a href="/news">View All</a>
           </div>
           <div id="newsFeed" class="news-from-api">
+            <% for(let news of newsData) {%>
+              <div id="news-data">
+                <img src="<%=news.urlToImage %>" id="news-image" alt="">
+                <p id='news-headline'><%= news.title %></p>
+              </div>
+              <%}%>
           </div>
         </div>
       </div>

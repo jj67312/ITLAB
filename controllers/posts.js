@@ -50,7 +50,27 @@ module.exports.getAllPosts = async (req, res) => {
   for (let comment of userComments) {
     comment.populate('postId');
   }
-  res.render('forums.ejs', { allPosts, userPosts, userComments });
+
+  const getData = async () => {
+    const options = {
+      method: 'GET',
+      url: `${configurations.NEWS_URL}&apiKey=${configurations.NEWS_API_KEY}`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const result = await axios(options);
+      return result.data.articles;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const newsData = await getData();
+
+  res.render('forums.ejs', { allPosts, userPosts, userComments, newsData });
 };
 
 module.exports.renderNewForm = async (req, res) => {
