@@ -28,7 +28,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --timeout 100000 --exit",
-    "start": "nodemon index.js"
+    "build": "npm i",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
