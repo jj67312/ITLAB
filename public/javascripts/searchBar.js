@@ -103,7 +103,7 @@ function autocomplete(inp, arr) {
 
 
 async function getTitles() {
-  const url = 'http://localhost:3000/allTitles';
+  const url = 'https://bitbot-pxnf.onrender.com/allTitles';
   const response = await (await fetch(url)).json();
   return response.campTitles;
 }

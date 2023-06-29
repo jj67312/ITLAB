@@ -2,12 +2,13 @@ const express = require('express');
 const app = express();
 
 const passport = require('passport');
-
 const genPassword = require('./utils').genPassword;
 const validator = require('validator');
 
 const isAuth = require('./authMiddleware').isAuth;
 const alreadyLoggedIn = require('./authMiddleware').alreadyLoggedIn;
+const dotenv = require('dotenv');
+const configurations = require('./configuration');
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -21,12 +22,12 @@ const flash = require('connect-flash');
 const MongoStore = require('connect-mongo');
 const sessionStore = new MongoStore({
   collectionName: 'sessions',
-  mongoUrl: 'mongodb://127.0.0.1:27017/bitbotDB',
+  mongoUrl: configurations.DB_URL,
 });
 
 app.use(
   session({
-    secret: 'jvdbvjdiv',
+    secret: configurations.SECRET,
     resave: false,
     saveUninitialized: true,
     store: sessionStore,
@@ -72,70 +73,75 @@ app.use('/', userRoutes);
 
 // login and register routes --------------------
 
-app.post('/login', alreadyLoggedIn, (req,res,next)=>{
-  passport.authenticate('local',{
-    successRedirect:'/forums',
-    failureRedirect:'/login',
-    failureFlash:true
-  })(req,res,next);
-})
+app.post('/login', alreadyLoggedIn, (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/forums',
+    failureRedirect: '/login',
+    failureFlash: true,
+  })(req, res, next);
+});
 
 app.post('/register', alreadyLoggedIn, (req, res, next) => {
-    const { username, password, email } = req.body;
-    
-    if (!username || !password || !email) {
-      req.flash('error_msg', 'Enter all fields');
-      return res.redirect('/register');
-    }
+  const { username, password, email } = req.body;
 
-    if (!validator.isEmail(email)) {
-      req.flash('error_msg', 'Incorrect email format');
-      return res.redirect('/register');
-    }
-
-    if (!validator.isStrongPassword(req.body.password)) {
-      req.flash('error_msg', 'Enter a strong password with numbers, symbols, small and capital letters.');
-      return res.redirect('/register');
-    }
-
-    User.findOne({ username: req.body.username })
-      .then((user) => {
-        if (user) {
-          req.flash('error_msg', 'User already exists');
-          res.redirect('/register');
-        }
-        else {
-          const saltHash = genPassword(req.body.password);
-
-          const salt = saltHash.salt;
-          const hash = saltHash.hash;
-
-          const newUser = new User({
-            username: req.body.username,
-            email: req.body.email,
-            googleId: null,
-            salt: salt,
-            hashedPassword: hash,
-          });
-
-          newUser.save();
-          res.redirect('/login');
-        }
-      })
-      .catch((err) => {
-        next(err);
-      });
+  if (!username || !password || !email) {
+    req.flash('error_msg', 'Enter all fields');
+    return res.redirect('/register');
   }
-);
 
-app.get('/google',passport.authenticate('google', { scope: ['profile', 'email'] }));
+  if (!validator.isEmail(email)) {
+    req.flash('error_msg', 'Incorrect email format');
+    return res.redirect('/register');
+  }
+
+  if (!validator.isStrongPassword(req.body.password)) {
+    req.flash(
+      'error_msg',
+      'Enter a strong password with numbers, symbols, small and capital letters.'
+    );
+    return res.redirect('/register');
+  }
+
+  User.findOne({ username: req.body.username })
+    .then((user) => {
+      if (user) {
+        req.flash('error_msg', 'User already exists');
+        res.redirect('/register');
+      } else {
+        const saltHash = genPassword(req.body.password);
+
+        const salt = saltHash.salt;
+        const hash = saltHash.hash;
+
+        const newUser = new User({
+          username: req.body.username,
+          email: req.body.email,
+          googleId: null,
+          salt: salt,
+          hashedPassword: hash,
+        });
+
+        newUser.save();
+        res.redirect('/login');
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+app.get(
+  '/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
 
 app.get(
   '/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/login',
     successRedirect: '/forums',
-  }));
+  })
+);
 
 app.get('/logout', (req, res, next) => {
   req.logout((err) => {
@@ -165,19 +171,16 @@ app.post('/allTitles', async (req, res) => {
 // web scraping
 const axios = require('axios');
 const cheerio = require('cheerio');
-
-//const url ='https://www.91mobiles.com/' + brand + '-mobile-price-list-in-india';
-
 const webCrawler = require('./utils');
 
 urlTag = '.btn_prcList_sn flt-rt target_link_external impressions_gts';
 app.get('/market', isAuth, async (req, res) => {
-  const predecessor = 'https://www.91mobiles.com';
-  
+  const predecessor = configurations.PRODUCTS_URL;
+
   // mobiles
   let mobileUrls;
   let mobileData = [];
-  const mobile_url = 'https://www.91mobiles.com/top-10-mobiles-in-india';
+  const mobile_url = configurations.MOBILE_URL;
   mobileUrls = await webCrawler.crawlData(mobile_url);
   for (let j = 0; j < 12; j++) {
     mobileItem = await webCrawler.scrapeData(
@@ -188,12 +191,12 @@ app.get('/market', isAuth, async (req, res) => {
       '.btn_prcList_sn.flt-rt.target_link_external.impressions_gts'
     );
     mobileData.push(mobileItem);
-  }  
+  }
 
   //laptops
   let laptopUrls;
-  let laptopData=[];
-  const laptop_url = 'https://www.91mobiles.com/best-laptops-in-india';
+  let laptopData = [];
+  const laptop_url = configurations.LAPTOP_URL;
   laptopUrls = await webCrawler.crawlData(laptop_url);
   for (let j = 0; j < 12; j++) {
     laptopItem = await webCrawler.scrapeData(
@@ -208,8 +211,8 @@ app.get('/market', isAuth, async (req, res) => {
 
   //tablets
   let tabletUrls;
-  let tabletData=[];
-  const tablet_url = 'https://www.91mobiles.com/best-tablets-in-india';
+  let tabletData = [];
+  const tablet_url = configurations.TABLET_URL;
   tabletUrls = await webCrawler.crawlData(tablet_url);
   for (let j = 0; j < 10; j++) {
     tabletItem = await webCrawler.scrapeData(
@@ -224,8 +227,8 @@ app.get('/market', isAuth, async (req, res) => {
 
   //cameras
   let cameraUrls;
-  let cameraData=[];
-  const camera_url = 'https://www.91mobiles.com/top-10-cameras-india';
+  let cameraData = [];
+  const camera_url = configurations.CAMERA_URL;
   cameraUrls = await webCrawler.crawlData(camera_url);
   for (let j = 0; j < 12; j++) {
     cameraItem = await webCrawler.scrapeData(
@@ -242,7 +245,26 @@ app.get('/market', isAuth, async (req, res) => {
 });
 
 app.get('/news', isAuth, async (req, res) => {
-  res.render('news.ejs');
+  const getData = async () => {
+    const options = {
+      method: 'GET',
+      url: `${configurations.NEWS_URL}&apiKey=${configurations.NEWS_API_KEY}`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const result = await axios(options);
+      return result.data.articles;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const newsData = await getData();
+  // console.log(newsData)
+  res.render('news.ejs', {newsData});
 });
 
 app.listen(3000, (req, res) => {

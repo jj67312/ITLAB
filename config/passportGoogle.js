@@ -1,10 +1,10 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
+const dotenv = require('dotenv');
 const User = require('../models/User');
+dotenv.config();
 
-const GOOGLE_CLIENT_ID =
-  '19799591403-4ro9pj02fkakbmd6mqarq8h1903janrt.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = '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';
+const {GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET} = require('../configuration');
 
 module.exports = (passport) => {
   passport.use(
@@ -12,7 +12,7 @@ module.exports = (passport) => {
       {
         clientID: GOOGLE_CLIENT_ID,
         clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: 'http://localhost:3000/google/callback',
+        callbackURL: 'https://bitbot-pxnf.onrender.com/google/callback',
       },
       function (accessToken, refreshToken, profile, done) {
         User.findOne({ email: profile.emails[0].value }).then((user) => {
