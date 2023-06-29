@@ -8,6 +8,8 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/stylesheets/market.css" />
   <link rel="stylesheet" href="/stylesheets/sidebar.css">
+  <link rel="stylesheet" href="/stylesheets/dropdown.css">
+  <link rel="stylesheet" href="/stylesheets/ham.css">
   <title>Forums</title>
 </head>
 
@@ -38,24 +40,74 @@
           </li>
         </ul>
       </div>
-      <div class="main-column">
-        <p class="heading1">Browse through your favourite products</p>
-        <p class="heading2">Assorted products, just for you</p>
 
-        <div class="category-div">
-          <ul class="category-nav">
-            <li><a href="#">Category 1</a></li>
-            <li><a href="#">Category 2</a></li>
-            <li><a href="#">Category 3</a></li>
-            <li><a href="#">Category 4</a></li>
-          </ul>
+      <div id="nav" class="hamMenu">
+        <nav>
+        <ul class="hamLinks">
+          <li>
+            <a href="/forums"
+              ><i class="bx bx-home icon"></i
+              ><span class="text">Forums</span></a
+            >
+          </li>
+          <li>
+            <a href="/news"
+              ><i class="bx bx-news icon"></i
+              ><span class="text">News</span></a
+            >
+          </li>
+          <li>
+            <a href="/market"
+              ><i class="bx bx-store icon"></i
+              ><span class="text">Products</span></a
+            >
+          </li>
+          <li>
+            <% if(currentUser) {%>
+            <a href="/logout"
+              ><i class="bx bx-log-out icon"></i
+              ><span class="text">Log Out</span></a
+            >
+            <% } else{%>
+            <a href="/login">
+              <i class="bx bx-log-in icon"></i
+              ><span class="text">Log In</span></a
+            >
+            <% } %>
+          </li>
+        </ul>
+        </nav>
+      </div>
+      
+      <div class="main-column">
+        <div id="menu" onClick="hamToogle()">
+          <div id="bar1" class="bar"></div>
+          <div id="bar2" class="bar"></div>
+          <div id="bar3" class="bar"></div>
         </div>
+        <div style="display: flex; flex-direction: row; justify-content:space-between; align-items: center">
+          <div style="display: flex; flex-direction: column;">
+            <p class="heading1">Browse through your favourite products</p>
+            <p class="heading2">Assorted products, just for you</p>
+          </div>
+
+          <div class="dropdown">
+            <button class="dropdown-btn" aria-label="menu button" aria-haspopup="menu" aria-expanded="false" aria-controls="dropdown-menu"><span>Category</span><span class="arrow"></span></button>
+            <ul class="dropdown-content" role="menu" id="dropdown-menu">
+              <li style="--delay: 1;"><a href="#">Category 1</a></li>
+              <li style="--delay: 2;"><a href="#">Category 2</a></li>
+              <li style="--delay: 3;"><a href="#">Category 3</a></li>
+              <li style="--delay: 4;"><a href="#">Category 4</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; margin-right:2rem;float: right;"><p class="category-curr">Now Showing: <p style="margin-left: 0.2rem; color: #4285f4;" >Smartphones</p></p></div>
+
 
         <div class="product-grid">
           <% for(let item of finalData){ %>
-          <div class="row">
             <% for(let ele of item) {%>
-            <div class="column">
               <div class="card">
                 <img class="product-item" src=<%= ele.imageUrl %> />
                 <p class="product-name"><%= ele.title %></p>
@@ -66,13 +118,19 @@
                   </button>
                 </a>
               </div>
-            </div>
             <% } %>
-          </div>
           <% } %>
-        </div>
+
       </div>
     </div>
   </div>
+  <script>
+    function hamToogle() {
+      document.getElementById("menu").classList.toggle("icon");
+      document.querySelector(".hamMenu").classList.toggle('hamChange');
+    }
+
+  </script>
+  <script src="javascripts/market.js"></script>
 </body>
 </html>

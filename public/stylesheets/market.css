@@ -11,7 +11,6 @@ body {
   font-weight: normal;
   cursor: context-menu;
   background-color: #f2f2f2;
-  overflow: hidden;
 }
 
 li {
@@ -27,7 +26,8 @@ a {
 
   margin: 0 auto;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 
   background-color: #f2f2f2;
   display: flex;
@@ -44,119 +44,46 @@ a {
   flex-direction: row;
 }
 
-.container:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.sidebar-column,
-.main-column {
-  float: left;
-}
-
-.sidebar-column {
-  position: relative;
-  min-width: 18%;
-  height: 100%;
-  background-color: #28282b;
-
-  display: flex;
-  flex-direction: column;
-}
-
-.logo {
-  margin: 4rem 0 1rem 1rem;
-  font-family: Poppins, sans-serif;
-  font-weight: bolder;
-  font-size: 2.6rem;
-  line-height: 1.2;
-  color: #fff;
-}
-
-.sidebar-column .icon {
-  font-size: 26px;
-  min-width: 50px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sidebar-column .text {
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-size: 24px;
-  opacity: 1;
-}
-
-.sidebar-column .links li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-top: 1.4rem;
-  height: 40px;
-}
-
-.sidebar-column .links li:last-child {
-  margin-top: 22rem;
-}
-.sidebar-column li a {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  width: 92%;
-
-  padding-left: 1rem;
-  background-color: transparent;
-  color: #fff;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-
-.sidebar-column li a:hover {
-  background-color: #fff;
-  color: #28282b;
-}
-
 .main-column {
   position: relative;
-  min-width: 82%;
-
+  width: 82%;
+  margin: 0 auto;
   background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
 }
 
-::-webkit-scrollbar {
-  width: 0;
-  background: transparent;
+.main-column .heading1 {
+  font-size: 30px;
+  margin: 2rem 0 0 1rem;
 }
 
-/* Float four columns side by side */
-.column {
-  float: left;
-  width: 24%;
-  padding: 0 10px;
+.main-column .heading2 {
+  color: #4285f4;
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0 1rem;
 }
 
-/* Remove extra left and right margins, due to padding in columns */
+.main-column .product-grid {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-top: 1rem;
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
+  gap: .5rem .5rem;
+  justify-items: center;
 }
 
 .card {
   height: 21em;
   width: 16em;
-  margin: 1rem 0 0 2rem;
+  max-width: 100%;
+  margin: .5rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
+  padding: 1rem;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -165,18 +92,30 @@ a {
   background-color: #fff;
 }
 
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-    align-content: center;
-  }
+.main-column .column .card {
+  align-content: center;
+}
+
+.product-name {
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.product-item {
+  height: 12em;
+  width: 10.5em;
+  max-width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
 
 .view-product-btn {
-  width: 200px;
-  height: 40px;
+  width: 12.5rem;
+  max-width: 100%;
+  height: 2.5rem;
   font-style: normal;
   font-size: 0.9rem;
 
@@ -191,8 +130,7 @@ a {
 
   transition: all 300ms;
 
-  min-width: 25px;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .view-product-btn:hover {
@@ -201,44 +139,8 @@ a {
   border: 1px solid #4285f4;
 }
 
-.main-column .heading1 {
-  font-size: 30px;
-  margin-top: 1.5em;
-  align-self: center;
+
+@media screen and (max-width: 1024px) {
+  
 }
 
-.main-column .heading2 {
-  color: #4285f4;
-  font-size: 1.2rem;
-  margin-top: 0.5em;
-  margin-bottom: 1.5em;
-  align-self: center;
-}
-
-.main-column .row .column .card {
-  align-content: center;
-}
-
-.main-column .product-grid {
-  scroll-behavior: smooth;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.product-name {
-  margin-bottom: 0.8rem;
-  font-size: 15px;
-}
-
-.product-item {
-  height: 12em;
-  width: 10.5em;
-}
-
-.comment-btn:hover {
-  opacity: 0.9;
-}
-
-.comment-btn:active {
-  opacity: 0.75;
-}
