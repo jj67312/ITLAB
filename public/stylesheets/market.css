@@ -72,7 +72,7 @@ a {
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
-  gap: .5rem .5rem;
+  /* gap: .5rem .5rem; */
   justify-items: center;
 }
 
@@ -80,7 +80,7 @@ a {
   height: 21em;
   width: 16em;
   max-width: 100%;
-  margin: .5rem;
+  margin: .5rem 0 .5rem 0;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 1rem;
 
@@ -89,11 +89,8 @@ a {
   align-items: center;
   justify-content: space-between;
   text-align: center;
-  background-color: #fff;
-}
-
-.main-column .column .card {
   align-content: center;
+  background-color: #fff;
 }
 
 .product-name {
@@ -101,10 +98,22 @@ a {
   font-size: 0.9rem;
 }
 
-.product-item {
+.grid0 .product-item,
+.grid2 .product-item {
   height: 12em;
   width: 10.5em;
   max-width: 100%;
+}
+
+.grid1 .product-item {
+  height: 9.5em;
+  width: 10em;
+  max-width: 100%;
+}
+
+.grid3 .product-item {
+  height: 9rem;
+  width: 10rem;
 }
 
 ::-webkit-scrollbar {

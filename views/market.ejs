@@ -94,10 +94,10 @@
           <div class="dropdown">
             <button class="dropdown-btn" aria-label="menu button" aria-haspopup="menu" aria-expanded="false" aria-controls="dropdown-menu"><span>Category</span><span class="arrow"></span></button>
             <ul class="dropdown-content" role="menu" id="dropdown-menu">
-              <li style="--delay: 1;"><button >Smartphone</button></li>
-              <li style="--delay: 2;"><button >Laptop</button></li>
-              <li style="--delay: 3;"><button >Tablet</button></li>
-              <li style="--delay: 4;"><button >Camera</button></li>
+              <li style="--delay: 1;"><a onclick="showProductGrid(0)" >Smartphone</a></li>
+              <li style="--delay: 2;"><a onclick="showProductGrid(1)" >Laptop</a></li>
+              <li style="--delay: 3;"><a onclick="showProductGrid(2)" >Tablet</a></li>
+              <li style="--delay: 4;"><a onclick="showProductGrid(3)" >Camera</a></li>
             </ul>
           </div>
         </div>
@@ -105,7 +105,7 @@
         <div style="display:flex; justify-content:flex-end; margin-right:2rem;float: right;"><p class="category-curr">Now Showing: <p style="margin-left: 0.2rem; color: #4285f4;" >Smartphones</p></p></div>
 
 
-        <div id='id1' class="product-grid">
+        <div id='id1' class="product-grid grid0">
           <% for(let ele of mobileData){ %>
               <div class="card">
                 <img class="product-item" src=<%= ele.imageUrl %> />
@@ -120,7 +120,7 @@
           <% } %>
         </div>
 
-        <div id='id2' class="product-grid">
+        <div id='id2' class="product-grid grid1">
           <% for(let ele of laptopData){ %>
               <div class="card">
                 <img class="product-item" src=<%= ele.imageUrl %> />
@@ -135,7 +135,7 @@
           <% } %>
         </div>
 
-        <div id='id3' class="product-grid">
+        <div id='id3' class="product-grid grid2">
           <% for(let ele of tabletData){ %>
               <div class="card">
                 <img class="product-item" src=<%= ele.imageUrl %> />
@@ -150,7 +150,7 @@
           <% } %>
         </div>
 
-        <div id='id4' class="product-grid">
+        <div id='id4' class="product-grid grid3">
           <% for(let ele of cameraData){ %>
               <div class="card">
                 <img class="product-item" src=<%= ele.imageUrl %> />
@@ -168,13 +168,6 @@
       </div>
     </div>
   </div>
-  <script>
-    function hamToogle() {
-      document.getElementById("menu").classList.toggle("icon");
-      document.querySelector(".hamMenu").classList.toggle('hamChange');
-    }
-
-  </script>
   <script src="javascripts/market.js"></script>
 </body>
 </html>
