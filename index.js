@@ -268,7 +268,7 @@ app.get('/news', isAuth, async (req, res) => {
 });
 
 app.listen(3000, (req, res) => {
-  console.log('ITLAB');
+  console.log('BitBot running...');
 });
 
 module.exports = app;
