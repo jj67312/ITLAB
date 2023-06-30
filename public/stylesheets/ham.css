@@ -79,20 +79,7 @@ nav {
     font-size: 1.3rem;
     width: 2.8rem;
   }
-
   .hamMenu .hamLinks .text {
     font-size: 1.2rem;
-  }
-}
-
-@media screen and (width: 820px) and (height: 1180px) {
-  #menu {
-    margin-top: -5rem;
-  }
-}
-
-@media screen and (width: 768px) and (height: 1024px) {
-  #menu {
-    margin-top: -1rem;
   }
 }

@@ -97,7 +97,7 @@
 .sidebar-column {
     width: 0;
 }
-.sidebar-column.links,.sidebar-column.logo {
+.sidebar-column .links, .sidebar-column .logo {
     display: none;
 }
 }

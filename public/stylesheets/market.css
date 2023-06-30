@@ -1,49 +1,38 @@
-*,
-*::before,
-*::after {
+*,*::before,*::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: Inter, sans-serif;
   font-weight: normal;
   cursor: context-menu;
   background-color: #f2f2f2;
 }
-
 li {
   list-style: none;
 }
-
 a {
   text-decoration: none;
 }
-
 .final-wrapper {
   position: relative;
-
   margin: 0 auto;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-
   background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
 .container {
   margin: 0 auto;
   width: 100%;
   height: 100vh;
-
   display: flex;
   flex-direction: row;
 }
-
 .main-column {
   position: relative;
   width: 82%;
@@ -52,30 +41,24 @@ a {
   display: flex;
   flex-direction: column;
 }
-
-.main-column .heading1 {
-  font-size: 30px;
+.heading1 {
+  font-size: clamp(1rem, 5vw, 1.875rem);
   margin: 2rem 0 0 1rem;
 }
-
-.main-column .heading2 {
+.heading2 {
   color: #4285f4;
-  font-size: 1.2rem;
+  font-size: clamp(0.7rem, 4vw, 1.2rem);
   margin: 0.5rem 0 0 1rem;
 }
-
 .main-column .product-grid {
   scroll-behavior: smooth;
   overflow-y: scroll;
   overflow-x: hidden;
   margin-top: 1rem;
-
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
-  /* gap: .5rem .5rem; */
   justify-items: center;
 }
-
 .card {
   height: 21em;
   width: 16em;
@@ -83,7 +66,6 @@ a {
   margin: .5rem 0 .5rem 0;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 1rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,69 +74,63 @@ a {
   align-content: center;
   background-color: #fff;
 }
-
 .product-name {
   margin-bottom: 0.8rem;
   font-size: 0.9rem;
 }
-
-.grid0 .product-item,
-.grid2 .product-item {
+.grid0 .product-item,.grid2 .product-item {
   height: 12em;
   width: 10.5em;
   max-width: 100%;
 }
-
 .grid1 .product-item {
   height: 9.5em;
   width: 10em;
   max-width: 100%;
 }
-
 .grid3 .product-item {
   height: 9rem;
   width: 10rem;
 }
-
 ::-webkit-scrollbar {
   width: 0;
   background: transparent;
 }
-
 .view-product-btn {
   width: 12.5rem;
   max-width: 100%;
   height: 2.5rem;
   font-style: normal;
   font-size: 0.9rem;
-
   background-color: #4285f4;
   color: #fff;
   border: none;
   border-radius: 0px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   transition: all 300ms;
-
   font-size: 1.125rem;
 }
-
 .view-product-btn:hover {
   background-color: #fff;
   color: #4285f4;
   border: 1px solid #4285f4;
 }
-
 @media screen and (max-width: 906px) {
   .main-column {
     width: 100%;
   }
 }
-
 @media screen and (max-width: 1024px) {
-  
+  .heading1 {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (width: 820px) and (height: 1120px) {
+  #menu {
+    margin-top: 0rem;
+  }
 }
 
