@@ -1,85 +1,71 @@
-*,
-*::before,
-*::after {
+*,*::before,*::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-
 body {
   cursor: context-menu;
-  background-color: #f2f2f2;
   font-family: Inter, sans-serif;
   font-style: normal;
 }
-
 li {
   list-style: none;
 }
-
 a {
   text-decoration: none;
 }
-
 .final-wrapper {
   position: relative;
-
   margin: 0 auto;
   width: 100%;
-  min-height: 100vh;
-
+  height: 100vh;
+  overflow: hidden;
   background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
 .container {
   margin: 0 auto;
   width: 100%;
+  max-width: 96rem;
   height: 100vh;
-
+  z-index: 10;
   display: flex;
   flex-direction: row;
 }
-
 .main-column {
   position: relative;
   min-width: 82%;
-
-  background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
   overflow-y: scroll;
 }
-
 ::-webkit-scrollbar {
   width: 0;
   background: transparent;
 }
-
 .main-column .news-container-heading {
-  margin: 2.1rem 55rem 1rem 0rem;
+  margin: 2.1rem 0rem 1rem 2rem;
+  align-self: flex-start;
   font-size: 42px;
   font-weight: bold;
 }
-
-#slide {
-  background-color: #fff;
+.slide {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 1140px;
   height: 350px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   padding-top: 5px;
   padding-bottom: 5px;
   margin-bottom: 1rem;
 }
-
-#news-content {
+.news-content {
   width: 710px;
   display: flex;
   flex-direction: column;
@@ -87,41 +73,34 @@ a {
   margin-left: 1rem;
   margin-right: 1rem;
 }
-
-#headline-footer {
+.headline-footer {
   display: flex;
   justify-content: space-between;
 }
-
-#main-content {
+.main-content {
   margin-top: 1rem;
   text-align: justify;
   font-size: 16px;
   line-height: 22px;
   color: black;
 }
-
-#read-more {
+.read-more {
   color: #4285f4;
 }
-
-#date-time {
+.date-time {
   font-size: 14px;
   color: #8a8a8a;
 }
-
-#author {
+.author {
   font-size: 14px;
   color: #8a8a8a;
 }
-
-#news-image {
+.news-image {
   margin-left: 0.4rem;
   width: 400px;
   height: 250px;
 }
-
-#news-heading {
+.news-heading {
   margin-bottom: 0.5rem;
   font-size: 20px;
   font-weight: bold;

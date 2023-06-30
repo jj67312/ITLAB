@@ -4,43 +4,34 @@
   --darkTwo: #45424b;
   --lightOne: #919191;
   --lightTwo: #aaa;
-
   --color1: #64bcf4;
   --color2: #4285f4;
 }
-
 .dark {
   --backgroundColor: #192e3a;
   --darkOne: #f2f2f2;
   --darkTwo: #fff;
   --lightOne: #ccc;
   --lightTwo: #e7e3e3;
-
   --btnColor: #f2f2f2;
   --color1: #64bcf4;
   --color2: #4285f4;
 }
 
-*,
-*::before,
-*::after {
+*,*::before,*::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-
 body {
   cursor: context-menu;
 }
-
 img {
   width: 100%;
 }
-
 a {
   text-decoration: none;
 }
-
 .final-wrapper {
   position: relative;
   padding: 1.5rem 0 2rem;
@@ -52,7 +43,6 @@ a {
   flex-direction: column;
   justify-content: space-between;
 }
-
 .container {
   position: relative;
   margin: 0 auto;
@@ -61,13 +51,11 @@ a {
   padding: 0 2rem;
   z-index: 10;
 }
-
 header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .logo {
   display: flex;
   align-items: center;
@@ -78,21 +66,18 @@ header .container {
   line-height: 1.2;
   color: var(--darkOne);
 }
-
 .showcase-area .container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   justify-content: center;
 }
-
 .small-title {
   font-family: Inter;
   font-weight: 700;
   font-size: 1.3rem;
   color: var(--color2);
 }
-
 .big-title {
   line-height: 55px;
   font-family: Inter;
@@ -101,7 +86,6 @@ header .container {
   color: var(--darkOne);
   margin: 0.8rem 0 1rem;
 }
-
 .text {
   text-align: justify;
   font-family: Inter;
@@ -110,53 +94,43 @@ header .container {
   color: var(--darkOne);
   max-width: 600px;
 }
-
 .get-started-btn {
   color: var(--backgroundColor);
   background-color: var(--color2);
   width: 9.5rem;
   height: 3rem;
-
   margin: 1.8rem 0 2rem;
   text-decoration: none;
   text-align: center;
-
   border: none;
   border-radius: 3px;
-
   font-family: Inter;
   font-weight: 400;
   font-size: 1.1rem;
-
   transition: color 300ms, border 300ms, background-color 300ms ease-out;
 }
-
 .dark .get-started-btn:hover {
   color: var(--btnColor);
   background-color: var(--backgroundColor);
   border: 2px solid var(--btnColor);
   cursor: pointer;
 }
-
 .light .get-started-btn:hover {
   color: var(--color2);
   background-color: var(--backgroundColor);
   border: 2px solid var(--color2);
   cursor: pointer;
 }
-
 .signin {
   font-family: Inter;
   font-weight: 400;
   font-size: 1rem;
   color: var(--darkOne);
 }
-
 .person {
   width: 100%;
   transform: translate(10%, 20px);
 }
-
 .toggle-btn {
   display: inline-block;
   border: none;
@@ -171,29 +145,24 @@ header .container {
   font-size: 1.1rem;
   transition: 300ms;
 }
-
 .toggle-btn i {
   line-height: 39px;
 }
-
 .toggle-btn:hover {
   background: var(--color2);
 }
-
 .final-wrapper.light .toggle-btn i:first-child {
   display: block;
 }
 .final-wrapper.light .toggle-btn i:last-child {
   display: none;
 }
-
 .final-wrapper.dark .toggle-btn i:first-child {
   display: none;
 }
 .final-wrapper.dark .toggle-btn i:last-child {
   display: block;
 }
-
 .shape {
   position: absolute;
   z-index: 0;
@@ -202,7 +171,6 @@ header .container {
   left: -15px;
   opacity: 0.1;
 }
-
 .copy {
   position: absolute;
   top: 0;
@@ -210,7 +178,6 @@ header .container {
   z-index: 100;
   animation: appear 1s 1 both;
 }
-
 @keyframes appear {
   0% {
     clip-path: circle(30% at -25% -25%);
@@ -220,97 +187,77 @@ header .container {
     clip-path: circle(150% at 0 0);
   }
 }
-
 @media screen and (max-width: 1024px) {
   .big-title {
     font-size: 1.5rem;
   }
-
   .text {
     font-size: 1.1rem;
   }
 }
-
 @media screen and (max-width: 830px) {
-
   .showcase-area .container {
     display: flex;
     justify-content: space-between;
   }
-
   .small-title {
     font-size: 1.2rem;
   }
-
   .big-title {
     font-size: 1.35rem;
     line-height: 2.8rem;
   }
-
   .text {
     font-size: 1rem;
   }
-
   .left {
     width: 60%;
     float: left;
   }
-
   .right {
     width: 40%;
     float: right;
   }
-
   .person {
     width: 100%;
     transform: translate(10%, -1rem);
   }
-
   .shape {
     width: 450px;
     bottom: -150px;
     left: -120px;
   }
 }
-
 @media screen and (max-width: 700px) {
   .person {
     display: none;
   }
-
   .showcase-area .container {
     grid-template-columns: 1fr;
     display: flex;
   }
-
   .left {
     width: 100%;
   }
-
   .right {
     width: 0%;
   }
 }
-
 @media screen and (max-width: 470px) {
   .container {
     padding: 0 1rem;
   }
-
   .big-title {
     font-size: 1.2rem;
   }
-
   .text {
     margin: 1rem 0 1rem;
   }
-
   .showcase-area .get-started-btn {
     font-size: 0.9rem;
     width: 8rem;
     height: 2.5rem;
   }
-
   .shape {
     width: 400px;
   }

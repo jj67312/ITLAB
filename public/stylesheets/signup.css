@@ -1,19 +1,14 @@
-*,
-*::before,
-*::after {
+*,*::before,*::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-
 body {
   cursor: context-menu;
 }
-
 a {
   text-decoration: none;
 }
-
 .container {
   background-color: #ffffff;
   margin: 0 auto;
@@ -22,48 +17,37 @@ a {
   width: 100%;
   max-width: 96rem;
   overflow: hidden;
-
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   justify-content: center;
-  /* display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between; */
 }
 
 .left {
-  /* width: 50%; */
   margin-left: 14rem;
   display: flex;
   flex-direction: column;
 }
-
 .right {
   width: 50%;
 }
-
 .right .side-img {
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
-
   width: auto;
   height: auto;
   max-width: 100%;
   max-height: 100%;
   object-fit: cover;
 }
-
 .text1 {
   position: relative;
   font-family: Inter, sans-serif;
   font-size: 1.5rem;
   font-weight: 500;
 }
-
 .text2 {
   position: relative;
   text-align: justify;
@@ -72,12 +56,10 @@ a {
   font-size: 0.9rem;
   margin: 1rem 0 1.5rem;
 }
-
 .row3 {
   position: relative;
   margin: 0 0 1rem;
 }
-
 .google-btn {
   position: relative;
   display: flex;
@@ -95,17 +77,14 @@ a {
 
   transition: all 300ms;
 }
-
 .google-btn:hover {
   color: #ffffff;
   background-color: #4285f4;
   border: none;
 }
-
 .google-btn:active {
   background-color: #3367d6;
 }
-
 .google-icon-wrapper {
   position: relative;
   margin-top: 1.6px;
@@ -115,7 +94,6 @@ a {
   border-radius: 2px;
   background-color: #fff;
 }
-
 .google-icon {
   position: relative;
   margin-top: 8.5px;
@@ -123,7 +101,6 @@ a {
   width: 1.6875rem;
   height: 1.6875rem;
 }
-
 .btn-text {
   margin-left: 1.2rem;
 
@@ -136,7 +113,6 @@ a {
   text-transform: uppercase;
   font-family: Roboto, sans-serif;
 }
-
 .partition {
   position: relative;
   margin: 0rem 0 2rem;
@@ -144,109 +120,71 @@ a {
   font-size: 0.875rem;
   color: rgba(0, 0, 0, 0.3);
   text-align: center;
-}
-
-.partition {
   width: 17.5rem;
   display: flex;
   flex-direction: row;
 }
-
-.partition:before,
-.partition:after {
+.partition:before,.partition:after {
   content: "";
   flex: 1 1;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   margin: auto;
 }
-
 .row5 {
   position: relative;
   width: 17.5rem;
   font-family: Inter;
   transition: 300ms;
 }
-
-.email,
-.name,
-.password {
+.email,.name,.password {
   position: relative;
   box-sizing: border-box;
   box-shadow: none;
-
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 3px;
-
   width: 100%;
   height: 2.8125rem;
   padding-top: 10px;
   padding-left: 5px;
-
   transition: all 300ms;
 }
-
-.email,
-.name,
-.password,
-select,
-textarea {
+.email,.name,.password,select,textarea {
   font-size: 0.8rem;
   font-family: Inter;
   color: rgba(0, 0, 0, 0.85);
 }
-
-.email::placeholder,
-.name::placeholder,
-.password::placeholder {
+.email::placeholder,.name::placeholder,.password::placeholder {
   color: transparent;
 }
-
-.email:focus,
-.name:focus,
-.password:focus {
+.email:focus,.name:focus,.password:focus {
   box-shadow: none;
   outline: none;
   border-color: #5bacdf;
 }
-
 .form-label {
   display: block;
   font-size: 0.8rem;
   color: #999;
   opacity: 1;
-
   transform: translate(0.5rem, -2rem);
   transform-origin: 0 0;
   transition: all 300ms;
 }
-
-.group1,
-.group2,
-.group3 {
+.group1,.group2,.group3 {
   transition: all 300ms;
 }
-
-.group1:focus-within,
-.group2:focus-within,
-.group3:focus-within {
+.group1:focus-within,.group2:focus-within,.group3:focus-within {
   transform: scale(1.05, 1.05);
 }
-
-.email:focus + .form-label,
-.email:not(:placeholder-shown) + .form-label {
+.email:focus + .form-label,.email:not(:placeholder-shown) + .form-label {
   transform: translate(0.2rem, -2.6rem) scale(0.8);
 }
-
-.name:focus + .form-label,
-.name:not(:placeholder-shown) + .form-label {
+.name:focus + .form-label,.name:not(:placeholder-shown) + .form-label {
   transform: translate(0.2rem, -2.6rem) scale(0.8);
 }
-
-.password:focus + .form-label,
-.password:not(:placeholder-shown) + .form-label {
+.password:focus + .form-label,.password:not(:placeholder-shown) + .form-label {
   transform: translate(0.2rem, -2.6rem) scale(0.8);
 }
-
 .fa-eye {
   position: relative;
   top: -3rem;
@@ -255,30 +193,24 @@ textarea {
   cursor: pointer;
   transition: all 300ms;
 }
-
 .error {
   width: 100%;
   top: -20px;
   position: relative;
   display: flex;
 }
-
 .error .error-icon {
   margin-right: 0.2rem;
 }
-
 .error .error-text {
   top: -2px;
 }
-
-.error .error-text,
-.error .error-icon {
+.error .error-text,.error .error-icon {
   font-size: 0.8rem;
   font-family: Inter, sans-serif;
   color: #d93025;
   position: relative;
 }
-
 .row5 input[type="submit"] {
   position: static;
   width: 100%;
@@ -286,24 +218,19 @@ textarea {
   cursor: pointer;
   border-radius: 4px;
   letter-spacing: 0.5px;
-
   border: none;
   font-weight: 600;
   text-transform: uppercase;
-
   color: #ffffff;
   background: #4285f4;
   transition: all 0.3s;
 }
-
 .row5 input[type="submit"]:hover {
   opacity: 0.75;
 }
-
 .row5 input[type="submit"]:active {
   opacity: 0.45;
 }
-
 .row6 {
   position: relative;
   margin: 1rem 0 0;
@@ -311,137 +238,92 @@ textarea {
   font-weight: 400;
   font-size: 0.8rem;
 }
-
-
-/* @media screen and (max-width:1245px) {
-  .left {
-    margin-left: 8rem;
-  }
-} */
-
 @media screen and (max-width: 1044px) {
-
-  .left {
-    margin-left: 5rem;
-  }
+.left {
+  margin-left: 5rem;
 }
-
+}
 @media screen and (max-width: 940px) {
-
-  .right {
-    display: none;
-  }
-
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .left {
-    margin: 0;  
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+.right {
+  display: none;
 }
-
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.left {
+  margin: 0;  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+}
 @media screen and (max-width:470px) {
-
-  .container {
-    justify-content: center;
-  }
-
-  .left {
-    margin: 0;
-  }
-
-  .google-btn {
-    width: 16rem;
-    height: 2.8rem;
-  }
-
-  .btn-text {
-    font-size: 0.8rem;
-    line-height: 2.9rem;
-  }
-
-  .google-icon-wrapper {
-    width: 2.6rem;
-    height: 2.55rem;
-  }
-
-  .google-icon {
-    height: 1.4875rem;
-    width: 1.4875rem;
-  }
-
-  .row5,
-  .partition {
-    width: 16rem;
-  }
-
-  .email,
-  .password,
-  .name {
-    height: 2.6rem;
-  }
-
-  .fa-eye {
-    left: 13.5rem;
-  }
+.container {
+  justify-content: center;
 }
-
+.left {
+  margin: 0;
+}
+.google-btn {
+  width: 16rem;
+  height: 2.8rem;
+}
+.btn-text {
+  font-size: 0.8rem;
+  line-height: 2.9rem;
+}
+.google-icon-wrapper {
+  width: 2.6rem;
+  height: 2.55rem;
+}
+.google-icon {
+  height: 1.4875rem;
+  width: 1.4875rem;
+}
+.row5,.partition {
+  width: 16rem;
+}
+.email,.password,.name {
+  height: 2.6rem;
+}
+.fa-eye {
+  left: 13.5rem;
+}
+}
 @media screen and (max-width: 340px) {
-
-  .row1,
-  .row2,
-  .row3,
-  .row5,
-  .row6,
-  .partition {
-    margin-left: 1rem;
+.row1,.row2,.row3,.row5,.row6,.partition {
+  margin-left: 1rem;
+}
+.partition,.email,.name,.password,.google-btn  {
+  width: 15rem;
+} 
+.text1 {
+  font-size: 1.4rem;
+}
+.text2 {
+  width: 100%;
+  max-width: 90%;
+  font-size: 0.8rem;
+}
+.btn-text {
+  margin-left: 0.9rem;
+  line-height: 2.75rem;
+  font-size: 0.73rem;
   }
-
-  .partition,
-  .email,
-  .name,
-  .password,
-  .google-btn  {
-    width: 15rem;
-  }
-  
-  .text1 {
-    font-size: 1.4rem;
-  }
-
-  .text2 {
-    width: 100%;
-    max-width: 90%;
-    font-size: 0.8rem;
-  }
-
-  .btn-text {
-    margin-left: 0.9rem;
-    line-height: 2.75rem;
-    font-size: 0.73rem;
-  }
-
-  .google-icon {
-    width: 1.3rem;
-    height: 1.3rem;
-  }
-
-  .google-icon-wrapper {
-    width: 2.4rem;
-    height: 2.35rem;
-  }
-
-  .fa-eye {
-    left: 12.5rem;
-  }
-
-  .row5 input[type="submit"] {
-    width: 15rem;
-  }
+.google-icon {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+.google-icon-wrapper {
+  width: 2.4rem;
+  height: 2.35rem;
+}
+.fa-eye {
+  left: 12.5rem;
+}
+.row5 input[type="submit"] {
+  width: 15rem;
+}
 }

@@ -100,14 +100,11 @@ function autocomplete(inp, arr) {
     closeAllLists(e.target);
   });
 }
-
-
 async function getTitles() {
   const url = 'https://bitbot-pxnf.onrender.com/allTitles';
   const response = await (await fetch(url)).json();
   return response.campTitles;
 }
-
 getTitles().then((data) => {
   let courses = data;
   console.log('Data in search bar:')

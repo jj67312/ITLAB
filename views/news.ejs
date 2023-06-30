@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="stylesheets/news.css" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stylesheets/news.css">
   <link rel="stylesheet" href="/stylesheets/sidebar.css">
   <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <title>News</title>
 </head>
-
 <body>
   <div class="final-wrapper">
     <div class="container">
@@ -19,48 +17,36 @@
         <div class="logo">bit<font style="color: #4285f4">bot.</font>
         </div>
         <ul class="links">
-          <li>
-            <a href="/forums"><i class="bx bx-home icon"></i><span class="text">Forums</span></a>
-          </li>
-          <li>
-            <a href="/news"><i class="bx bx-news icon"></i><span class="text">News</span></a>
-          </li>
-          <li>
-            <a href="/market"><i class="bx bx-store icon"></i><span class="text">Products</span></a>
-          </li>
+          <li><a href="/forums"><i class="bx bx-home icon"></i><span class="text">Forums</span></a></li>
+          <li><a href="/news"><i class="bx bx-news icon"></i><span class="text">News</span></a></li>
+          <li><a href="/market"><i class="bx bx-store icon"></i><span class="text">Products</span></a></li>
           <li>
             <% if(currentUser) {%>
             <a href="/logout"><i class="bx bx-log-out icon"></i><span class="text">Log Out</span></a>
             <% } else{%>
-            <a href="/login">
-              <i class="bx bx-log-in icon"></i>
-              <span class="text">Log In</span></a>
+            <a href="/login"><i class="bx bx-log-in icon"></i><span class="text">Log In</span></a>
             <% } %>
           </li>
         </ul>
       </div>
       <div id="newsFeed" class="main-column">
         <p class="news-container-heading">Breaking News</p>
-
         <% for(let news of newsData) {%>
-        <div id="slide">
-          <img src="<%=news.urlToImage %>" id="news-image" alt="">
+        <div class="slide">
+          <img class="news-image" src="<%=news.urlToImage %>" alt="">
           <div class="news-content">
-            <p id='news-heading'><%= news.title %></p>
-            <div id="headline-footer">
-              <p id="author"> <%= news.author %> </p>
-              <p id="date-time"> <%= news.publishedAt %> </p>
+            <p class='news-heading'><%= news.title %></p>
+            <div class="headline-footer">
+              <p class="author"> <%= news.author %> </p>
+              <p class="date-time"> <%= news.publishedAt %> </p>
             </div>
-            <p id="main-content"><%= news.description %></p>
-            <a id="read-more" href="<%= news.url %>">Read More</a>
+            <p class="main-content"><%= news.description %></p>
+            <a class="read-more" href="<%= news.url %>">Read More</a>
           </div>
         </div>
         <%}%>
-
       </div>
     </div>
   </div>
-  <!-- <script src="javascripts/news.js"></script> -->
 </body>
-
 </html>

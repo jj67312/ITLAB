@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,7 +10,6 @@
   <link rel="stylesheet" href="/stylesheets/sidebar.css">
   <title>Comments</title>
 </head>
-
 <body>
   <div class="final-wrapper">
     <div class="container">
@@ -44,7 +42,6 @@
             <p><%= post.description %> </p>
             <p class="line"></p>
           </div>
-
           <div class="post-footer">
             <p class="posted-by">
               Posted By
@@ -54,20 +51,17 @@
             </p>
           </div>
         </div>
-
         <div class="comment-section">
           <p class="comment-heading">Comments</p>
           <div class="comment-div">
             <ul>
               <% for(let comment of post.comments) {%>
               <li>
-
                 <div class="comment-body">
                   <div class="comment-body-header">
                     <a href="/users/<%= comment.author._id %>"><%= comment.author.username %></a> <br>
                     <%= comment.commentBody %>
                   </div>
-
                   <div class="icon-area">
                     <% if(!comment.isLikedByUser) {%>
                       <form class="icon-form" id="likeComment" action="/comments/like/<%= comment._id %>" method="post">
@@ -87,7 +81,6 @@
             </ul>
           </div>
         </div>
-
         <div class="add-comment-area">
           <form action="/comments/<%= post._id %>" method="POST">
             <input type="text" id="myCommentInput" name="commentBody" class="comment-input" placeholder="Add Comment" />
@@ -95,7 +88,6 @@
           </form>
         </div>
       </div>
-
       <div class="news-profile-column">
         <% if(currentUser) {%>
         <div class="profile">
@@ -107,7 +99,6 @@
               comments
             </p>
           </div>
-          
           <a href="/users/<%= currentUser._id %>">
             <button class="profile-btn" onclick="window.location.href = 'profile.html'">
               View Profile
@@ -138,5 +129,4 @@
     }
   </script>
 </body>
-
 </html>

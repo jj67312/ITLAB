@@ -2,11 +2,9 @@
   position: relative;
   width: 18%;
   background-color: #28282b;
-
   display: flex;
   flex-direction: column;
 }
-
 .logo {
   margin: 2rem 0 1rem 1rem;
   font-family: Poppins, sans-serif;
@@ -15,20 +13,15 @@
   line-height: 1.2;
   color: #fff;
 }
-
-.sidebar-column .icon,
-.hamMenu .hamLinks .icon {
+.sidebar-column .icon, .hamMenu .hamLinks .icon {
   font-size: 1.625rem;
   width: 3.125rem;
   max-width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.sidebar-column .text,
-.hamMenu .hamLinks .text {
+.sidebar-column .text, .hamMenu .hamLinks .text {
   font-family: Inter, sans-serif;
   font-style: normal;
   font-size: 1.5rem;
@@ -36,27 +29,21 @@
   max-width: 100%;
   opacity: 1;
 }
-
-.sidebar-column .links li,
-.hamMenu .hamLinks li {
+.sidebar-column .links li, .hamMenu .hamLinks li {
   display: flex;
   align-items: center;
   justify-content: center;
-
   max-width: 100%;
   margin-top: 1.4rem;
   height: 2.5rem;
 }
-
-.sidebar-column li a,
-.hamMenu .hamLinks li a {
+.sidebar-column li a,.hamMenu .hamLinks li a {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 100%;
   width: 92%;
   max-width: 100%;
-
   padding-left: 1rem;
   background-color: transparent;
   color: #fff;
@@ -64,68 +51,53 @@
   text-decoration: none;
   transition: all 0.2s;
 }
-
-.sidebar-column li a:hover,
-.hamMenu .hamLinks li a:hover {
+.sidebar-column li a:hover,.hamMenu .hamLinks li a:hover {
   background-color: #fff;
   color: #28282b;
 }
-
 @media screen and (max-width: 1245px) {
   .logo {
     font-size: 2.3rem;
   }
-
   .sidebar-column .icon {
     font-size: 1.5rem;
     width: 3rem;
   }
-
   .sidebar-column .text {
     font-size: 1.4rem;
   }
-
   .sidebar-column .links li {
     height: 2.4rem;
     margin-top: 1.35rem;
   }
-
   .sidebar-column li a {
     padding-left: 0.8rem;
   }
 }
-
 @media screen and (max-width: 1024px) {
   .logo {
     font-size: 2.2rem;
   }
-
   .sidebar-column .icon {
     font-size: 1.4rem;
     width: 2.9rem;
   }
-
   .sidebar-column .text {
     font-size: 1.3rem;
   }
-
   .sidebar-column .links li {
     height: 2.3rem;
     margin-top: 1.35rem;
   }
-
   .sidebar-column li a {
     padding-left: 0.6rem;
   }
 }
-
 @media screen and (max-width: 906px) {
-  .sidebar-column {
+.sidebar-column {
     width: 0;
-  }
-
-  .sidebar-column .links,
-  .sidebar-column .logo {
+}
+.sidebar-column.links,.sidebar-column.logo {
     display: none;
-  }
+}
 }
