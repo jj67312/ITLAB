@@ -40,44 +40,6 @@
           </li>
         </ul>
       </div>
-
-      <div id="nav" class="hamMenu">
-        <nav>
-        <ul class="hamLinks">
-          <li>
-            <a href="/forums"
-              ><i class="bx bx-home icon"></i
-              ><span class="text">Forums</span></a
-            >
-          </li>
-          <li>
-            <a href="/news"
-              ><i class="bx bx-news icon"></i
-              ><span class="text">News</span></a
-            >
-          </li>
-          <li>
-            <a href="/market"
-              ><i class="bx bx-store icon"></i
-              ><span class="text">Products</span></a
-            >
-          </li>
-          <li>
-            <% if(currentUser) {%>
-            <a href="/logout"
-              ><i class="bx bx-log-out icon"></i
-              ><span class="text">Log Out</span></a
-            >
-            <% } else{%>
-            <a href="/login">
-              <i class="bx bx-log-in icon"></i
-              ><span class="text">Log In</span></a
-            >
-            <% } %>
-          </li>
-        </ul>
-        </nav>
-      </div>
       
       <div class="main-column">
         <div id="menu" onClick="hamToogle()">

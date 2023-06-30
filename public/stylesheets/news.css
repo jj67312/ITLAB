@@ -36,7 +36,7 @@ a {
 }
 .main-column {
   position: relative;
-  min-width: 82%;
+  width: 82%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,7 +50,7 @@ a {
 .main-column .news-container-heading {
   margin: 2.1rem 0rem 1rem 2rem;
   align-self: flex-start;
-  font-size: 42px;
+  font-size: 2.625rem;
   font-weight: bold;
 }
 .slide {
@@ -58,18 +58,18 @@ a {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 1140px;
+  width: 76vw;
   height: 350px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 2px 4px 1px rgba(0, 0, 0, 0.1);
   padding-top: 5px;
   padding-bottom: 5px;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem auto;
 }
 .news-content {
-  width: 710px;
+  width: 44.375rem;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
-  float: left;
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -80,29 +80,79 @@ a {
 .main-content {
   margin-top: 1rem;
   text-align: justify;
-  font-size: 16px;
-  line-height: 22px;
+  font-size: 1rem;
+  line-height: 1.375rem;
   color: black;
 }
 .read-more {
   color: #4285f4;
 }
 .date-time {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #8a8a8a;
 }
 .author {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #8a8a8a;
 }
 .news-image {
   margin-left: 0.4rem;
-  width: 400px;
-  height: 250px;
+  width: 25rem;
+  flex: 1 0 auto;
+  height: 15.625rem;
 }
 .news-heading {
   margin-bottom: 0.5rem;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bold;
   text-align: justify;
+}
+@media screen and (max-width:906px) {
+  .main-column {
+    width: 100%;
+  }
+  .slide {
+    width: 90vw;
+  }
+  .news-container-heading {
+    font-size: 2.4rem;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .slide {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    height: auto;
+    width: 95vw;
+  }
+  .news-content {
+    margin-top: .5rem;
+    width:fit-content;
+  }
+  .main-column .news-container-heading {
+    font-size: 2.2rem;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .slide {
+    align-items: center;
+  }
+  .news-image {
+    margin: 0;
+    width: 90%;
+    height: auto;
+  }
+  .main-column .news-container-heading {
+    font-size: 2.2rem;
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .main-column .news-container-heading {
+    font-size: 2rem;
+  }
 }

@@ -5,6 +5,7 @@
 }
 body {
   cursor: context-menu;
+  font-family: Inter, sans-serif;
 }
 li {
   list-style: none;
@@ -41,14 +42,22 @@ a {
   justify-content: center;
   align-items: center;
 }
+.heading1 {
+  text-align: justify;
+  font-size: 1.5em;
+  color: #28282b;
+}
+.heading2 {
+  text-align: justify;
+  font-size: 1.3em;
+  color: #4285f4;
+}
 .main-column .header-div {
   position: relative;
   margin: 2rem 0 0 0rem;
 }
 .main-column .header-div .name {
-  font-family: Inter, sans-serif;
   font-style: normal;
-
   font-size: 3.125rem;
 }
 .main-column .follow-info {
@@ -59,7 +68,7 @@ a {
   align-items: center;
 }
 .main-column .follow-info p {
-  font-family: Inter, sans-serif;
+  
   font-style: normal;
   font-size: 1.125rem;
 }
@@ -92,7 +101,7 @@ a {
   flex-direction: row;
 }
 .main-column .links li {
-  font-family: Inter, sans-serif;
+  
   font-style: normal;
   font-size: 16px;
   transition: all 300ms;
@@ -126,7 +135,6 @@ a {
   padding: 20px 30px 20px 30px;
   background-color: #fff;
   color: #8a8a8a;
-  font-family: Inter, sans-serif;
   font-style: normal;
   text-align: justify;
 }
@@ -163,11 +171,23 @@ a {
 .main-column .partition {
   width: 40rem;
 }
+.heading1{
+  font-size: 1.3em;
+}
+.heading2 {
+  font-size: 1.1em;
+}
 }
 @media screen and (max-width: 680px) {
 .main-column .partition {
   width: 26rem;
   }
+.heading1{
+  font-size: 1.2em;
+}
+.heading2 {
+  font-size: 1em;
+}
 }
 @media screen and (max-width: 470px) {
 .main-column .partition {
@@ -184,6 +204,12 @@ a {
 }
 .main-column .links li:nth-child(2) {
   margin-left: 6rem;
+}
+.heading1{
+  font-size: 1.1em;
+}
+.heading2 {
+  font-size: 0.9em;
 }
 }
 @media screen and (width: 820px) and (height: 1180px) {

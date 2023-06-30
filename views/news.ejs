@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="stylesheets/news.css">
   <link rel="stylesheet" href="/stylesheets/sidebar.css">
+  <link rel="stylesheet" href="/stylesheets/ham.css">
   <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <title>News</title>
@@ -29,11 +30,56 @@
           </li>
         </ul>
       </div>
+
+      <div id="nav" class="hamMenu">
+        <nav>
+        <ul class="hamLinks">
+          <li>
+            <a href="/forums"
+              ><i class="bx bx-home icon"></i
+              ><span class="text">Forums</span></a
+            >
+          </li>
+          <li>
+            <a href="/news"
+              ><i class="bx bx-news icon"></i
+              ><span class="text">News</span></a
+            >
+          </li>
+          <li>
+            <a href="/market"
+              ><i class="bx bx-store icon"></i
+              ><span class="text">Products</span></a
+            >
+          </li>
+          <li>
+            <% if(currentUser) {%>
+            <a href="/logout"
+              ><i class="bx bx-log-out icon"></i
+              ><span class="text">Log Out</span></a
+            >
+            <% } else{%>
+            <a href="/login">
+              <i class="bx bx-log-in icon"></i
+              ><span class="text">Log In</span></a
+            >
+            <% } %>
+          </li>
+        </ul>
+        </nav>
+      </div>
+
       <div id="newsFeed" class="main-column">
+        <div id="menu" onClick="hamToogle()">
+          <div id="bar1" class="bar"></div>
+          <div id="bar2" class="bar"></div>
+          <div id="bar3" class="bar"></div>
+        </div>
+
         <p class="news-container-heading">Breaking News</p>
         <% for(let news of newsData) {%>
         <div class="slide">
-          <img class="news-image" src="<%=news.urlToImage %>" alt="">
+          <div></div><img class="news-image" src="<%=news.urlToImage %>" alt="">
           <div class="news-content">
             <p class='news-heading'><%= news.title %></p>
             <div class="headline-footer">
@@ -48,5 +94,11 @@
       </div>
     </div>
   </div>
+  <script>
+    function hamToogle() {
+      document.getElementById("menu").classList.toggle("icon");
+      document.querySelector(".hamMenu").classList.toggle('hamChange');
+    }
+  </script>
 </body>
 </html>
