@@ -4,7 +4,9 @@ const dotenv = require('dotenv');
 const User = require('../models/User');
 dotenv.config();
 
-const {GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET} = require('../configuration');
+const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = require('../configuration');
+console.log(GOOGLE_CLIENT_ID);
+console.log(GOOGLE_CLIENT_SECRET);
 
 module.exports = (passport) => {
   passport.use(
